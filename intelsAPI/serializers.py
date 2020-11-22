@@ -9,9 +9,9 @@ class TagSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
 class IntelSerializer(serializers.ModelSerializer):
     tag = TagSerializer(read_only=True, many=True)
+    owner = serializers.ReadOnlyField(source='author.username')
 
     class Meta:
         model = Intel
