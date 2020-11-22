@@ -19,6 +19,7 @@ function ajax_load_filtered_resources(api_endpoint, detail_view_endpoint, keywor
                 display_results_banner(data.count, keyword);
             }
         }
+        // todo error
     });
 }
 

@@ -103,20 +103,21 @@
 
     <script>
         $( document ).ready(function() {
+            var base_detail_view_endpoint = "/view/";
+            var api_endpoint = "{% url 'intels-list' %}";
+
             // hook search bar
             $('#id_searchbar').keyup( debounce(500, function() {
                 var search_input = $("#id_searchbar").val().trim();
                 if (search_input === "") {
                     // todo optimise
-                    ajax_load_all_resources(api_endpoint);
+                    ajax_load_all_resources(api_endpoint, base_detail_view_endpoint);
                 } else {
-                    ajax_load_filtered_resources(api_endpoint, search_input);
+                    ajax_load_filtered_resources(api_endpoint, base_detail_view_endpoint, search_input);
                 }
             }));
 
             // load resources content
-            let base_detail_view_endpoint = "/view/";
-            let api_endpoint = "{% url 'intels-list' %}";
             ajax_load_all_resources(api_endpoint, base_detail_view_endpoint);
         });
     </script>
