@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework import permissions
 
 from intelsAPI.models import Intel, Tag
@@ -7,6 +7,8 @@ from intelsAPI.permissions import IsOwnerOrReadOnly
 
 
 class IntelViewSet(viewsets.ModelViewSet):
+    search_fields = ['title',]
+    filter_backends = (filters.SearchFilter,)
     queryset = Intel.objects.all().order_by("last_update")
     serializer_class = IntelSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]

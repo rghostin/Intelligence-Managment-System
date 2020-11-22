@@ -1,4 +1,7 @@
-function ajax_load_all_resources(endpoint) {
+function ajax_load_filtered_resources(endpoint, keyword) {
+    if (keyword != null) {
+        endpoint = endpoint + "?search="+keyword;
+    }
     $.ajax({
         url: endpoint,
         contentType: "application/json",
@@ -14,6 +17,10 @@ function ajax_load_all_resources(endpoint) {
             }
         }
     });
+}
+
+function ajax_load_all_resources(endpoint) {
+    ajax_load_filtered_resources(endpoint, null);
 }
 
 function append_search_entry(title, link) {

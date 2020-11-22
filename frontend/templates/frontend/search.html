@@ -9,7 +9,7 @@
 <div class="content">
     <form action="#" method="POST">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search..">
+            <input type="text" class="form-control" placeholder="Search.." id="id_searchbar">
             <div class="input-group-append">
                 <span class="input-group-text">
                     <i class="fa fa-fw fa-search"></i>
@@ -46,7 +46,7 @@
                                 </tr>
                             </thead>
                             <tbody id="id_search_results_body">
-                                {% include 'frontend/search_entry.html' with entry_title="test" entry_preview="reser" entry_type="Article" entry_link="https://abc.com" %}
+                                no data
                             </tbody>
                         </table>
 
@@ -100,9 +100,24 @@
 
 {% block custom_js %}
     <script src="{% static "frontend/assets/javascript/search.js" %}"></script>
+    <script src="{% static "frontend/assets/javascript/utils.js" %}"></script>
 
     <script>
         $( document ).ready(function() {
+            // hook search bar
+            $('#id_searchbar').keyup( debounce(800, function() {
+                var search_input = $("#id_searchbar").val().trim();
+
+                if (search_input === "") {
+                    // todo optimise
+                    ajax_load_all_resources(endpoint);
+                } else {
+                    ajax_load_filtered_resources(endpoint, search_input);
+                }
+
+            }));
+
+            // load resources content
             let endpoint = "{% url 'intels-list' %}";
             ajax_load_all_resources(endpoint);
         });
