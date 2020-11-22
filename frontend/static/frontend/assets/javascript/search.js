@@ -1,6 +1,8 @@
 function ajax_load_filtered_resources(endpoint, keyword) {
+    let show_results_banner = false;
     if (keyword != null) {
         endpoint = endpoint + "?search="+keyword;
+        show_results_banner = true;
     }
     $.ajax({
         url: endpoint,
@@ -15,12 +17,17 @@ function ajax_load_filtered_resources(endpoint, keyword) {
                     entry.link
                 )
             }
+
+            if (show_results_banner) {
+                display_results_banner(data.count, keyword);
+            }
         }
     });
 }
 
 function ajax_load_all_resources(endpoint) {
     ajax_load_filtered_resources(endpoint, null);
+    hide_results_banner()
 }
 
 function append_search_entry(title, link) {
@@ -46,4 +53,14 @@ function append_search_entry(title, link) {
     `;
 
     $('#id_search_results_body').append(entry);
+}
+
+function display_results_banner(number, keyword) {
+    $('#id_results_banner').show();
+    $('#id_results_banner_number').text(number.toString());
+    $('#id_results_banner_keyword').text(keyword);
+}
+
+function hide_results_banner() {
+    $('#id_results_banner').hide();
 }
