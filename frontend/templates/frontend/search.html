@@ -1,0 +1,99 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+
+{% block page_title %}Search{% endblock %}
+
+{% block page_content %}
+<!-- Search -->
+<div class="content">
+    <form action="#" method="POST">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search..">
+            <div class="input-group-append">
+                <span class="input-group-text">
+                    <i class="fa fa-fw fa-search"></i>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- END Search -->
+
+<!-- Page Content -->
+<div class="content">
+    <div class="row">
+        <div class="col-md-9">
+            <!-- Results -->
+            <div class="block">
+                <ul class="nav nav-tabs nav-tabs-block" data-toggle="tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#search-projects">Resources</a>
+                    </li>
+                </ul>
+                <div class="block-content tab-content overflow-hidden">
+                    <!-- Projects -->
+                    <div class="tab-pane fade fade-up show active" id="search-projects" role="tabpanel">
+                        <div class="font-size-h4 font-w600 p-2 mb-4 border-left border-4x border-primary bg-body-light">
+                            <span class="text-primary font-w700">###</span> projects found for <mark class="text-danger">###</mark>
+                        </div>
+                        <table class="table table-striped table-vcenter">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50%;">Project</th>
+                                    <th class="d-none d-lg-table-cell text-center" style="width: 15%;">Type</th>
+                                    <th class="d-none d-lg-table-cell text-center" style="width: 15%;">Link</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% include 'frontend/search_entry.html' with entry_title="test" entry_preview="reser" entry_type="Article" entry_link="https://abc.com" %}
+                            </tbody>
+                        </table>
+
+                        <nav aria-label="Projects Search Navigation">
+                            <ul class="pagination pagination-sm">
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-label="Previous">
+                                        Prev
+                                    </a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="javascript:void(0)">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0)">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0)">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0)">4</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0)" aria-label="Next">
+                                        Next
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- END Projects -->
+                </div>
+            </div>
+            <!-- END Results -->
+        </div>
+
+        <div class="col-md-3">
+            <div class="block">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">Search filtering</h3>
+                </div>
+                <div class="block-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- END Page Content -->
+{% endblock %}

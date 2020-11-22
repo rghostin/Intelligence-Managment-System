@@ -3,7 +3,7 @@ from rest_framework import permissions
 
 from intelsAPI.models import Intel, Tag
 from intelsAPI.serializers import IntelSerializer, TagSerializer
-from intelsAPI.permissinos import IsOwnerOrReadOnly
+from intelsAPI.permissions import IsOwnerOrReadOnly
 
 
 class IntelViewSet(viewsets.ModelViewSet):
