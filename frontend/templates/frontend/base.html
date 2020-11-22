@@ -215,7 +215,7 @@
                                     </div>
                                     <div class="block-content">
                                         <!-- Quick Settings Form -->
-                                        <form action="be_pages_dashboard.html" method="POST" onsubmit="return false;">
+                                        <form action="#" method="POST" onsubmit="return false;">
                                             <div class="form-group">
                                                 <p class="font-w600 mb-2">
                                                     Online Status
@@ -546,7 +546,7 @@
                 <div class="content-side content-side-full">
                     <ul class="nav-main">
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="be_pages_dashboard.html">
+                            <a class="nav-main-link" href="{% url 'search' %}">
                                 <i class="nav-main-link-icon si si-magnifier"></i>
                                 <span class="nav-main-link-name">Search</span>
                             </a>
@@ -603,24 +603,6 @@
                     <!-- END Right Section -->
                 </div>
                 <!-- END Header Content -->
-
-                <!-- Header Search -->
-                <div id="page-header-search" class="overlay-header bg-white">
-                    <div class="content-header">
-                        <form class="w-100" action="be_pages_generic_search.html" method="POST">
-                            <div class="input-group input-group-sm">
-                                <div class="input-group-prepend">
-                                    <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                                    <button type="button" class="btn btn-danger" data-toggle="layout" data-action="header_search_off">
-                                        <i class="fa fa-fw fa-times-circle"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Search or hit ESC.." id="page-header-search-input" name="page-header-search-input">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <!-- END Header Search -->
 
                 <!-- Header Loader -->
                 <!-- Please check out the Loaders page under Components category to see examples of showing/hiding it -->
