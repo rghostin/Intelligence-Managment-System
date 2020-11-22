@@ -108,15 +108,16 @@
                 var search_input = $("#id_searchbar").val().trim();
                 if (search_input === "") {
                     // todo optimise
-                    ajax_load_all_resources(endpoint);
+                    ajax_load_all_resources(api_endpoint);
                 } else {
-                    ajax_load_filtered_resources(endpoint, search_input);
+                    ajax_load_filtered_resources(api_endpoint, search_input);
                 }
             }));
 
             // load resources content
-            let endpoint = "{% url 'intels-list' %}";
-            ajax_load_all_resources(endpoint);
+            let base_detail_view_endpoint = "/view/";
+            let api_endpoint = "{% url 'intels-list' %}";
+            ajax_load_all_resources(api_endpoint, base_detail_view_endpoint);
         });
     </script>
 {% endblock %}
