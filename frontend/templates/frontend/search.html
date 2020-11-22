@@ -45,7 +45,7 @@
                                     <th class="d-none d-lg-table-cell text-center" style="width: 15%;">Link</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="id_search_results_body">
                                 {% include 'frontend/search_entry.html' with entry_title="test" entry_preview="reser" entry_type="Article" entry_link="https://abc.com" %}
                             </tbody>
                         </table>
@@ -96,4 +96,15 @@
 
 </div>
 <!-- END Page Content -->
+{% endblock %}
+
+{% block custom_js %}
+    <script src="{% static "frontend/assets/javascript/search.js" %}"></script>
+
+    <script>
+        $( document ).ready(function() {
+            let endpoint = "{% url 'intels-list' %}";
+            ajax_load_all_resources(endpoint);
+        });
+    </script>
 {% endblock %}
