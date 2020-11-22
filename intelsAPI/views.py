@@ -8,7 +8,7 @@ from intelsAPI.permissions import IsOwnerOrReadOnly
 
 class IntelViewSet(viewsets.ModelViewSet):
     search_fields = ['title',]
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = [filters.SearchFilter,]
     queryset = Intel.objects.all().order_by("last_update")
     serializer_class = IntelSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
