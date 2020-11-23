@@ -10,9 +10,9 @@
 
 {% block page_content %}
 
-    <div>
-    {{ intelFilter.form.as_p }}
-    </div>
+{#    <div>#}
+{#    {{ intelFilter.form.as_p }}#}
+{#    </div>#}
 
 <!-- Search -->
 <div class="content">
@@ -40,15 +40,17 @@
 
                         {# creation date #}
                         <div class="form-group form-row">
-{#                             <div class="col-2">#}
-{#                                {% render_field intelFilter.form.creation_date class="form-control form-control-alt" placeholder=intelFilter.form.creation_date.label %}#}
-{#                            </div>#}
-                            <div class="col-2">
-                                {% render_field intelFilter.form.creation_date_range class="form-control form-control-alt" %}
+                            <div class="form-group">
+                                <div class="input-daterange input-group js-datepicker-enabled" data-date-format="mm/dd/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                                    <input type="text" name="creation_date_range_after" class="form-control" id="id_creation_date_range_0" placeholder="From">
+                                    <div class="input-group-prepend input-group-append">
+                                        <span class="input-group-text font-w600">
+                                            <i class="fa fa-fw fa-arrow-right"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" name="creation_date_range_before" class="form-control" id="id_creation_date_range_1" placeholder="To">
+                                </div>
                             </div>
-{#                            <div class="col-2">#}
-{#                                {% render_field intelFilter.form.creation_date__lte class="form-control form-control-alt" placeholder=intelFilter.form.creation_date_range.label %}#}
-{#                            </div>#}
                         </div>
 
                         <div class="row items-push">
@@ -56,7 +58,6 @@
                                 <button class="btn btn-primary" id="id_reset_button">Reset</button>
                                 <input type="submit" class="btn btn-primary" value="Search">
                             </div>
-
                         </div>
 
 
@@ -82,7 +83,7 @@
 <!-- Page Content -->
 <div class="content">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <!-- Results -->
             <div class="block">
                 <div class="block-content tab-content overflow-hidden">
@@ -136,15 +137,7 @@
             <!-- END Results -->
         </div>
 
-        <div class="col-md-3">
-            <div class="block">
-                <div class="block-header block-header-default">
-                    <h3 class="block-title">Search filtering</h3>
-                </div>
-                <div class="block-content"></div>
-                </div>
-            </div>
-        </div>
+
     </div>
 
 <!-- END Page Content -->
@@ -155,6 +148,8 @@
     <script src="{% static 'frontend/assets/js/plugins/tagsinput/bootstrap-tagsinput.js' %}"></script>
     <script src="{% static "frontend/assets/js/plugins/typeahead/typeahead.js" %}"></script>
     <script src="{% static "frontend/assets/javascript/load_tags.js" %}"></script>
+    {# date #}
+    <script src="{% static "frontend/assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" %}"></script>
     {# search #}
     <script src="{% static "frontend/assets/javascript/search.js" %}"></script>
 
@@ -165,7 +160,15 @@
             var base_detail_view_endpoint = "/view/";
             var api_endpoint = "{% url 'intels-list' %}";
 
+            // init tags
             load_tags();
+
+            // init dates
+            let date_picker_options = {
+                format: 'yyyy-mm-dd',
+            }
+            $("#id_creation_date_range_0").datepicker(date_picker_options);
+            $("#id_creation_date_range_1").datepicker(date_picker_options);
 
             // init search form
             $('#id_reset_button').click(function (event){

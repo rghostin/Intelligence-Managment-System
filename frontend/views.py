@@ -7,7 +7,7 @@ from intelsAPI.models import Intel
 
 def search(request):
     intelFilter = IntelFilter(request.GET, Intel.objects.all())
-    print(intelFilter.form.fields)
+    print(intelFilter.form.fields['creation_date_range'])
     return render(request, 'frontend/search.html', locals())
 
 

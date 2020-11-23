@@ -1,4 +1,5 @@
 import django_filters
+from django_filters.widgets import RangeWidget
 
 from intelsAPI.models import Intel, Tag
 
