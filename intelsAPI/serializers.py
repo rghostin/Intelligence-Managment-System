@@ -13,6 +13,8 @@ class IntelSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
     tags = serializers.SlugRelatedField(many=True, slug_field='name', queryset=Tag.objects.all())
 
+    files = serializers.HyperlinkedRelatedField(many=True, queryset=IntelFile.objects.all(), view_name='intelfiles-detail')
+
     class Meta:
         model = Intel
         fields = '__all__'
