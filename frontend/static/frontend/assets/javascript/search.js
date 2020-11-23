@@ -32,7 +32,7 @@ function ajax_load_all_resources(api_endpoint, detail_view_endpoint) {
 function append_search_entry(entry, detail_view_endpoint) {
     let view_endpoint = detail_view_endpoint + entry.id;
     console.log(entry.tags);
-    let tags_list = entry.tags.map(function(elem){return elem.name;}).join(",");
+    let tags_list = entry.tags.join(",");
 
     let html_entry = `
     <tr>
@@ -41,12 +41,12 @@ function append_search_entry(entry, detail_view_endpoint) {
                 <a href="${view_endpoint}">${entry.title}</a>
             </h4>
             <p class="d-none d-sm-block text-muted">
-
+                lorem
             </p>
         </td>
 
 
-        <td class="d-none d-lg-table-cell text-center">#article</td>
+        <td class="d-none d-lg-table-cell text-center">${entry.resource_type}</td>
         <td>${tags_list}</td>
         <td class="d-none d-lg-table-cell font-size-xl text-center font-w600">
             <a href=\"${entry.link}\">Link</a>

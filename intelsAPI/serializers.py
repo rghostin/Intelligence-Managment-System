@@ -11,7 +11,7 @@ class TagSerializer(serializers.ModelSerializer):
 
 class IntelSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
-    tags = TagSerializer(many=True, read_only=True)
+    tags = serializers.SlugRelatedField(many=True, slug_field='name', queryset=Tag.objects.all())
 
     class Meta:
         model = Intel

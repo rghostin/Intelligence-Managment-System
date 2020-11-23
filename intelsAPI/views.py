@@ -12,7 +12,7 @@ from django_filters import rest_framework as dj_filters
 class IntelViewSet(viewsets.ModelViewSet):
     queryset = Intel.objects.all().order_by("last_update")
     serializer_class = IntelSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
     # search
     filter_backends = [dj_filters.DjangoFilterBackend]
     filterset_class = IntelFilter
@@ -24,4 +24,4 @@ class IntelViewSet(viewsets.ModelViewSet):
 class TagsViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-    permission_classes = [permissions.IsAdminUser]
+    # permission_classes = [permissions.IsAdminUser]
