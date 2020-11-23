@@ -4,6 +4,7 @@ from django.views.generic import DetailView, CreateView
 
 from intelsAPI.filters import IntelFilter
 from intelsAPI.models import Intel
+from intelsAPI.serializers import IntelSerializer
 
 
 def search(request):
@@ -18,10 +19,6 @@ class IntelView(DetailView):
     context_object_name = 'resource'
 
 
-class IntelCreate(CreateView):
-    model = Intel
-    template_name = 'frontend/intel_create.html'
-    fields = ['title', 'resource_type', 'tags', 'link', 'text_content', 'additional_note', ]
-
-    def get_success_url(self):
-        return reverse("view", kwargs={'pk':  self.object.pk})
+def intel_create(request):
+    intel_serializer = IntelSerializer()
+    return render(request, 'frontend/intel_create.html', locals())

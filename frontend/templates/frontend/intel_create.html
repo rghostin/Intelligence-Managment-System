@@ -1,4 +1,6 @@
 {% extends 'frontend/base.html' %}
+{% load static %}
+{% load rest_framework %}
 
 {% block page_title %}Add intel{% endblock %}
 
@@ -17,12 +19,10 @@
                     </div>
                     <div class="col-lg-8">
                         <!-- Form Labels on top - Default Style -->
-                        <form class="mb-5" action="" method="POST">
+                        <form action="{% url 'intels-list' %}" method="POST" id="id_create_form">
                             {% csrf_token %}
-                            {{form.as_p}}
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Create</button>
-                            </div>
+                            {% render_form intel_serializer %}
+                            <input type="submit" value="Save">
                         </form>
                         <!-- END Form Labels on top - Default Style -->
 
@@ -32,4 +32,18 @@
         </div>
 
     </div>
+{% endblock %}
+
+{% block custom_js %}
+    <script src="{% static "frontend/assets/javascript/create.js" %}"></script>
+
+    <script>
+        $( document ).ready(function() {
+            var api_endpoint = "{% url 'intels-list' %}";
+            $("#id_create_form").on("submit", function (e) {
+                e.preventDefault();
+                create_intel(api_endpoint, $(this).serialize());
+            });
+        });
+    </script>
 {% endblock %}
