@@ -4,6 +4,10 @@
 
 {% block page_title %}Search{% endblock %}
 
+{% block custom_css %}
+    <link href="{% static 'frontend/assets/js/plugins/tagsinput/bootstrap-tagsinput.css' %}">
+{% endblock %}
+
 {% block page_content %}
 {##}
 {#    <div>#}
@@ -24,7 +28,7 @@
                     <form action="" method="GET" id="id_search_form">
                         <div class="form-group form-row">
                             <div class="col-9">
-                                {% render_field intelFilter.form.tag %}
+                                {% render_field intelFilter.form.tag id="id_tags"%}
                             </div>
                         </div>
 
@@ -49,8 +53,10 @@
 
                         <div class="row items-push">
                             <div class="col-lg-7 offset-lg-4">
-                                <input type="submit" class="btn btn-primary">
+                                <button class="btn btn-primary" id="id_reset_button">Reset</button>
+                                <input type="submit" class="btn btn-primary" value="Search">
                             </div>
+
                         </div>
 
 
@@ -145,14 +151,28 @@
 {% endblock %}
 
 {% block custom_js %}
+    {# tags #}
+    <script src="{% static 'frontend/assets/js/plugins/tagsinput/bootstrap-tagsinput.js' %}"></script>
+    <script src="{% static "frontend/assets/js/plugins/typeahead/typeahead.js" %}"></script>
+    <script src="{% static "frontend/assets/javascript/load_tags.js" %}"></script>
+    {# search #}
     <script src="{% static "frontend/assets/javascript/search.js" %}"></script>
+
+
 
     <script>
         $( document ).ready(function() {
             var base_detail_view_endpoint = "/view/";
             var api_endpoint = "{% url 'intels-list' %}";
 
-            //
+            load_tags();
+
+            // init search form
+            $('#id_reset_button').click(function (event){
+                event.preventDefault();
+                $('#id_search_form')[0].reset();
+                ajax_load_all_resources(api_endpoint, base_detail_view_endpoint);
+            });
             $('#id_search_form').on( "submit", function( event ) {
                   event.preventDefault();
                   ajax_load_filtered_intels(api_endpoint, base_detail_view_endpoint, $( this ).serialize());
