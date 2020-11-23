@@ -1,0 +1,35 @@
+{% extends 'frontend/base.html' %}
+
+{% block page_title %}Add intel{% endblock %}
+
+{% block page_content %}
+<div class="content">
+    <div class="block">
+            <div class="block-header">
+                <h3 class="block-title">Labels on top</h3>
+            </div>
+            <div class="block-content block-content-full">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <p class="font-size-sm text-muted">
+                            An often used layout which is very easy to create with minimal markup
+                        </p>
+                    </div>
+                    <div class="col-lg-8">
+                        <!-- Form Labels on top - Default Style -->
+                        <form class="mb-5" action="" method="POST">
+                            {% csrf_token %}
+                            {{form.as_p}}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </div>
+                        </form>
+                        <!-- END Form Labels on top - Default Style -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

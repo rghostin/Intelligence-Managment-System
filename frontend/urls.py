@@ -4,5 +4,6 @@ from frontend import views
 
 urlpatterns = [
    path('search', views.search, name='search'),
-   path('view/<int:pk>', views.ResourceView.as_view(), name='resource_view')
+   path('view/<int:pk>', views.IntelView.as_view(), name='view'),
+   path('create', views.IntelCreate.as_view(), name='create')
 ]

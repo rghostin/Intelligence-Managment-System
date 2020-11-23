@@ -10,7 +10,7 @@ from django_filters import rest_framework as dj_filters
 
 
 class IntelViewSet(viewsets.ModelViewSet):
-    queryset = Intel.objects.all().order_by("last_update")
+    queryset = Intel.objects.all().order_by("-last_update")
     serializer_class = IntelSerializer
     # permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
     # search

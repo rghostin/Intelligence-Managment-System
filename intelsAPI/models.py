@@ -23,8 +23,13 @@ class Intel(models.Model):
 
     tags = models.ManyToManyField(Tag, related_name='intels')
 
-    link = models.URLField(null=True)
-    text_content = models.TextField(max_length=10000, null=True)
-    additional_note = models.TextField(max_length=3000, null=True)
+    link = models.URLField(blank=True)
+    text_content = models.TextField(max_length=10000, blank=True)
+    additional_note = models.TextField(max_length=3000, blank=True)
+
+
+# class IntelFile:
+#     intel = models.ForeignKey(Intel, on_delete=models.CASCADE, related_name='files')
+#     file = models.FileField(upload_to="resources/")
 
 
