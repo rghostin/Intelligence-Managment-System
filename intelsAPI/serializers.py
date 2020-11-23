@@ -10,10 +10,12 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class IntelSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='author.username')
+    author = serializers.ReadOnlyField(source='author.username')
+    tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
         model = Intel
-        exclude = ('author',)
+        fields = '__all__'
+        # exclude = ('author',)
 
 
