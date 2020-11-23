@@ -21,7 +21,7 @@ class IntelView(DetailView):
 class IntelCreate(CreateView):
     model = Intel
     template_name = 'frontend/intel_create.html'
-    fields = ['title', 'resource_type', 'tags', 'link', 'text_content', 'additional_note']
+    fields = ['title', 'resource_type', 'tags', 'link', 'text_content', 'additional_note', ]
 
     def get_success_url(self):
         return reverse("view", kwargs={'pk':  self.object.pk})

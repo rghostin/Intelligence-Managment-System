@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from intelsAPI.models import Intel, Tag
+from intelsAPI.models import Intel, Tag, IntelFile
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -16,6 +16,10 @@ class IntelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Intel
         fields = '__all__'
-        # exclude = ('author',)
 
+
+class IntelFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IntelFile
+        fields = '__all__'
 

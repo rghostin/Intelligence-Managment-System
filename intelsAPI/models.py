@@ -27,9 +27,13 @@ class Intel(models.Model):
     text_content = models.TextField(max_length=10000, blank=True)
     additional_note = models.TextField(max_length=3000, blank=True)
 
+    def __str__(self):
+        return "#%s - %s" % (self.id, self.title)
 
-# class IntelFile:
-#     intel = models.ForeignKey(Intel, on_delete=models.CASCADE, related_name='files')
-#     file = models.FileField(upload_to="resources/")
+
+class IntelFile(models.Model):
+    intel = models.ForeignKey(Intel, on_delete=models.CASCADE)
+    file = models.FileField(upload_to="intel_resource/")
+
 
 
