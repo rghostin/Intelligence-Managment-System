@@ -30,20 +30,20 @@
 
                         <div class="form-group form-row">
                             <div class="col-5">
-                                {% render_field intelFilter.form.title class="form-control form-control-alt"  %}
+                                {% render_field intelFilter.form.title class="form-control form-control-alt" placeholder=intelFilter.form.title.label %}
                             </div>
                         </div>
 
                         {# creation date #}
                         <div class="form-group form-row">
                              <div class="col-2">
-                                {% render_field intelFilter.form.creation_date class="form-control form-control-alt"  %}
+                                {% render_field intelFilter.form.creation_date class="form-control form-control-alt" placeholder=intelFilter.form.creation_date.label %}
                             </div>
                             <div class="col-2">
-                                {% render_field intelFilter.form.creation_date__gte class="form-control form-control-alt"  %}
+                                {% render_field intelFilter.form.creation_date__gte class="form-control form-control-alt" placeholder=intelFilter.form.creation_date__gte.label %}
                             </div>
                             <div class="col-2">
-                                {% render_field intelFilter.form.creation_date__lte class="form-control form-control-alt"  %}
+                                {% render_field intelFilter.form.creation_date__lte class="form-control form-control-alt" placeholder=intelFilter.form.creation_date__lte.label %}
                             </div>
                         </div>
 
@@ -83,7 +83,7 @@
                     <!-- Projects -->
                     <div class="tab-pane fade fade-up show active" id="search-projects" role="tabpanel">
                         <div class="font-size-h4 font-w600 p-2 mb-4 border-left border-4x border-primary bg-body-light" id="id_results_banner">
-                            <span class="text-primary font-w700" id="id_results_banner_number"></span> resources found for <mark class="text-danger" id="id_results_banner_keyword"></mark>
+                            <span class="text-primary font-w700" id="id_results_banner_number"></span> resources found.
                         </div>
                         <table class="table table-striped table-vcenter">
                             <thead>
@@ -141,13 +141,11 @@
         </div>
     </div>
 
-</div>
 <!-- END Page Content -->
 {% endblock %}
 
 {% block custom_js %}
     <script src="{% static "frontend/assets/javascript/search.js" %}"></script>
-    <script src="{% static "frontend/assets/javascript/utils.js" %}"></script>
 
     <script>
         $( document ).ready(function() {
@@ -157,19 +155,9 @@
             //
             $('#id_search_form').on( "submit", function( event ) {
                   event.preventDefault();
+                  ajax_load_filtered_intels(api_endpoint, base_detail_view_endpoint, $( this ).serialize());
                   console.log( $( this ).serialize() );
                 });
-
-            // hook search bar
-            {#$('#id_searchbar').keyup( debounce(500, function() {#}
-            {#    var search_input = $("#id_searchbar").val().trim();#}
-            {#    if (search_input === "") {#}
-            {#        // todo optimise#}
-            {#        ajax_load_all_resources(api_endpoint, base_detail_view_endpoint);#}
-            {#    } else {#}
-            {#        ajax_load_filtered_resources(api_endpoint, base_detail_view_endpoint, search_input);#}
-            {#    }#}
-
 
             // load resources content
             ajax_load_all_resources(api_endpoint, base_detail_view_endpoint);

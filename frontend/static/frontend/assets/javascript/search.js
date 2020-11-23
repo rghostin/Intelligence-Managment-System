@@ -1,13 +1,13 @@
-function ajax_load_filtered_resources(api_endpoint, detail_view_endpoint, keyword) {
+function ajax_load_filtered_intels(api_endpoint, detail_view_endpoint, filter) {
     let show_results_banner = false;
-    if (keyword != null) {
-        api_endpoint = api_endpoint + "?search="+keyword;
+    if (filter != null) {
         show_results_banner = true;
     }
     $.ajax({
         url: api_endpoint,
         contentType: "application/json",
         dataType: 'json',
+        data: filter,
         success: function(data){
             $('#id_search_results_body').empty();
             for (let i = 0; i < data.count; i++) {
@@ -16,7 +16,7 @@ function ajax_load_filtered_resources(api_endpoint, detail_view_endpoint, keywor
             }
 
             if (show_results_banner) {
-                display_results_banner(data.count, keyword);
+                display_results_banner(data.count);
             }
         }
         // todo error
@@ -24,7 +24,7 @@ function ajax_load_filtered_resources(api_endpoint, detail_view_endpoint, keywor
 }
 
 function ajax_load_all_resources(api_endpoint, detail_view_endpoint) {
-    ajax_load_filtered_resources(api_endpoint, detail_view_endpoint, null);
+    ajax_load_filtered_intels(api_endpoint, detail_view_endpoint, null);
     hide_results_banner()
 }
 
@@ -54,10 +54,9 @@ function append_search_entry(entry, detail_view_endpoint) {
     $('#id_search_results_body').append(html_entry);
 }
 
-function display_results_banner(number, keyword) {
+function display_results_banner(number) {
     $('#id_results_banner').show();
     $('#id_results_banner_number').text(number.toString());
-    $('#id_results_banner_keyword').text(keyword);
 }
 
 function hide_results_banner() {
