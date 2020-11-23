@@ -1,10 +1,15 @@
 {% extends 'frontend/base.html' %}
 {% load static %}
-
+{% load widget_tweaks %}
 
 {% block page_title %}Search{% endblock %}
 
 {% block page_content %}
+{##}
+{#    <div>#}
+{#    {{ intelFilter.form.as_p }}#}
+{#    </div>#}
+
 <!-- Search -->
 <div class="content">
     <div class="block">
@@ -16,22 +21,35 @@
 
                 <div class="col-lg-9">
                     <!-- Form Grid -->
-                    <form action="" method="POST" onsubmit="return false;">
+                    <form action="" method="GET" id="id_search_form">
                         <div class="form-group form-row">
                             <div class="col-9">
-                                <input type="text" class="form-control form-control-alt" placeholder="Tags">
+                                {% render_field intelFilter.form.tag %}
                             </div>
                         </div>
 
                         <div class="form-group form-row">
                             <div class="col-5">
-                                <input type="text" class="form-control form-control-alt" placeholder="Keyword" id="id_searchbar">
+                                {% render_field intelFilter.form.title class="form-control form-control-alt"  %}
+                            </div>
+                        </div>
+
+                        {# creation date #}
+                        <div class="form-group form-row">
+                             <div class="col-2">
+                                {% render_field intelFilter.form.creation_date class="form-control form-control-alt"  %}
                             </div>
                             <div class="col-2">
-                                <input type="text" class="form-control form-control-alt" placeholder="Article type">
+                                {% render_field intelFilter.form.creation_date__gte class="form-control form-control-alt"  %}
                             </div>
                             <div class="col-2">
-                                <input type="text" class="form-control form-control-alt" placeholder="Publish date">
+                                {% render_field intelFilter.form.creation_date__lte class="form-control form-control-alt"  %}
+                            </div>
+                        </div>
+
+                        <div class="row items-push">
+                            <div class="col-lg-7 offset-lg-4">
+                                <input type="submit" class="btn btn-primary">
                             </div>
                         </div>
 
@@ -45,6 +63,7 @@
                     </p>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -60,11 +79,6 @@
         <div class="col-md-9">
             <!-- Results -->
             <div class="block">
-{#                <ul class="nav nav-tabs nav-tabs-block" data-toggle="tabs" role="tablist">#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link active" href="#search-projects">Resources</a>#}
-{#                    </li>#}
-{#                </ul>#}
                 <div class="block-content tab-content overflow-hidden">
                     <!-- Projects -->
                     <div class="tab-pane fade fade-up show active" id="search-projects" role="tabpanel">
@@ -140,16 +154,22 @@
             var base_detail_view_endpoint = "/view/";
             var api_endpoint = "{% url 'intels-list' %}";
 
+            //
+            $('#id_search_form').on( "submit", function( event ) {
+                  event.preventDefault();
+                  console.log( $( this ).serialize() );
+                });
+
             // hook search bar
-            $('#id_searchbar').keyup( debounce(500, function() {
-                var search_input = $("#id_searchbar").val().trim();
-                if (search_input === "") {
-                    // todo optimise
-                    ajax_load_all_resources(api_endpoint, base_detail_view_endpoint);
-                } else {
-                    ajax_load_filtered_resources(api_endpoint, base_detail_view_endpoint, search_input);
-                }
-            }));
+            {#$('#id_searchbar').keyup( debounce(500, function() {#}
+            {#    var search_input = $("#id_searchbar").val().trim();#}
+            {#    if (search_input === "") {#}
+            {#        // todo optimise#}
+            {#        ajax_load_all_resources(api_endpoint, base_detail_view_endpoint);#}
+            {#    } else {#}
+            {#        ajax_load_filtered_resources(api_endpoint, base_detail_view_endpoint, search_input);#}
+            {#    }#}
+
 
             // load resources content
             ajax_load_all_resources(api_endpoint, base_detail_view_endpoint);

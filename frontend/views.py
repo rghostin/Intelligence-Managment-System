@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
 
+from intelsAPI.filters import IntelFilter
 from intelsAPI.models import Intel
 
 
 def search(request):
+    intelFilter = IntelFilter(request.GET, Intel.objects.all())
     return render(request, 'frontend/search.html', locals())
 
 
