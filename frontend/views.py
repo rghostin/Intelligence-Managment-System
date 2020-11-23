@@ -7,6 +7,7 @@ from intelsAPI.models import Intel
 
 def search(request):
     intelFilter = IntelFilter(request.GET, Intel.objects.all())
+    print(intelFilter.form.fields)
     return render(request, 'frontend/search.html', locals())
 
 

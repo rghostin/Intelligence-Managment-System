@@ -9,10 +9,10 @@
 {% endblock %}
 
 {% block page_content %}
-{##}
-{#    <div>#}
-{#    {{ intelFilter.form.as_p }}#}
-{#    </div>#}
+
+    <div>
+    {{ intelFilter.form.as_p }}
+    </div>
 
 <!-- Search -->
 <div class="content">
@@ -40,15 +40,15 @@
 
                         {# creation date #}
                         <div class="form-group form-row">
-                             <div class="col-2">
-                                {% render_field intelFilter.form.creation_date class="form-control form-control-alt" placeholder=intelFilter.form.creation_date.label %}
-                            </div>
+{#                             <div class="col-2">#}
+{#                                {% render_field intelFilter.form.creation_date class="form-control form-control-alt" placeholder=intelFilter.form.creation_date.label %}#}
+{#                            </div>#}
                             <div class="col-2">
-                                {% render_field intelFilter.form.creation_date__gte class="form-control form-control-alt" placeholder=intelFilter.form.creation_date__gte.label %}
+                                {% render_field intelFilter.form.creation_date_range class="form-control form-control-alt" %}
                             </div>
-                            <div class="col-2">
-                                {% render_field intelFilter.form.creation_date__lte class="form-control form-control-alt" placeholder=intelFilter.form.creation_date__lte.label %}
-                            </div>
+{#                            <div class="col-2">#}
+{#                                {% render_field intelFilter.form.creation_date__lte class="form-control form-control-alt" placeholder=intelFilter.form.creation_date_range.label %}#}
+{#                            </div>#}
                         </div>
 
                         <div class="row items-push">
