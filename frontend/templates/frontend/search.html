@@ -97,6 +97,7 @@
                                 <tr>
                                     <th style="width: 50%;">Title</th>
                                     <th class="d-none d-lg-table-cell text-center" style="width: 15%;">Type</th>
+                                    <th class="d-none d-lg-table-cell text-center" style="width: 15%;">Tags</th>
                                     <th class="d-none d-lg-table-cell text-center" style="width: 15%;">Link</th>
                                 </tr>
                             </thead>
@@ -179,7 +180,6 @@
             $('#id_search_form').on( "submit", function( event ) {
                   event.preventDefault();
                   ajax_load_filtered_intels(api_endpoint, base_detail_view_endpoint, $( this ).serialize());
-                  console.log( $( this ).serialize() );
                 });
 
             // load resources content

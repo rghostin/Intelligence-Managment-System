@@ -8,6 +8,7 @@ function ajax_load_filtered_intels(api_endpoint, detail_view_endpoint, filter) {
         contentType: "application/json",
         dataType: 'json',
         data: filter,
+        beforeSend: function(jqXHR, settings) {console.log(settings.url);},
         success: function(data){
             $('#id_search_results_body').empty();
             for (let i = 0; i < data.count; i++) {
@@ -30,6 +31,9 @@ function ajax_load_all_resources(api_endpoint, detail_view_endpoint) {
 
 function append_search_entry(entry, detail_view_endpoint) {
     let view_endpoint = detail_view_endpoint + entry.id;
+    console.log(entry.tags);
+    let tags_list = entry.tags.map(function(elem){return elem.name;}).join(",");
+
     let html_entry = `
     <tr>
         <td>
@@ -42,8 +46,8 @@ function append_search_entry(entry, detail_view_endpoint) {
         </td>
 
 
-        <td class="d-none d-lg-table-cell text-center">
-        </td>
+        <td class="d-none d-lg-table-cell text-center">#article</td>
+        <td>${tags_list}</td>
         <td class="d-none d-lg-table-cell font-size-xl text-center font-w600">
             <a href=\"${entry.link}\">Link</a>
         </td>
