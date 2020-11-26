@@ -29,16 +29,31 @@ function getSelectedFiles() {
     return $('#id_input_files')[0].files;
 }
 
+
+function display_status(failed) {
+    if (failed) {
+        console.log("Error : Failure creating intel");
+        display_notification("error", "Failure creating intel")
+    } else {
+        console.log("Intel created successfully");
+        display_notification("success", "Intel created successfully !")
+    }
+}
+
 function create_intel(api_endpoint_intel, api_endpoint_intelfiles, csrf_token, form_data_base) {
+    var failed = false;
     let xhr_base = create_intel_base(api_endpoint_intel, form_data_base);
-    xhr_base.fail( () => {console.log("Error: unable to create base intel");});
+    let deferreds = [];
+    xhr_base.fail( function () {
+        failed=true;
+        console.log("Error: unable to create base intel");
+        display_status(failed);
+    });
     xhr_base.done( function (data_intel_base) {
             let intel_id = data_intel_base.id;
             console.log("Base intel created successfully id=" + data_intel_base.id);
 
-            let failed = false;
             let files = getSelectedFiles();
-            let deferreds = [];
             Array.from(files).forEach(function (file) {
                 let xhr_file = upload_file(api_endpoint_intelfiles, csrf_token, intel_id, file);
                 xhr_file.fail(() => {
@@ -53,11 +68,7 @@ function create_intel(api_endpoint_intel, api_endpoint_intelfiles, csrf_token, f
             });
 
             $.when.apply($, deferreds).then(function (){
-                if (failed) {
-                    console.log("Error : Failure creating intel");
-                } else {
-                    console.log("Intel created successfully");
-                }
+                display_status(failed);
             });
         }
     );
