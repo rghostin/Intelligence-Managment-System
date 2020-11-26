@@ -30,8 +30,9 @@
                             <label class="d-block" for="id_input_files">Files</label>
                             <input class="form-control-file" name="file" type="file" value="" id="id_input_files" multiple>
                         </div>
-                        <div>
-                            <button id="create_btn">Create</button>
+
+                        <div class="form-group" style="text-align: right;" >
+                            <button class="btn btn-primary" id="id_create_btn">Create</button>
                         </div>
 
                     </div>
@@ -52,7 +53,7 @@
             var api_endpoint_intelfiles = "{%  url 'intelfiles-list' %}";
             var csrf_token = "{{ csrf_token }}";
 
-            $("#create_btn").click( function (e) {
+            $("#id_create_btn").click( function (e) {
                 e.preventDefault();
                 create_intel(api_endpoint_intel, api_endpoint_intelfiles, csrf_token, $("#id_create_form").serialize() );
             });
