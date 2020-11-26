@@ -76,17 +76,20 @@
 
     <script>
         $(document).ready(function () {
+            var api_endpoint_intel = "{% url 'intels-list' %}";
+            var api_endpoint_intelfiles = "{%  url 'intelfiles-list' %}";
+            var csrf_token = "{{ csrf_token }}";
 
             // init intel creation
-            var api_endpoint = "{% url 'intels-list' %}";
             $("#id_create_form").on("submit", function (e) {
                 e.preventDefault();
-                create_intel(api_endpoint, $(this).serialize(), "{{ csrf_token }}");
+                {#create_intel(api_endpoint, $(this).serialize(), "{{ csrf_token }}");#}
+                create_intel(api_endpoint_intel, api_endpoint_intelfiles, csrf_token, $(this).serialize() );
             });
 
             $("#test_btn").click(function (e) {
                 e.preventDefault();
-                upload_selected_files("{% url 'intelfiles-list' %}", 6);
+                upload_selected_files("{% url 'intelfiles-list' %}", csrf_token, 6);
             })
 
 
