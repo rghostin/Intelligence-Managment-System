@@ -18,50 +18,21 @@
                         </p>
                     </div>
                     <div class="col-lg-8">
-                        <!-- Form Labels on top - Default Style -->
+                        {# Base Intel form #}
                         <form action="{% url 'intels-list' %}" method="POST" id="id_create_form">
                             {% csrf_token %}
                             {% render_form intel_serializer %}
-                            <input type="submit" value="Save">
                         </form>
-                        <!-- END Form Labels on top - Default Style -->
 
+                        {# Intel Files #}
                         <div>
-{#                            {% render_form intelfile_serializer %}#}
-{#                            <div>#}
-{#                                <div class="form-group ">#}
-{#                                    <label>File</label>#}
-{#                                    <input name="file" type="file" value="">#}
-{#                                </div>#}
-{#                                #}
-{#                                <div class="form-group ">#}
-{#                                    <label>#}
-{#                                        Intel#}
-{#                                    </label>#}
-{#                                    <select class="form-control" name="intel">#}
-{#                                        <option value="1">#1 - tuiltui</option>#}
-{#                                    </select>#}
-{#                                </div>#}
-{#                            </div>#}
-
-                            <div>
-                                <form id="id_form_files_upload">
-                                    {% csrf_token %}
-                                    <label>File</label>
-                                    <input type="hidden" value="522" name="intel" id="id_intelfile_intel">
-                                </form>
-                            </div>
-
-                            <div>
-                                    <input name="file" type="file" value="" id="file">
-                                    <button id="test_btn">test</button>
-                            </div>
-
-
+                            <input name="file" type="file" value="" id="file" multiple>
                         </div>
 
                         <div>
+                            <button id="create_btn">Create</button>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -80,19 +51,10 @@
             var api_endpoint_intelfiles = "{%  url 'intelfiles-list' %}";
             var csrf_token = "{{ csrf_token }}";
 
-            // init intel creation
-            $("#id_create_form").on("submit", function (e) {
+            $("#create_btn").click( function (e) {
                 e.preventDefault();
-                {#create_intel(api_endpoint, $(this).serialize(), "{{ csrf_token }}");#}
-                create_intel(api_endpoint_intel, api_endpoint_intelfiles, csrf_token, $(this).serialize() );
+                create_intel(api_endpoint_intel, api_endpoint_intelfiles, csrf_token, $("#id_create_form").serialize() );
             });
-
-            $("#test_btn").click(function (e) {
-                e.preventDefault();
-                upload_selected_files("{% url 'intelfiles-list' %}", csrf_token, 6);
-            })
-
-
         });
     </script>
 {% endblock %}

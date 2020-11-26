@@ -39,20 +39,21 @@ function create_intel(api_endpoint_intel, api_endpoint_intelfiles, csrf_token, f
             Array.from(files).forEach(function (file) {
                 let xhr_file = upload_file(api_endpoint_intelfiles, csrf_token, intel_id, file);
                 xhr_file.fail(() => {
+                    // todo rollback
                     failed = true;
                     console.log("Failed to upload " + f.name);
                 });
                 xhr_file.done(data_intel_file => {
-                    console.log("Uploaded file " + file.name + "id=" + data_intel_file.id + " to intel_id=" + intel_id);
+                    console.log("Uploaded file " + file.name + " id=" + data_intel_file.id + " to intel_id=" + intel_id);
                 });
                 deferreds.push(xhr_file);
             });
 
             $.when.apply($, deferreds).then(function (){
                 if (failed) {
-                    console.log("Error : Failure");
+                    console.log("Error : Failure creating intel");
                 } else {
-                    console.log("Intel created successful");
+                    console.log("Intel created successfully");
                 }
             });
         }
