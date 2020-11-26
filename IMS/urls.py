@@ -12,9 +12,9 @@ router.register(r'tags', intelsAPI_views.TagsViewSet)
 urlpatterns = [
     path('', include('frontend.urls')),
 
-    # path('api/', include(router.urls)),
-    path('api/', include('intelsAPI.urls')),
+    path('auth/', include('django.contrib.auth.urls')),
 
+    path('api/', include('intelsAPI.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     path('admin/', admin.site.urls),
