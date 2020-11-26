@@ -113,16 +113,7 @@
                                     </a>
                                 </li>
                                 <li class="page-item active">
-                                    <a class="page-link" href="javascript:void(0)">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0)">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0)">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0)">4</a>
+                                    <span class="page-link" id="id_page_num">1</span>
                                 </li>
                                 <li class="page-item">
                                     <a class="page-link" href="javascript:void(0)" aria-label="Next">
@@ -179,7 +170,7 @@
             });
             $('#id_search_form').on( "submit", function( event ) {
                   event.preventDefault();
-                  ajax_load_filtered_intels(api_endpoint, base_detail_view_endpoint, $( this ).serialize());
+                  ajax_load_filtered_intels(api_endpoint, base_detail_view_endpoint, $( this ).serializeArray(), null);
                 });
 
             // load resources content
