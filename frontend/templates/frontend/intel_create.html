@@ -56,7 +56,12 @@
 
             $("#id_create_btn").click( function (e) {
                 e.preventDefault();
-                create_intel(api_endpoint_intel, api_endpoint_intelfiles, csrf_token, $("#id_create_form").serialize() );
+                var $form = $('#id_create_form')[0];
+                if ($form.checkValidity()) {
+                    create_intel(api_endpoint_intel, api_endpoint_intelfiles, csrf_token, $("#id_create_form").serialize() );
+                } else {
+                    display_notification("error", "Invalid form");
+                }
             });
         });
     </script>
