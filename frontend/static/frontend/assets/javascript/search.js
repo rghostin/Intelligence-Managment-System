@@ -11,8 +11,6 @@ function ajax_load_filtered_intels(api_endpoint, detail_view_endpoint, filterArr
     if (page) {
         data.push({name: "page", value: page})
     }
-    console.log(data);
-
 
     $.ajax({
         url: api_endpoint,
@@ -31,9 +29,7 @@ function ajax_load_filtered_intels(api_endpoint, detail_view_endpoint, filterArr
                 display_results_banner(data.count);
             }
 
-            set_page_num(page);
-
-
+            load_pagination(api_endpoint, detail_view_endpoint, filterArray, page, data.previous, data.next);
         }
         // todo error
     });
@@ -83,9 +79,36 @@ function hide_results_banner() {
 }
 
 function set_page_num(num) {
-    console.log(num);
-    if (!num){
-        num=1;
-    }
     $("#id_page_num").text(num.toString());
+}
+
+function load_pagination(api_endpoint, detail_view_endpoint, curr_filterArray, curr_page, prev_link, next_link) {
+    if (!curr_page){
+        curr_page=1;
+    }
+    set_page_num(curr_page);
+
+    $("#id_prev").off();
+    $("#id_next").off()
+
+    if (prev_link) {
+        $("#id_prev").on("click", function () {
+            ajax_load_filtered_intels(api_endpoint, detail_view_endpoint, curr_filterArray, curr_page-1);
+        });
+    } else {
+        $("#id_prev").on("click", function () {
+            return false;
+        });
+    }
+
+    if (next_link) {
+        $("#id_next").on("click", function () {
+            ajax_load_filtered_intels(api_endpoint, detail_view_endpoint, curr_filterArray, curr_page+1);
+        });
+    } else {
+        $("#id_next").on("click", function () {
+            return false;
+        });
+    }
+
 }
