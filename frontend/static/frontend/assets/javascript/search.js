@@ -19,17 +19,18 @@ function ajax_load_filtered_intels(api_endpoint, detail_view_endpoint, filterArr
         data: $.param(data),
         beforeSend: function(jqXHR, settings) {console.log(settings.url);},
         success: function(data){
-            // $('#id_search_results_body').empty();
-            // for (let i = 0; i < data.count; i++) {
-            //     let entry = data.results[i];
-            //     append_search_entry(entry, detail_view_endpoint)
-            // }
-
             if (show_results_banner) {
                 display_results_banner(data.count);
             }
 
             load_pagination(api_endpoint, detail_view_endpoint, filterArray, page, data.previous, data.next);
+
+            $('#id_search_results_body').empty();
+            for (let i = 0; i < data.results.length; i++) {
+                let entry = data.results[i];
+                console.log("entry "+entry);
+                append_search_entry(entry, detail_view_endpoint)
+            }
         }
         // todo error
     });
