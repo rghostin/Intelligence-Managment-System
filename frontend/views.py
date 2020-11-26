@@ -4,7 +4,7 @@ from django.views.generic import DetailView, CreateView
 
 from intelsAPI.filters import IntelFilter
 from intelsAPI.models import Intel
-from intelsAPI.serializers import IntelSerializer
+from intelsAPI.serializers import IntelSerializer, IntelFileSerializer
 
 
 def search(request):
@@ -21,4 +21,5 @@ class IntelView(DetailView):
 
 def intel_create(request):
     intel_serializer = IntelSerializer()
+    intelfile_serializer = IntelFileSerializer()
     return render(request, 'frontend/intel_create.html', locals())

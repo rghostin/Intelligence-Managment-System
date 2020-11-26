@@ -5,8 +5,8 @@
 {% block page_title %}Add intel{% endblock %}
 
 {% block page_content %}
-<div class="content">
-    <div class="block">
+    <div class="content">
+        <div class="block">
             <div class="block-header">
                 <h3 class="block-title">Labels on top</h3>
             </div>
@@ -27,21 +27,55 @@
                         <!-- END Form Labels on top - Default Style -->
 
                         <div>
+{#                            {% render_form intelfile_serializer %}#}
+{#                            <div>#}
+{#                                <div class="form-group ">#}
+{#                                    <label>File</label>#}
+{#                                    <input name="file" type="file" value="">#}
+{#                                </div>#}
+{#                                #}
+{#                                <div class="form-group ">#}
+{#                                    <label>#}
+{#                                        Intel#}
+{#                                    </label>#}
+{#                                    <select class="form-control" name="intel">#}
+{#                                        <option value="1">#1 - tuiltui</option>#}
+{#                                    </select>#}
+{#                                </div>#}
+{#                            </div>#}
+
+                            <div>
+                                <form id="id_form_files_upload">
+                                    {% csrf_token %}
+                                    <label>File</label>
+                                    <input type="hidden" value="522" name="intel" id="id_intelfile_intel">
+                                </form>
+                            </div>
+
+                            <div>
+                                    <input name="file" type="file" value="" id="file">
+                                    <button id="test_btn">test</button>
+                            </div>
+
+
+                        </div>
+
+                        <div>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
     </div>
-
-</div>
 {% endblock %}
 
 {% block custom_js %}
     <script src="{% static "frontend/assets/javascript/create.js" %}"></script>
 
     <script>
-        $( document ).ready(function() {
+        $(document).ready(function () {
 
             // init intel creation
             var api_endpoint = "{% url 'intels-list' %}";
@@ -49,6 +83,11 @@
                 e.preventDefault();
                 create_intel(api_endpoint, $(this).serialize(), "{{ csrf_token }}");
             });
+
+            $("#test_btn").click(function (e) {
+                e.preventDefault();
+                upload_selected_files("{% url 'intelfiles-list' %}", 6);
+            })
 
 
         });
