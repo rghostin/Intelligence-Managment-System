@@ -25,6 +25,9 @@ function upload_file(api_endpoint, csrf_token, intel_id, file) {
    });
 }
 
+function getSelectedFiles() {
+    return $('#id_input_files')[0].files;
+}
 
 function create_intel(api_endpoint_intel, api_endpoint_intelfiles, csrf_token, form_data_base) {
     let xhr_base = create_intel_base(api_endpoint_intel, form_data_base);
@@ -34,7 +37,7 @@ function create_intel(api_endpoint_intel, api_endpoint_intelfiles, csrf_token, f
             console.log("Base intel created successfully id=" + data_intel_base.id);
 
             let failed = false;
-            let files = $('#file')[0].files;
+            let files = getSelectedFiles();
             let deferreds = [];
             Array.from(files).forEach(function (file) {
                 let xhr_file = upload_file(api_endpoint_intelfiles, csrf_token, intel_id, file);

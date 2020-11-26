@@ -4,6 +4,7 @@
 
 {% block page_title %}Add intel{% endblock %}
 
+
 {% block page_content %}
     <div class="content">
         <div class="block">
@@ -25,10 +26,10 @@
                         </form>
 
                         {# Intel Files #}
-                        <div>
-                            <input name="file" type="file" value="" id="file" multiple>
+                        <div class="form-group">
+                            <label class="d-block" for="id_input_files">Files</label>
+                            <input class="form-control-file" name="file" type="file" value="" id="id_input_files" multiple>
                         </div>
-
                         <div>
                             <button id="create_btn">Create</button>
                         </div>
