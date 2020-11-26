@@ -132,6 +132,7 @@ MEDIA_URL = "/media/"
 #### Authentication - Start
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'search'
+LOGOUT_REDIRECT_URL = LOGIN_URL
 #### Authentication - End
 
 
