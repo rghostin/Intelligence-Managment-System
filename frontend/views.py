@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, CreateView
 
 from intelsAPI.filters import IntelFilter
-from intelsAPI.models import Intel
+from intelsAPI.models import Intel, IntelFile
 from intelsAPI.serializers import IntelSerializer, IntelFileSerializer
 
 
@@ -19,8 +19,8 @@ def search(request):
 @method_decorator(login_required, name='dispatch')
 class IntelView(DetailView):
     model = Intel
-    template_name = 'frontend/resource_view.html'
-    context_object_name = 'resource'
+    template_name = 'frontend/intel_view.html'
+    context_object_name = 'intel'
 
 
 @login_required

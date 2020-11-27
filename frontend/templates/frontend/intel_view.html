@@ -1,0 +1,113 @@
+{% extends 'frontend/base.html' %}
+
+{% block page_title %}#{{ intel.id }} - {{ intel.title }}{% endblock %}
+
+{% block page_content %}
+    <div class="content">
+
+        {#  TAGS #}
+        <div>
+            <p>
+                {% for tag in intel.tags.all %}
+                    <span class="badge badge-primary">{{ tag.name }}</span>
+                {% endfor %}
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                {# BASIC INFO #}
+                <div class="block">
+                    <div class="block-header">
+                        <h3 class="block-title">
+                            Basic information
+                        </h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option">
+                                <i class="si si-settings"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="block-content">
+                        <ul>
+                            <li>
+                                <strong>Author:</strong>
+                                {{ intel.author.username }}
+                            </li>
+
+                            <li>
+                                <strong>Resource Type:</strong>
+                                {{ intel.resource_type |capfirst }}
+                            </li>
+
+                            <li>
+                                <strong>Creation date:</strong>
+                                {{ intel.creation_date }}
+                            </li>
+
+                            <li>
+                                <strong>Last update:</strong>
+                                {{ intel.last_update }}
+                            </li>
+
+                            <li>
+                                <strong>Link:</strong>
+                                {% if intel.link %}
+                                    <a href="{{ intel.link }}">{{ intel.link |truncatechars:100 }}</a>
+                                {% else %}
+                                    <i>null</i>
+                                {% endif %}
+                            </li>
+
+                            <li>
+                                <strong>Note:</strong>
+                                {% if intel.additional_note %}
+                                    <p>{{ intel.additional_note }}</p>
+                                {% else %}
+                                    <i>null</i>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {# FILES #}
+            <div class="col-md-4">
+                <div class="block" style="overflow: auto; max-height: 270px">
+                    <div class="block-header">
+                        <h3 class="block-title">
+                            Files ({{ intel.files.count }})
+                        </h3>
+                    </div>
+                    <div class="block-content">
+                        {% if not intel.files %}
+                            <p><i>No files</i></p>
+                        {% else %}
+                            <ul>
+                                {% for intelfile in intel.files.all %}
+                                    <li><a href="{{ intelfile.file.url }}" target="_blank">{{ intelfile.filename }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        {#  TEXT CONTENT #}
+        <div class="block">
+            <div class="block-header">
+                <h3 class="block-title">
+                    Text content
+                </h3>
+            </div>
+            <div class="block-content">
+                <p>{{ intel.text_content | default:"<i>null</i>" }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

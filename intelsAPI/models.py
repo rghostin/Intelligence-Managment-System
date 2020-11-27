@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 
 
@@ -34,6 +36,9 @@ class Intel(models.Model):
 class IntelFile(models.Model):
     intel = models.ForeignKey(Intel, on_delete=models.CASCADE, related_name='files')
     file = models.FileField(upload_to="intel_resource/")
+
+    def filename(self):
+        return os.path.basename(self.file.name)
 
 
 
