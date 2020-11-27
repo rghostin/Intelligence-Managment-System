@@ -52,7 +52,7 @@ function append_search_entry(entry, detail_view_endpoint) {
     <tr>
         <td>
             <h4 class="h5 mt-3 mb-2">
-                <a href="${view_endpoint}">${entry.title}</a>
+                <a href="${view_endpoint}">#${entry.id} - ${entry.title}</a>
             </h4>
             <p class="d-none d-sm-block text-muted">
                 lorem
