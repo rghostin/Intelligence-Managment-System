@@ -28,7 +28,6 @@ function ajax_load_filtered_intels(api_endpoint, detail_view_endpoint, filterArr
             $('#id_search_results_body').empty();
             for (let i = 0; i < data.results.length; i++) {
                 let entry = data.results[i];
-                console.log("entry "+entry);
                 append_search_entry(entry, detail_view_endpoint)
             }
         },
@@ -45,7 +44,6 @@ function ajax_load_all_resources(api_endpoint, detail_view_endpoint) {
 
 function append_search_entry(entry, detail_view_endpoint) {
     let view_endpoint = detail_view_endpoint + entry.id;
-    console.log(entry.tags);
     let tags_list = entry.tags.join(",");
 
     let html_entry = `

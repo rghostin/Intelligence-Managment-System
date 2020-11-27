@@ -26,11 +26,12 @@
                 <div class="col-lg-9">
                     <!-- Form Grid -->
                     <form action="" method="GET" id="id_search_form">
-                        <div class="form-group form-row">
-                            <div class="col-9">
-                                {% render_field intelFilter.form.tag id="id_tags"%}
-                            </div>
-                        </div>
+{#                        <div class="form-group form-row">#}
+{#                            <div class="col-9">#}
+{#                                {% render_field intelFilter.form.tag %}#}
+{#                            </div>#}
+{#                        </div>#}
+                        <select id="id_tags" name="tag" multiple></select>
 
                         <div class="form-group form-row">
                             <div class="col-5">
