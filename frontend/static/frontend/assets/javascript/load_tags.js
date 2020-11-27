@@ -28,7 +28,15 @@ function load_tags() {
                 freeInput: false,
                 typeaheadjs: {
                    name: 'tagnames',
-                   source: engine
+                   source: engine,
+                     templates: {
+                    empty: [
+                      '<div>No matching tags found</div>'
+                    ].join('\n'),
+                    suggestion: function(data){
+                        return '<span class="badge badge-secondary">' + data + '</span>';
+                    }
+                  }
                 }
             });
         });
