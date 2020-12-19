@@ -1,6 +1,7 @@
 import os
 
 from django.db import models
+from martor.models import MartorField
 
 
 class Tag(models.Model):
@@ -26,7 +27,7 @@ class Intel(models.Model):
     tags = models.ManyToManyField(Tag, related_name='intels')
 
     link = models.URLField(blank=True)
-    text_content = models.TextField(max_length=10000, blank=True)
+    text_content = MartorField()
     additional_note = models.TextField(max_length=3000, blank=True)
 
     def __str__(self):

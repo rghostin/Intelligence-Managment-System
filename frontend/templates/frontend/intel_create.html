@@ -5,6 +5,12 @@
 {% block page_title %}Add intel{% endblock %}
 
 
+{% block custom_css %}
+    <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+    <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+    <link href="{% static 'martor/css/martor.bootstrap.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+{% endblock %}
+
 {% block page_content %}
     <div class="content">
         <div class="block">
@@ -13,11 +19,11 @@
             </div>
             <div class="block-content block-content-full">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-2">
                         <p class="font-size-sm text-muted">
                         </p>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-10">
                         {# Base Intel form #}
                         <form method="post" enctype="multipart/form-data" novalidate>
                             {% csrf_token %}
@@ -44,6 +50,18 @@
     <script src="{% static 'frontend/assets/js/plugins/tagsinput/bootstrap-tagsinput.js' %}"></script>
     <script src="{% static "frontend/assets/js/plugins/typeahead/typeahead.js" %}"></script>
 {#    <script src="{% static "frontend/assets/javascript/load_tags.js" %}"></script>#}
+
+    {# martor #}
+    <script type="text/javascript" src="{% static 'plugins/js/ace.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/mode-markdown.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/ext-language_tools.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/theme-github.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/typo.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/spellcheck.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/highlight.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/resizable.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/emojis.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'martor/js/martor.bootstrap.min.js' %}"></script>
 
     <script src="{% static "frontend/assets/javascript/utils.js" %}"></script>
 

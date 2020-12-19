@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'widget_tweaks',
+    'martor',
     'intelsAPI',
     'frontend'
 ]
@@ -136,7 +137,34 @@ LOGOUT_REDIRECT_URL = LOGIN_URL
 #### Authentication - End
 
 
+### DRF - Start
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+### DRF - End
+
+
+### Martor - Start
+# Martor Configuration
+MARTOR_THEME = 'bootstrap'  # semantic
+MARTOR_ENABLE_LABEL = True
+MARTOR_ENABLE_CONFIGS = {
+    'emoji': 'false',
+    'imgur': 'false',        # to enable/disable imgur/custom uploader.
+    'mention': 'false',      # to enable/disable mention
+    'jquery': 'false',       # to include/revoke jquery (require for admin default django)
+    'living': 'false',      # to enable/disable live updates in preview
+    'spellcheck': 'true',  # to enable/disable spellcheck in form textareas
+    'hljs': 'true',         # to enable/disable hljs highlighting in preview
+}
+MARTOR_TOOLBAR_BUTTONS = [
+    'bold', 'italic', 'horizontal', 'heading', 'pre-code',
+    'blockquote', 'unordered-list', 'ordered-list',
+    'link', 'image-link', 'image-upload',
+    'direct-mention', 'toggle-maximize', 'help'
+]
+### Martor - End
+
+
+

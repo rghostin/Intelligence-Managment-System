@@ -8,4 +8,4 @@ class IntelCreationForm(forms.ModelForm):
 
     class Meta:
         model = Intel
-        exclude = ['author']
+        fields = ['title', 'resource_type', 'tags', 'link', 'files_field', 'additional_note', 'text_content']
