@@ -107,20 +107,26 @@ function load_pagination(api_endpoint, detail_view_endpoint, curr_filterArray, c
         $("#id_prev").on("click", function () {
             ajax_load_filtered_intels(api_endpoint, detail_view_endpoint, curr_filterArray, curr_page-1);
         });
+        $("#id_div_prev").removeClass("disabled");
     } else {
         $("#id_prev").on("click", function () {
             return false;
         });
+        $("#id_div_prev").addClass("disabled");
     }
 
     if (next_link) {
         $("#id_next").on("click", function () {
             ajax_load_filtered_intels(api_endpoint, detail_view_endpoint, curr_filterArray, curr_page+1);
         });
+        $("#id_div_next").removeClass("disabled");
     } else {
         $("#id_next").on("click", function () {
             return false;
         });
+        $("#id_div_next").addClass("disabled");
+;
+
     }
 
 }
