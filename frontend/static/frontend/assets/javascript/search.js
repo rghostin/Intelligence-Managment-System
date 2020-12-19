@@ -47,7 +47,7 @@ function make_tags_list_html(tags) {
     let tags_list_html = "<p>";
     for (i=0; i < tags.length; i++) {
         let tagname = tags[i];
-        let tag_html = "<span class='badge badge-primary'>"+tagname + "</span>  ";
+        let tag_html = "<span class='badge badge-danger'>"+tagname + "</span>  ";
         tags_list_html += tag_html;
     }
     tags_list_html += "</p>"
@@ -59,6 +59,10 @@ function append_search_entry(entry, detail_view_endpoint) {
 
     let tags_list = make_tags_list_html(entry.tags);
     let resource_type = capFirst(entry.resource_type);
+    let note = "";
+    if (entry.note) {
+        note = entry.note;
+    }
 
     let html_entry = `
     <tr>
@@ -67,7 +71,7 @@ function append_search_entry(entry, detail_view_endpoint) {
                 <a href="${view_endpoint}">#${entry.id} - ${entry.title}</a>
             </h4>
             <p class="d-none d-sm-block text-muted">
-                lorem
+                ${note}
             </p>
         </td>
         <td class="d-none d-lg-table-cell text-center">${resource_type}</td>
