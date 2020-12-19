@@ -42,9 +42,23 @@ function ajax_load_all_resources(api_endpoint, detail_view_endpoint) {
     hide_results_banner()
 }
 
+
+function make_tags_list_html(tags) {
+    let tags_list_html = "<p>";
+    for (i=0; i < tags.length; i++) {
+        let tagname = tags[i];
+        let tag_html = "<span class='badge badge-primary'>"+tagname + "</span>  ";
+        tags_list_html += tag_html;
+    }
+    tags_list_html += "</p>"
+    return tags_list_html;
+}
+
 function append_search_entry(entry, detail_view_endpoint) {
     let view_endpoint = detail_view_endpoint + entry.id;
-    let tags_list = entry.tags.join(",");
+
+    let tags_list = make_tags_list_html(entry.tags);
+    let resource_type = capFirst(entry.resource_type);
 
     let html_entry = `
     <tr>
@@ -56,14 +70,11 @@ function append_search_entry(entry, detail_view_endpoint) {
                 lorem
             </p>
         </td>
-
-
-        <td class="d-none d-lg-table-cell text-center">${entry.resource_type}</td>
+        <td class="d-none d-lg-table-cell text-center">${resource_type}</td>
         <td>${tags_list}</td>
         <td class="d-none d-lg-table-cell font-size-xl text-center font-w600">
             <a href=\"${entry.link}\">Link</a>
         </td>
-
     </tr>
     `;
 

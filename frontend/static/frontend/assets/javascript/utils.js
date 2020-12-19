@@ -21,3 +21,8 @@ function display_notification(notification_type, msg) {
             console.error("Unknown notification type "+notification_type);
     }
 }
+
+
+function capFirst(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
