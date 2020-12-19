@@ -35,7 +35,7 @@ class IntelCreate(CreateView):
         intel = form.save(commit=False)
         intel.author = self.request.user
         intel.save()
-        files = self.request.FILES.getlist('file_field')
+        files = self.request.FILES.getlist('files_field')
         for f in files:
             IntelFile.objects.create(intel=intel, file=f)
         messages.success(self.request, "Intel created successfully")

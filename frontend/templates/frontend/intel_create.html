@@ -1,6 +1,6 @@
 {% extends 'frontend/base.html' %}
 {% load static %}
-{% load rest_framework %}
+{% load widget_tweaks %}
 
 {% block page_title %}Add intel{% endblock %}
 
@@ -19,13 +19,16 @@
                     </div>
                     <div class="col-lg-8">
                         {# Base Intel form #}
-                        <form action="" method="POST" enctype="multipart/form-data" novalidate>
+                        <form method="post" enctype="multipart/form-data" novalidate>
                             {% csrf_token %}
-                            {{ form.as_p }}
-                            <input type="submit">
+
+                            {% include 'frontend/include_rendered_form.html' with form=form %}
+
+                            <div class="form-group text-right">
+                                <button type="submit" class="btn btn-dark ">Create</button>
+                            </div>
+
                         </form>
-
-
 
                     </div>
                 </div>
