@@ -92,6 +92,7 @@
         $(document).ready(function () {
             var api_endpoint_intel = "{% url 'intels-list' %}";
             var api_endpoint_intelfiles = "{%  url 'intelfiles-list' %}";
+            var endpoint_intel_view = "/view/"
             var csrf_token = "{{ csrf_token }}";
 
             load_tags();
@@ -100,7 +101,7 @@
                 e.preventDefault();
                 var $form = $('#id_create_form')[0];
                 if ($form.checkValidity()) {
-                    create_intel(api_endpoint_intel, api_endpoint_intelfiles, csrf_token, $("#id_create_form").serialize());
+                    create_intel(api_endpoint_intel, api_endpoint_intelfiles, endpoint_intel_view, csrf_token, $("#id_create_form").serialize());
                 } else {
                     display_notification("error", "Invalid form");
                 }

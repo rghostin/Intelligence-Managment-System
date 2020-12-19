@@ -3,6 +3,7 @@ function create_intel_base(api_endpoint, data) {
         type: "POST",
         url: api_endpoint,
         data: data,
+        async: false,
         success: function(response) {
         }
     });
@@ -21,6 +22,7 @@ function upload_file(api_endpoint, csrf_token, intel_id, file) {
       data: fd,
       contentType: false,
       processData: false,
+       async: false,
       success: function(response){},
    });
 }
@@ -40,17 +42,22 @@ function display_status(failed) {
     }
 }
 
-function create_intel(api_endpoint_intel, api_endpoint_intelfiles, csrf_token, form_data_base) {
+function redirect_success_url(endpoint_intel_view, intel_id) {
+    window.location.href = endpoint_intel_view + intel_id.toString();
+}
+
+function create_intel(api_endpoint_intel, api_endpoint_intelfiles, endpoint_intel_view, csrf_token, form_data_base) {
     var failed = false;
     let xhr_base = create_intel_base(api_endpoint_intel, form_data_base);
     let deferreds = [];
+    var intel_id = null;
     xhr_base.fail( function () {
         failed=true;
         console.log("Error: unable to create base intel");
         display_status(failed);
     });
     xhr_base.done( function (data_intel_base) {
-            let intel_id = data_intel_base.id;
+            intel_id = data_intel_base.id;
             console.log("Base intel created successfully id=" + data_intel_base.id);
 
             let files = getSelectedFiles();
@@ -68,7 +75,11 @@ function create_intel(api_endpoint_intel, api_endpoint_intelfiles, csrf_token, f
             });
 
             $.when.apply($, deferreds).then(function (){
-                display_status(failed);
+                if (failed) {
+                    display_status(failed);
+                } else {
+                    redirect_success_url(endpoint_intel_view, intel_id);
+                }
             });
         }
     );
