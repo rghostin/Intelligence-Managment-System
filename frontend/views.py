@@ -1,9 +1,11 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView, CreateView, FormView
 
+from frontend.forms import IntelCreationForm
 from intelsAPI.filters import IntelFilter
 from intelsAPI.models import Intel, IntelFile
 from intelsAPI.serializers import IntelSerializer, IntelFileSerializer
@@ -23,8 +25,19 @@ class IntelView(DetailView):
     context_object_name = 'intel'
 
 
-@login_required
-def intel_create(request):
-    intel_serializer = IntelSerializer()
-    intelfile_serializer = IntelFileSerializer()
-    return render(request, 'frontend/intel_create.html', locals())
+@method_decorator(login_required, name='dispatch')
+class IntelCreate(CreateView):
+    model = Intel
+    form_class = IntelCreationForm
+    template_name = "frontend/intel_create.html"
+
+    def form_valid(self, form):
+        intel = form.save(commit=False)
+        intel.author = self.request.user
+        intel.save()
+        files = self.request.FILES.getlist('file_field')
+        for f in files:
+            IntelFile.objects.create(intel=intel, file=f)
+        messages.success(self.request, "Intel created successfully")
+        return redirect('view', pk=intel.id)
+

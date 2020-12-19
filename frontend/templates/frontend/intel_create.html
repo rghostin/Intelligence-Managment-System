@@ -19,56 +19,13 @@
                     </div>
                     <div class="col-lg-8">
                         {# Base Intel form #}
-                        <form action="{% url 'intels-list' %}" method="POST" id="id_create_form">
+                        <form action="" method="POST" enctype="multipart/form-data" novalidate>
                             {% csrf_token %}
-                            <div class="form-group ">
-                                <label>Tags</label>
-                                <select multiple="" class="form-control" name="tags" id="id_tags"></select>
-                            </div>
-
-                            <div class="form-group ">
-                                <label>Title</label>
-                                <input name="title" class="form-control" type="text" value="">
-                            </div>
-
-                            <div class="form-group ">
-                                <label>Resource type</label>
-                                <select class="form-control" name="resource_type">
-                                    <option value="article">Article</option>
-                                    <option value="book">Book</option>
-                                    <option value="text">Text</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group ">
-                                <label>Link</label>
-                                <input name="link" class="form-control" type="url" value="">
-                            </div>
-
-                            <div class="form-group ">
-                                <label>Text content</label>
-                                <textarea name="text_content" class="form-control"></textarea>
-                            </div>
-
-                            <div class="form-group ">
-                                <label>Additional note</label>
-                                <textarea name="additional_note" class="form-control"></textarea>
-                            </div>
-
+                            {{ form.as_p }}
+                            <input type="submit">
                         </form>
 
-                        {# Intel Files #}
-                        <div class="form-group">
-                            <label class="d-block" for="id_input_files">Files</label>
-                            <input class="form-control-file" name="file" type="file" value="" id="id_input_files"
-                                   multiple>
-                        </div>
 
-                        <div class="form-group" style="text-align: right;">
-                            <button class="btn btn-primary" id="id_create_btn" type="submit" form="id_create_form">
-                                Create
-                            </button>
-                        </div>
 
                     </div>
                 </div>
@@ -83,29 +40,8 @@
     {# tags #}
     <script src="{% static 'frontend/assets/js/plugins/tagsinput/bootstrap-tagsinput.js' %}"></script>
     <script src="{% static "frontend/assets/js/plugins/typeahead/typeahead.js" %}"></script>
-    <script src="{% static "frontend/assets/javascript/load_tags.js" %}"></script>
+{#    <script src="{% static "frontend/assets/javascript/load_tags.js" %}"></script>#}
 
     <script src="{% static "frontend/assets/javascript/utils.js" %}"></script>
-    <script src="{% static "frontend/assets/javascript/create.js" %}"></script>
 
-    <script>
-        $(document).ready(function () {
-            var api_endpoint_intel = "{% url 'intels-list' %}";
-            var api_endpoint_intelfiles = "{%  url 'intelfiles-list' %}";
-            var endpoint_intel_view = "/view/"
-            var csrf_token = "{{ csrf_token }}";
-
-            load_tags();
-
-            $("#id_create_btn").click(function (e) {
-                e.preventDefault();
-                var $form = $('#id_create_form')[0];
-                if ($form.checkValidity()) {
-                    create_intel(api_endpoint_intel, api_endpoint_intelfiles, endpoint_intel_view, csrf_token, $("#id_create_form").serialize());
-                } else {
-                    display_notification("error", "Invalid form");
-                }
-            });
-        });
-    </script>
 {% endblock %}
