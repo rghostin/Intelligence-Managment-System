@@ -15,7 +15,7 @@ function load_suggestion_engine() {
 }
 
 
-function load_tags_id() {
+function load_tags() {
     let engine = load_suggestion_engine()
     let promise = engine.initialize();
     promise

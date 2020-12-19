@@ -32,6 +32,7 @@ class IntelCreate(CreateView):
     template_name = "frontend/intel_create.html"
 
     def form_valid(self, form):
+        print(self.request.POST)
         intel = form.save(commit=False)
         intel.author = self.request.user
         intel.save()
