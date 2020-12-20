@@ -2,8 +2,18 @@ function load_suggestion_engine() {
     return new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
-        prefetch: {
-            url: '/api/tags/?format=json',
+        // prefetch: {
+        //     url: '/api/tags/?format=json',
+        //     filter: function(data) {
+        //         return $.map(data.results, function(tag_entry) {
+        //             return {id:tag_entry.id,  name:tag_entry.name} ;
+        //         });
+        //     },
+        //     ttl: 0
+        // }
+        remote: {
+            url: '/api/tags/?format=json&search=%QUERY',
+            wildcard: '%QUERY',
             filter: function(data) {
                 return $.map(data.results, function(tag_entry) {
                     return {id:tag_entry.id,  name:tag_entry.name} ;

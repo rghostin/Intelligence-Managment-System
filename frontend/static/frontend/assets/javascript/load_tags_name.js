@@ -2,10 +2,18 @@ function load_suggestion_engine() {
     return new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
-        prefetch: {
-            url: '/api/tags/?format=json',
+        // prefetch: {
+        //     url: '/api/tags/?format=json',
+        //     filter: function(data) {
+        //         return $.map(data.results, function(tag_entry) {   return tag_entry.name; });
+        //     },
+        //     ttl: 0
+        // }
+         remote: {
+            url: '/api/tags/?format=json&search=%QUERY',
+            wildcard: '%QUERY',
             filter: function(data) {
-                return $.map(data.results, function(tag_entry) {   return tag_entry.name; });
+                return $.map(data.results, function(tag_entry) { return tag_entry.name; });
             },
             ttl: 0
         }
