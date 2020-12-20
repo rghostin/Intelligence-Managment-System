@@ -9,4 +9,6 @@ urlpatterns = [
    path('create', views.IntelCreate.as_view(), name='create'),
    path('update/<int:pk>', views.IntelUpdate.as_view(), name='update'),
    path('delete/<int:pk>', views.IntelDelete.as_view(), name='delete'),
+   path('bookmark-create', views.BookmarkCreate.as_view(), name='bookmark_create'),
+
 ]

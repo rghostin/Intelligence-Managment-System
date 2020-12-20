@@ -1,11 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.core.files.base import ContentFile
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
+import pdfkit
 
+from frontend.bookmarker import Bookmarker
 from frontend.forms import IntelCreationForm
 from intelsAPI.filters import IntelFilter
 from intelsAPI.models import Intel, IntelFile
@@ -66,6 +69,7 @@ class IntelUpdate(UpdateView):
         return redirect('view', pk=intel.id)
 
 
+@method_decorator(login_required, name='dispatch')
 class IntelDelete(DeleteView):
     model = Intel
     template_name = "frontend/intel_delete.html"
@@ -80,3 +84,33 @@ class IntelDelete(DeleteView):
         intel = self.get_object()
         messages.warning(self.request, '#%s - %s has been deleted' % (intel.id, intel.title))
         return reverse("search")
+
+
+@method_decorator(login_required, name='dispatch')
+class BookmarkCreate(CreateView):
+    model = Intel
+    template_name = "frontend/bookmark_create.html"
+    fields = ['title', 'tags', 'link', 'additional_note']
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['link'].required = True
+        return form
+
+    def form_valid(self, form):
+        print(self.request.POST)
+        intel = form.save(commit=False)
+        intel.author = self.request.user
+        intel.resource_type = "article"
+        intel.save()
+        form._save_m2m()
+
+        try:
+            Bookmarker.create_snapshot(intel=intel, save=True)
+        except Exception as e:
+            intel.delete()
+            messages.error(self.request, "Unable to create snapshot")
+            return redirect('bookmark_create')
+
+        messages.success(self.request, "Bookmark intel created successfully")
+        return redirect('view', pk=intel.id)

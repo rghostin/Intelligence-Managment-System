@@ -1,0 +1,53 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block page_title %}Add bookmark{% endblock %}
+
+{% block page_content %}
+    <div class="content">
+        <div class="block">
+            <div class="block-header">
+                <h3 class="block-title">Add bookmark</h3>
+            </div>
+            <div class="block-content block-content-full">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <p class="font-size-sm text-muted">
+                        </p>
+                    </div>
+                    <div class="col-lg-10">
+                        {# Base Intel form #}
+                        <form method="post" enctype="multipart/form-data" novalidate>
+                            {% csrf_token %}
+                            {% include 'frontend/include_rendered_form.html' with form=form %}
+                            <div class="form-group text-right">
+                                <button type="submit" class="btn btn-dark ">Create</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block custom_js %}
+    {# tags #}
+    <script src="{% static 'frontend/assets/js/plugins/tagsinput/bootstrap-tagsinput.js' %}"></script>
+    <script src="{% static "frontend/assets/js/plugins/typeahead/typeahead.js" %}"></script>
+    <script src="{% static "frontend/assets/javascript/load_tags_id.js" %}"></script>
+
+    <script src="{% static "frontend/assets/javascript/utils.js" %}"></script>
+
+    <script>
+        $(document).ready(function () {
+                load_tags();
+            });
+    </script>
+
+{% endblock %}
