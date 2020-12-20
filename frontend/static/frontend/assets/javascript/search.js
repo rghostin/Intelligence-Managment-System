@@ -63,6 +63,10 @@ function append_search_entry(entry, detail_view_endpoint) {
     if (entry.additional_note) {
         note = entry.additional_note;
     }
+    let link = "<a href=\"#\" class='btn disabled'>Link</a>";
+    if (entry.link) {
+        link = "<a href=\"" + entry.link + "\">Link</a>";
+    }
 
     let html_entry = `
     <tr>
@@ -77,7 +81,7 @@ function append_search_entry(entry, detail_view_endpoint) {
         <td class="d-none d-lg-table-cell text-center">${resource_type}</td>
         <td>${tags_list}</td>
         <td class="d-none d-lg-table-cell font-size-xl text-center font-w600">
-            <a href=\"${entry.link}\">Link</a>
+            ${link}
         </td>
     </tr>
     `;
