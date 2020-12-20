@@ -21,7 +21,15 @@ function load_tags() {
     promise
         .fail(function () {console.error("unable to initialize suggestion engine");})
         .done(function () {
-            console.log("ok");
+
+            // serialize tag options
+            var tag_options = {}
+            var select_elem = document.getElementById("id_tags");
+            for (let i = 0; i < select_elem.options.length; i++) {
+                let tag_option = select_elem.options[i];
+                tag_options[tag_option.value] = {"name": tag_option.innerText, "selected": tag_option.selected};
+            }
+
             // init tagsinput
             $('#id_tags').tagsinput({
                 tagClass: "badge badge-primary",
@@ -37,5 +45,13 @@ function load_tags() {
                    source: engine.ttAdapter()
                 }
             });
+
+             // fill initial tags
+            $('#id_tags').tagsinput("removeAll");
+            for (let option_val in tag_options) {
+                if (tag_options[option_val]["selected"]) {
+                    $('#id_tags').tagsinput('add', {id: option_val, name: tag_options[option_val]["name"]});
+                }
+            }
         });
 }

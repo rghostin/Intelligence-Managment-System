@@ -98,6 +98,26 @@
 
         </div>
 
+        {#  control panel #}
+        <div class="block">
+            <div class="block-header">
+                <h3 class="block-title">Control</h3>
+            </div>
+
+            <div class="block-content">
+                <!-- Default -->
+                <div class="mb-4">
+                    <button type="button" class="btn btn-info mr-1 mb-3" onclick="window.location.href='{% url 'update' pk=intel.id %}'">
+                        <i class="fa fa-fw fa-pen mr-1"></i> Update
+                    </button>
+
+                    <button type="button" class="btn btn-danger mr-1 mb-3">
+                        <i class="fa fa-fw fa-times mr-1"></i> Delete
+                    </button>
+                </div>
+                <!-- END Default -->
+            </div>
+        </div>
 
         {#  TEXT CONTENT #}
         <div class="block">
