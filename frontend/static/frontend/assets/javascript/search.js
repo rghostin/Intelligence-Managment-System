@@ -65,7 +65,7 @@ function append_search_entry(entry, detail_view_endpoint) {
     }
     let link = "<a href=\"#\" class='btn disabled'>Link</a>";
     if (entry.link) {
-        link = "<a href=\"" + entry.link + "\">Link</a>";
+        link = "<a target='_blank' rel='noopener' href=\"" + entry.link + "\">Link</a>";
     }
 
     let html_entry = `

@@ -153,7 +153,7 @@
                         </li>
                          <li class="nav-main-item">
                             <a class="nav-main-link" href="{% url 'bookmark_create' %}">
-                                <i class="nav-main-link-icon si si-plus"></i>
+                                <i class="nav-main-link-icon fa fa-bookmark"></i>
                                 <span class="nav-main-link-name">Add bookmark</span>
                             </a>
                         </li>
@@ -231,7 +231,7 @@
                     <div class="content content-full">
 
                         <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
-                            {% block back_button %}{% include "frontend/include_back_button.html" %}{% endblock %}
+                            {% block back_button %}{% include "frontend/includes/include_back_button.html" %}{% endblock %}
                             <h1 class="flex-sm-fill h3 my-2">
                                 {% block page_title %}{% endblock %}
                                 <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">{% block page_description%}{% endblock %}</small>
@@ -269,7 +269,7 @@
         <!-- Custom JS -->
         <script src="{% static 'frontend/assets/js/oneui.app.min.js' %}"></script>
         <script src="{% static "frontend/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js" %}"></script>
-        {% include "frontend/include_msg_noitifications.html" %}
+        {% include "frontend/includes/include_msg_noitifications.html" %}
         {% block custom_js %}{%  endblock %}
     </body>
 </html>

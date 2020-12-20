@@ -20,7 +20,7 @@
                         {# Base Intel form #}
                         <form method="post" enctype="multipart/form-data" novalidate>
                             {% csrf_token %}
-                            {% include 'frontend/include_rendered_form.html' with form=form %}
+                            {% include 'frontend/includes/include_rendered_form.html' with form=form %}
                             <div class="form-group text-right">
                                 <button type="submit" class="btn btn-dark ">Create</button>
                             </div>

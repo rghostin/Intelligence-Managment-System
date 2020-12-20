@@ -11,6 +11,8 @@ class Bookmarker:
 
     @staticmethod
     def create_snapshot(intel, filename="snapshot", save=True):
+        assert intel.link
+
         if not Bookmarker.is_valid_filename(filename):
             raise NameError
         filename = filename + ".pdf"
