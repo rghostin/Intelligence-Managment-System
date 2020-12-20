@@ -16,6 +16,7 @@ class Intel(models.Model):
         ('article', 'Article'),
         ('book', 'Book'),
         ('text', 'Text'),
+        ('tool', 'Tool'),
     )
 
     author = models.ForeignKey('auth.User', on_delete=models.SET_NULL, related_name='intels', null=True)

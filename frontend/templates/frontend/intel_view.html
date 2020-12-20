@@ -23,11 +23,6 @@
                         <h3 class="block-title">
                             Basic information
                         </h3>
-                        <div class="block-options">
-                            <button type="button" class="btn-block-option">
-                                <i class="si si-settings"></i>
-                            </button>
-                        </div>
                     </div>
 
                     <div class="block-content">
@@ -81,6 +76,11 @@
                         <h3 class="block-title">
                             Files ({{ intel.files.count }})
                         </h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option">
+                                <i class="si si-cloud-upload"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="block-content">
                         {% if not intel.files %}
