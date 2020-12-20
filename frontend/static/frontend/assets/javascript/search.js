@@ -60,8 +60,8 @@ function append_search_entry(entry, detail_view_endpoint) {
     let tags_list = make_tags_list_html(entry.tags);
     let resource_type = capFirst(entry.resource_type);
     let note = "";
-    if (entry.note) {
-        note = entry.note;
+    if (entry.additional_note) {
+        note = entry.additional_note;
     }
 
     let html_entry = `

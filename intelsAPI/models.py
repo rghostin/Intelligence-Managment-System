@@ -27,7 +27,7 @@ class Intel(models.Model):
     tags = models.ManyToManyField(Tag, related_name='intels')
 
     link = models.URLField(blank=True)
-    text_content = MartorField()
+    text_content = MartorField(blank=True)
     additional_note = models.TextField(max_length=3000, blank=True)
 
     def __str__(self):
