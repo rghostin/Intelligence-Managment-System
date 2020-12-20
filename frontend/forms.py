@@ -9,3 +9,9 @@ class IntelCreationForm(forms.ModelForm):
     class Meta:
         model = Intel
         fields = ['title', 'resource_type', 'tags', 'link', 'files_field', 'additional_note', 'text_content']
+
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': "Title"}),
+            'link': forms.URLInput(attrs={'placeholder': "https://example.com"}),
+            'additional_note': forms.Textarea(attrs={'cols': 30, 'rows': 1}),
+        }
