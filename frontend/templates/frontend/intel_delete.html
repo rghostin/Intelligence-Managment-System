@@ -1,0 +1,69 @@
+{% extends 'frontend/base.html' %}
+
+{% block page_title %}#{{ intel.id }} - {{ intel.title }}{% endblock %}
+
+{% block page_content %}
+    <div class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                {# BASIC INFO #}
+                <div class="block">
+                    <div class="block-header">
+                        <h3 class="block-title">
+                            Basic information
+                        </h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option">
+                                <i class="si si-settings"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="block-content">
+                        <p>Are you sure you want to delete  #{{ intel.id }} - {{ intel.title }} ?</p>
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-4 text-right">
+                                <button type="button" class="btn btn-dark mr-1 mb-3" onclick="window.location.href='{% url 'view' pk=intel.id %}'">
+                                   Cancel
+                                </button>
+
+                                <button type="submit" class="btn btn-danger mr-1 mb-3">
+                                    <i class="fa fa-fw fa-times mr-1"></i> Delete
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+{##}
+        {#  control panel #}
+{#        <div class="block">#}
+{#            <div class="block-header">#}
+{#                <h3 class="block-title">Control</h3>#}
+{#            </div>#}
+{##}
+{#            <div class="block-content">#}
+{#                <!-- Default -->#}
+{#                <div class="mb-4">#}
+{#                    <button type="button" class="btn btn-info mr-1 mb-3" onclick="window.location.href='{% url 'update' pk=intel.id %}'">#}
+{#                        <i class="fa fa-fw fa-pen mr-1"></i> Update#}
+{#                    </button>#}
+{##}
+{#                    <button type="button" class="btn btn-danger mr-1 mb-3" onclick="window.location.href='{% url 'delete' pk=intel.id %}'">#}
+{#                        <i class="fa fa-fw fa-times mr-1"></i> Delete#}
+{#                    </button>#}
+{#                </div>#}
+{#                <!-- END Default -->#}
+{#            </div>#}
+{#        </div>#}
+
+
+
+    </div>
+{% endblock %}

@@ -2,8 +2,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import DetailView, CreateView, UpdateView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 
 from frontend.forms import IntelCreationForm
 from intelsAPI.filters import IntelFilter
@@ -64,3 +65,18 @@ class IntelUpdate(UpdateView):
         messages.success(self.request, "Intel updated successfully")
         return redirect('view', pk=intel.id)
 
+
+class IntelDelete(DeleteView):
+    model = Intel
+    template_name = "frontend/intel_delete.html"
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if self.request.user != obj.author:
+            raise PermissionDenied
+        return obj
+
+    def get_success_url(self):
+        intel = self.get_object()
+        messages.warning(self.request, '#%s - %s has been deleted' % (intel.id, intel.title))
+        return reverse("search")

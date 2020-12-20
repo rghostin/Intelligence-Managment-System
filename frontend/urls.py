@@ -7,5 +7,6 @@ urlpatterns = [
    path('search', views.search, name='search'),
    path('view/<int:pk>', views.IntelView.as_view(), name='view'),
    path('create', views.IntelCreate.as_view(), name='create'),
-   path('update/<int:pk>', views.IntelUpdate.as_view(), name='update')
+   path('update/<int:pk>', views.IntelUpdate.as_view(), name='update'),
+   path('delete/<int:pk>', views.IntelDelete.as_view(), name='delete'),
 ]
