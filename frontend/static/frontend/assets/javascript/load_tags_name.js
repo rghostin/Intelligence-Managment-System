@@ -37,13 +37,13 @@ function load_tags() {
                 typeaheadjs: {
                    name: 'tagnames',
                    source: engine,
-                     templates: {
-                    empty: [
-                      '<div>No matching tags found</div>'
-                    ].join('\n'),
-                    suggestion: function(data){
-                        return '<span class="badge badge-secondary">' + data + '</span>';
-                    }
+                   templates: {
+                        empty: [
+                          '<div>No matching tags found</div>'
+                        ].join('\n'),
+                        suggestion: function(data){
+                            return '<span class="badge badge-secondary">' + data + '</span>';
+                        }
                   }
                 }
             });

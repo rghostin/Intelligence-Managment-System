@@ -52,7 +52,15 @@ function load_tags() {
                 typeaheadjs: {
                    name: 'tagnames',
                    displayKey: 'name',
-                   source: engine.ttAdapter()
+                   source: engine.ttAdapter(),
+                   templates: {
+                        empty: [
+                          '<div>No matching tags found</div>'
+                        ].join('\n'),
+                        suggestion: function(data){
+                            return '<span class="badge badge-secondary">' + data.name + '</span>';
+                        }
+                  }
                 }
             });
 
