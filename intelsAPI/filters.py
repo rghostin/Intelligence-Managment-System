@@ -13,5 +13,5 @@ class IntelFilter(django_filters.FilterSet):
 
     class Meta:
         model = Intel
-        fields = ['title']
+        fields = ['title', 'resource_type']
 
