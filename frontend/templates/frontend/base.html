@@ -263,6 +263,7 @@
         <!-- Custom JS -->
         <script src="{% static 'frontend/assets/js/oneui.app.min.js' %}"></script>
         <script src="{% static "frontend/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js" %}"></script>
+        {% include "frontend/include_msg_noitifications.html" %}
         {% block custom_js %}{%  endblock %}
     </body>
 </html>

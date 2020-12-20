@@ -1,0 +1,68 @@
+{# Message notification #}
+{% if messages %}
+    <script>
+        function display_notification(notification_type, msg) {
+            switch (notification_type) {
+                case "success":
+                   One.helpers('notify', {type: 'success', icon: 'fa fa-check mr-1', message: msg});
+                   break;
+                case "error":
+                   One.helpers('notify', {type: 'danger', icon: 'fa fa-times mr-1', message: msg});
+                   break;
+                case "warning":
+                    One.helpers('notify', {type: 'warning', icon: 'fa fa-exclamation-triangle  mr-1', message: msg});
+                    break;
+                case "info":
+                     One.helpers('notify', {type: 'info', icon: 'fa fa-info-circle mr-1', message: msg});
+                     break;
+                default:
+                    console.error("Unknown notification type "+notification_type);
+            }
+        }
+
+
+        $(document).ready(function(){
+            const LEVEL_INFO = "{{ DEFAULT_MESSAGE_LEVELS.INFO }}";
+            const LEVEL_WARNING = "{{ DEFAULT_MESSAGE_LEVELS.WARNING }}";
+            const LEVEL_ERROR = "{{ DEFAULT_MESSAGE_LEVELS.ERROR }}";
+            const LEVEL_SUCCESS = "{{ DEFAULT_MESSAGE_LEVELS.SUCCESS }}";
+
+            {# Serialize messages #}
+            var msgs = [];
+            {%  for msg in messages %}
+                msgs.push({
+                    msg_level: "{{ msg.level }}",
+                    msg_text: "{{ msg.message }}"
+                });
+            {% endfor %}
+
+
+            for (var i=0; i < msgs.length; ++i) {
+                let msg_level = msgs[i].msg_level;
+                let msg_text = msgs[i].msg_text;
+
+                var is_notification_set = false;
+
+                if (msg_level === LEVEL_INFO) {
+                    is_notification_set = true;
+                    var type = 'info';
+                } else if (msg_level === LEVEL_WARNING) {
+                    is_notification_set = true;
+                    var type = 'warning';
+                } else if (msg_level === LEVEL_ERROR) {
+                    is_notification_set = true;
+                    var type = 'error';
+                } else if (msg_level === LEVEL_SUCCESS) {
+                    is_notification_set = true;
+                    var type = 'success';
+                }
+
+                if (is_notification_set) {
+                    display_notification(type, msg_text)
+                }
+            }
+        });
+    </script>
+
+
+{%  endif %}
