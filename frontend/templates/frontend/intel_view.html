@@ -4,6 +4,13 @@
 
 {% block page_title %}#{{ intel.id }} - {{ intel.title }}{% endblock %}
 
+{% block security_label %}
+    {% if intel.author == request.user %}
+        {% include 'frontend/includes/security_labels/include_label_readwrite.html' %}
+    {% else %}
+        {% include 'frontend/includes/security_labels/include_label_readonly.html' %}
+    {% endif %}
+{% endblock %}
 
 {% block page_content %}
     <div class="content">
