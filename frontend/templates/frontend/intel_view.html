@@ -75,7 +75,7 @@
                 <div class="block" style="overflow: auto; max-height: 270px">
                     <div class="block-header">
                         <h3 class="block-title">
-                            Files ({{ intel.files.count }})
+                            Files (<span id="id_file_count">{{ intel.files.count }}</span>)
                         </h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option js-upload-photos">
@@ -93,7 +93,7 @@
                         {% if not intel.files %}
                             <p><i>No files</i></p>
                         {% else %}
-                            <ul>
+                            <ul id="id_files_ul">
                                 {% for intelfile in intel.files.all %}
                                     <li><a href="{{ intelfile.file.url }}" target="_blank">{{ intelfile.filename }}</a></li>
                                 {% endfor %}
@@ -143,36 +143,6 @@
         </div>
 
 
-
-{##}
-{#                        <div>#}
-{#                            <button type="button" class="btn btn-primary js-upload-photos" id="id_upload_btn">#}
-{#                              <span class="glyphicon glyphicon-cloud-upload"></span> Upload photos#}
-{#                            </button>#}
-{##}
-{#                            <div class="well text-muted text-center" style="padding-top: 4rem; padding-bottom: 4rem;">#}
-{#                              <span class="glyphicon glyphicon-arrow-down" style="font-size: 4rem;"></span>#}
-{#                              <h3>Drop Photos Here to Upload</h3>#}
-{#                            </div>#}
-{##}
-{#                            <input id="fileupload" type="file" name="file" multiple#}
-{#                                   style="display: none;"#}
-{#                                   data-url="{% url 'intelfiles-list' %}"#}
-{#                                   data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}", "intel":{{ intel.id }}}'>#}
-{##}
-{#                            <table id="id_files_table" class="table table-bordered">#}
-{#                              <thead>#}
-{#                                <tr>#}
-{#                                    <th>File</th>#}
-{#                                    <th>Type</th>#}
-{#                                    <th>Size</th>#}
-{#                                </tr>#}
-{#                              </thead>#}
-{#                              <tbody>#}
-{#                              </tbody>#}
-{#                            </table>#}
-{#                        </div>#}
-
         {#  TEXT CONTENT #}
         <div class="block">
             <div class="block-header">
@@ -215,6 +185,16 @@
     <script src="{% static 'frontend/assets/js/plugins/jquery-file-upload/jquery.fileupload.js' %}"></script>
 
     <script>
+        function add_to_files_list(file_url) {
+            let filename = file_url.substring(file_url.lastIndexOf('/')+1);
+            let files_count = parseInt($("#id_file_count").text());
+            if (files_count === 0) {
+                $("#id_files_ul").html('<ul id="id_files_ul"></ul>')
+            }
+            let entry = `<li><a href="${file_url}" target="_blank">${filename}</a></li>`;
+            $("#id_files_ul").append(entry);
+            $("#id_file_count").html(files_count+1);
+        }
 
 
             $( document ).ready(function() {
@@ -232,6 +212,7 @@
                     },
                     stop: function (e) {  /* 3. WHEN THE UPLOADING PROCESS FINALIZE, HIDE THE MODAL */
                       $("#modal-progress").modal("hide");
+
                     },
                     progressall: function (e, data) {  /* 4. UPDATE THE PROGRESS BAR */
                       var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -240,7 +221,8 @@
                       $(".progress-bar").text(strProgress);
                     },
                     done: function (e, data) {
-                        console.log("upload ok");
+                        console.log(data);
+                        add_to_files_list(data.result.file)
                     }
                   });
 
