@@ -4,6 +4,7 @@
 
 {% block page_title %}#{{ intel.id }} - {{ intel.title }}{% endblock %}
 
+
 {% block page_content %}
     <div class="content">
 
@@ -72,7 +73,7 @@
 
             {# FILES #}
             <div class="col-md-4">
-                <div class="block" style="overflow: auto; max-height: 270px">
+                <div class="block dzone">
                     <div class="block-header">
                         <h3 class="block-title">
                             Files (<span id="id_file_count">{{ intel.files.count }}</span>)
@@ -89,7 +90,7 @@
 
                         </div>
                     </div>
-                    <div class="block-content">
+                    <div class="block-content" style="max-height: 180px; overflow-y: scroll;">
                         {% if not intel.files %}
                             <p><i>No files</i></p>
                         {% else %}
@@ -183,51 +184,5 @@
     <script src="{% static 'frontend/assets/js/plugins/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
     <script src="{% static 'frontend/assets/js/plugins/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
     <script src="{% static 'frontend/assets/js/plugins/jquery-file-upload/jquery.fileupload.js' %}"></script>
-
-    <script>
-        function add_to_files_list(file_url) {
-            let filename = file_url.substring(file_url.lastIndexOf('/')+1);
-            let files_count = parseInt($("#id_file_count").text());
-            if (files_count === 0) {
-                $("#id_files_ul").html('<ul id="id_files_ul"></ul>')
-            }
-            let entry = `<li><a href="${file_url}" target="_blank">${filename}</a></li>`;
-            $("#id_files_ul").append(entry);
-            $("#id_file_count").html(files_count+1);
-        }
-
-
-            $( document ).ready(function() {
-
-                  $(".js-upload-photos").click(function () {
-                    $("#fileupload").click();
-                  });
-
-                  // init file upload
-                $("#fileupload").fileupload({
-                    dataType: 'json',
-                    sequentialUploads: true,  /* 1. SEND THE FILES ONE BY ONE */
-                    start: function (e) {  /* 2. WHEN THE UPLOADING PROCESS STARTS, SHOW THE MODAL */
-                      $("#modal-progress").modal("show");
-                    },
-                    stop: function (e) {  /* 3. WHEN THE UPLOADING PROCESS FINALIZE, HIDE THE MODAL */
-                      $("#modal-progress").modal("hide");
-
-                    },
-                    progressall: function (e, data) {  /* 4. UPDATE THE PROGRESS BAR */
-                      var progress = parseInt(data.loaded / data.total * 100, 10);
-                      var strProgress = progress + "%";
-                      $(".progress-bar").css({"width": strProgress});
-                      $(".progress-bar").text(strProgress);
-                    },
-                    done: function (e, data) {
-                        console.log(data);
-                        add_to_files_list(data.result.file)
-                    }
-                  });
-
-        });
-
-
-    </script>
+    <script src="{% static 'frontend/assets/javascript/dyn_file_upload.js' %}"></script>
 {% endblock %}
