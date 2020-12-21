@@ -1,3 +1,5 @@
+from time import time
+
 import pdfkit
 from django.core.files.base import ContentFile
 
@@ -6,16 +8,23 @@ from intelsAPI.models import IntelFile
 
 class Bookmarker:
     @staticmethod
-    def is_valid_filename(filename):
-        return len(filename) > 0
+    def assert_valid_filename(filename):
+        valid = len(filename) > 0 and filename[-4:] == ".pdf"
+        if not valid:
+            raise NameError
 
     @staticmethod
-    def create_snapshot(intel, filename="snapshot", save=True):
+    def get_default_filename():
+        time_info = int(time())
+        return f"snapshot_{time_info}.pdf"
+
+    @staticmethod
+    def create_snapshot(intel, filename=None, save=True):
         assert intel.link
 
-        if not Bookmarker.is_valid_filename(filename):
-            raise NameError
-        filename = filename + ".pdf"
+        if filename is None:
+            filename = Bookmarker.get_default_filename()
+        Bookmarker.assert_valid_filename(filename)
 
         # download snapshot
         options = {

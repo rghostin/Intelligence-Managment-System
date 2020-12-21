@@ -1,15 +1,22 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import render, redirect
+from django.http import HttpResponseBadRequest
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.utils.decorators import method_decorator
+from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 
 from frontend.bookmarker import Bookmarker
 from frontend.forms import IntelCreationForm
 from intelsAPI.filters import IntelFilter
 from intelsAPI.models import Intel, IntelFile
+
+
+def assert_intel_author(intel, user):
+    if intel.author != user:
+        raise PermissionDenied
 
 
 @login_required
@@ -53,8 +60,7 @@ class IntelUpdate(UpdateView):
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
-        if self.request.user != obj.author:
-            raise PermissionDenied
+        assert_intel_author(intel=obj, user=self.request.user)
         return obj
 
     def form_valid(self, form):
@@ -74,8 +80,7 @@ class IntelDelete(DeleteView):
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
-        if self.request.user != obj.author:
-            raise PermissionDenied
+        assert_intel_author(intel=obj, user=self.request.user)
         return obj
 
     def get_success_url(self):
@@ -112,3 +117,23 @@ class BookmarkCreate(CreateView):
 
         messages.success(self.request, "Bookmark intel created successfully")
         return redirect('view', pk=intel.id)
+
+
+@login_required
+@require_POST
+def bookmark_add(request):
+    try:
+        intel_id = request.POST['intel_id']
+    except KeyError:
+        return HttpResponseBadRequest()
+
+    intel = get_object_or_404(Intel, pk=intel_id)
+    assert_intel_author(intel=intel, user=request.user)
+
+    try:
+        Bookmarker.create_snapshot(intel=intel, save=True)
+    except Exception as e:
+        messages.error(request, "Unable to create snapshot")
+    else:
+        messages.success(request, "Snapshot created successfully")
+    return redirect('view', pk=intel_id)

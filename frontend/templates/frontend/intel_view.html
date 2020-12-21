@@ -111,6 +111,21 @@
                         <i class="fa fa-fw fa-pen mr-1"></i> Update
                     </button>
 
+                    {% if intel.link %}
+                        <form method="post" action="{% url 'bookmark_add'  %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="intel_id" value="{{ intel.id }}">
+                            <button type="submit" class="btn btn-info mr-1 mb-3">
+                                <i class="fa fa-fw fa-camera mr-1"></i> Snapshot
+                            </button>
+                        </form>
+                    {% else %}
+                        <button type="button" class="btn btn-info mr-1 mb-3 disabled" data-toggle="tooltip" data-placement="top" title="No link provided">
+                            <i class="fa fa-fw fa-camera mr-1"></i> Snapshot
+                        </button>
+                    {% endif %}
+
+
                     <button type="button" class="btn btn-danger mr-1 mb-3" onclick="window.location.href='{% url 'delete' pk=intel.id %}'">
                         <i class="fa fa-fw fa-times mr-1"></i> Delete
                     </button>
