@@ -34,6 +34,6 @@ class TagsViewSet(viewsets.ModelViewSet):
 class IntelFileViewSet(viewsets.ModelViewSet):
     queryset = IntelFile.objects.all()
     serializer_class = IntelFileSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
 
 

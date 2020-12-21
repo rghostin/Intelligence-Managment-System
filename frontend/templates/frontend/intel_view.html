@@ -1,4 +1,5 @@
 {% extends 'frontend/base.html' %}
+{% load static %}
 {% load martortags %}
 
 {% block page_title %}#{{ intel.id }} - {{ intel.title }}{% endblock %}
@@ -77,9 +78,15 @@
                             Files ({{ intel.files.count }})
                         </h3>
                         <div class="block-options">
-                            <button type="button" class="btn-block-option">
+                            <button type="button" class="btn-block-option js-upload-photos">
                                 <i class="si si-cloud-upload"></i>
                             </button>
+
+                            <input id="fileupload" type="file" name="file" multiple
+                                   style="display: none;"
+                                   data-url="{% url 'intelfiles-list' %}"
+                                   data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}", "intel":{{ intel.id }}}'>
+
                         </div>
                     </div>
                     <div class="block-content">
@@ -111,7 +118,6 @@
                         <i class="fa fa-fw fa-pen mr-1"></i> Update
                     </button>
 
-
                     <div style="display: inline-block">
                         {% if intel.link %}
                             <form method="post" action="{% url 'bookmark_add'  %}">
@@ -128,8 +134,6 @@
                         {% endif %}
                     </div>
 
-
-
                     <button type="button" class="btn btn-danger mr-1 mb-3" onclick="window.location.href='{% url 'delete' pk=intel.id %}'">
                         <i class="fa fa-fw fa-times mr-1"></i> Delete
                     </button>
@@ -137,6 +141,37 @@
                 <!-- END Default -->
             </div>
         </div>
+
+
+
+{##}
+{#                        <div>#}
+{#                            <button type="button" class="btn btn-primary js-upload-photos" id="id_upload_btn">#}
+{#                              <span class="glyphicon glyphicon-cloud-upload"></span> Upload photos#}
+{#                            </button>#}
+{##}
+{#                            <div class="well text-muted text-center" style="padding-top: 4rem; padding-bottom: 4rem;">#}
+{#                              <span class="glyphicon glyphicon-arrow-down" style="font-size: 4rem;"></span>#}
+{#                              <h3>Drop Photos Here to Upload</h3>#}
+{#                            </div>#}
+{##}
+{#                            <input id="fileupload" type="file" name="file" multiple#}
+{#                                   style="display: none;"#}
+{#                                   data-url="{% url 'intelfiles-list' %}"#}
+{#                                   data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}", "intel":{{ intel.id }}}'>#}
+{##}
+{#                            <table id="id_files_table" class="table table-bordered">#}
+{#                              <thead>#}
+{#                                <tr>#}
+{#                                    <th>File</th>#}
+{#                                    <th>Type</th>#}
+{#                                    <th>Size</th>#}
+{#                                </tr>#}
+{#                              </thead>#}
+{#                              <tbody>#}
+{#                              </tbody>#}
+{#                            </table>#}
+{#                        </div>#}
 
         {#  TEXT CONTENT #}
         <div class="block">
@@ -155,4 +190,62 @@
         </div>
 
     </div>
+
+    {# Progress bar modal #}
+    <div class="modal" id="modal-progress">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Uploading...</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block custom_js %}
+    {# JQUERY FILE UPLOAD SCRIPTS #}
+    <script src="{% static 'frontend/assets/js/plugins/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+    <script src="{% static 'frontend/assets/js/plugins/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+    <script src="{% static 'frontend/assets/js/plugins/jquery-file-upload/jquery.fileupload.js' %}"></script>
+
+    <script>
+
+
+            $( document ).ready(function() {
+
+                  $(".js-upload-photos").click(function () {
+                    $("#fileupload").click();
+                  });
+
+                  // init file upload
+                $("#fileupload").fileupload({
+                    dataType: 'json',
+                    sequentialUploads: true,  /* 1. SEND THE FILES ONE BY ONE */
+                    start: function (e) {  /* 2. WHEN THE UPLOADING PROCESS STARTS, SHOW THE MODAL */
+                      $("#modal-progress").modal("show");
+                    },
+                    stop: function (e) {  /* 3. WHEN THE UPLOADING PROCESS FINALIZE, HIDE THE MODAL */
+                      $("#modal-progress").modal("hide");
+                    },
+                    progressall: function (e, data) {  /* 4. UPDATE THE PROGRESS BAR */
+                      var progress = parseInt(data.loaded / data.total * 100, 10);
+                      var strProgress = progress + "%";
+                      $(".progress-bar").css({"width": strProgress});
+                      $(".progress-bar").text(strProgress);
+                    },
+                    done: function (e, data) {
+                        console.log("upload ok");
+                    }
+                  });
+
+        });
+
+
+    </script>
 {% endblock %}
