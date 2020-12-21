@@ -10,6 +10,7 @@ idna==2.10
 Markdown==3.3.3
 martor==1.5.8
 pdfkit==0.6.1
+python-decouple==3.3
 pytz==2020.4
 requests==2.25.1
 sqlparse==0.4.1
