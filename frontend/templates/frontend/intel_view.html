@@ -8,73 +8,69 @@
 {% block page_content %}
     <div class="content">
 
-        {#  TAGS #}
-        <div>
-            <p>
-                {% for tag in intel.tags.all %}
-                    <span class="badge badge-primary">{{ tag.name }}</span>
-                {% endfor %}
-            </p>
-        </div>
-
         <div class="row">
             <div class="col-md-8">
                 {# BASIC INFO #}
-                <div class="block">
-                    <div class="block-header">
-                        <h3 class="block-title">
-                            Basic information
-                        </h3>
+                <div class="block block-rounded">
+                    <div class="block-header block-header-default text-center">
+                        <h3 class="block-title">About This Intel</h3>
                     </div>
-
                     <div class="block-content">
-                        <ul>
-                            <li>
-                                <strong>Author:</strong>
-                                {{ intel.author.username }}
-                            </li>
-
-                            <li>
-                                <strong>Resource Type:</strong>
-                                {{ intel.resource_type |capfirst }}
-                            </li>
-
-                            <li>
-                                <strong>Creation date:</strong>
-                                {{ intel.creation_date }}
-                            </li>
-
-                            <li>
-                                <strong>Last update:</strong>
-                                {{ intel.last_update }}
-                            </li>
-
-                            <li>
-                                <strong>Link:</strong>
-                                {% if intel.link %}
-                                    <a href="{{ intel.link }}">{{ intel.link |truncatechars:100 }}</a>
-                                {% else %}
-                                    <i>null</i>
-                                {% endif %}
-                            </li>
-
-                            <li>
-                                <strong>Note:</strong>
-                                {% if intel.additional_note %}
-                                    <p>{{ intel.additional_note }}</p>
-                                {% else %}
-                                    <i>null</i>
-                                {% endif %}
-                            </li>
-                        </ul>
+                        <table class="table table-striped table-borderless font-size-sm">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <i class="fa fa-fw fa-user mr-1"></i>
+                                        <b>Author:</b> {{ intel.author.username }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <i class="fa fa-fw fa-book mr-1"></i>
+                                        <strong>Resource Type:</strong> {{ intel.resource_type |capfirst }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <i class="fa fa-fw fa-calendar-plus mr-1"></i>
+                                        <strong>Creation date:</strong> {{ intel.creation_date }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <i class="fa fa-fw fa-calendar mr-1"></i>
+                                        <strong>Last update:</strong> {{ intel.last_update }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <i class="fa fa-fw fa-link mr-1"></i>
+                                            <strong>Link:</strong>
+                                            {% if intel.link %}
+                                                <a target="_blank" rel="noopener" href="{{ intel.link }}">{{ intel.link |truncatechars:100 }}</a>
+                                            {% else %}
+                                                <i>null</i>
+                                            {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <i class="fa fa-fw fa-tags mr-1"></i>
+                                        {% for tag in intel.tags.all %}
+                                            <span class="badge badge-primary">{{ tag.name }}</span>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
             {# FILES #}
             <div class="col-md-4">
-                <div class="block dzone">
-                    <div class="block-header">
+                <div class="block block-rounded dzone" style="height: 355px">
+                    <div class="block-header block-header-default text-center">
                         <h3 class="block-title">
                             Files (<span id="id_file_count">{{ intel.files.count }}</span>)
                         </h3>
@@ -90,7 +86,7 @@
 
                         </div>
                     </div>
-                    <div class="block-content" style="max-height: 180px; overflow-y: scroll;">
+                    <div class="block-content" style="max-height: 280px; overflow-y: scroll;">
                         {% if not intel.files %}
                             <p><i>No files</i></p>
                         {% else %}
@@ -145,8 +141,10 @@
 
 
         {#  TEXT CONTENT #}
-        <div class="block">
-            <div class="block-header">
+
+
+        <div class="block block-rounded">
+            <div class="block-header block-header-default">
                 <h3 class="block-title">
                     Text content
                 </h3>
