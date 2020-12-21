@@ -39,11 +39,13 @@ TAGS = {
 
     # anonymity
     'anonymity',
+    'steganography',
     'covering-tracks',
     'secure-erase',
 
     # cryptography
     'cryptography',
+    'crypto-attack',
     'ntlm',
 
     # exploit development
