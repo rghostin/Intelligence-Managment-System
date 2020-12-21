@@ -41,7 +41,6 @@ TAGS = {
     'anonymity',
     'steganography',
     'covering-tracks',
-    'secure-erase',
 
     # cryptography
     'cryptography',
@@ -66,11 +65,8 @@ TAGS = {
     'windows',
     'mac',
 
-    # malware
-    'malware',
-
-    # forensics
-    'forensics',
+    #
+    'osint',
 
     # other
     'guide',
