@@ -35,9 +35,13 @@ class Intel(models.Model):
         return "#%s - %s" % (self.id, self.title)
 
 
+def get_upload_path(instance, filename):
+    return os.path.join("intel_files", "intel_%d" % instance.intel.id, filename)
+
+
 class IntelFile(models.Model):
     intel = models.ForeignKey(Intel, on_delete=models.CASCADE, related_name='files')
-    file = models.FileField(upload_to="intel_resource/")
+    file = models.FileField(upload_to=get_upload_path)
 
     def filename(self):
         return os.path.basename(self.file.name)
