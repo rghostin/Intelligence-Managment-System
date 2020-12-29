@@ -5,6 +5,7 @@ from intelsAPI.models import Intel, Tag
 
 class IntelFilter(django_filters.FilterSet):
     title = django_filters.CharFilter(lookup_expr='icontains')
+    description = django_filters.CharFilter(lookup_expr='icontains')
     creation_date_range = django_filters.DateFromToRangeFilter(field_name='creation_date')
     tag = django_filters.ModelMultipleChoiceFilter(queryset=Tag.objects.all(),
                                                           field_name="tags__name",
@@ -12,7 +13,4 @@ class IntelFilter(django_filters.FilterSet):
 
     class Meta:
         model = Intel
-        fields = ['title', 'resource_type']
-
-
-# todo search description
+        fields = ['title', 'description', 'resource_type']
