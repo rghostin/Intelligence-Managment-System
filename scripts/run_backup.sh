@@ -13,11 +13,11 @@ VENV_ACTIVATE="${PROJ_ROOT_DIR}/venv/bin/activate"
 MANAGE_SCRIPT="${PROJ_ROOT_DIR}/manage.py"
 
 echo '================================================'
-echo "$(date) - Starting backup"
+echo "[*] $(date) - Starting backup"
 
 source "$VENV_ACTIVATE"
 python3 "${MANAGE_SCRIPT}" dbbackup --clean --compress
 python3 "${MANAGE_SCRIPT}" mediabackup --clean --compress
 deactivate
 
-echo "$(date) - Backup completed"
+echo "[*] $(date) - Backup completed"
