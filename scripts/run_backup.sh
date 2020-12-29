@@ -3,11 +3,11 @@
 # Usage :
 # e.g run everyday at 4AM and 6PM : crontab -e
 #   MAILTO = "sharp.imsystem@gmail.com"
-#   0 4,18 * * * <PROJ_ROOT>/scripts/run_backup.sh > /tmp/sharp_backup.log
+#   0 4,18 * * * <PROJ_ROOT_DIR>/scripts/run_backup.sh > /tmp/sharp_backup.log
 
 set -e
 
-# set absolute path to project
+# TO CONFIGURE - set absolute path to project
 PROJ_ROOT_DIR="$(pwd)"
 VENV_ACTIVATE="${PROJ_ROOT_DIR}/venv/bin/activate"
 MANAGE_SCRIPT="${PROJ_ROOT_DIR}/manage.py"
