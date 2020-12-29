@@ -12,9 +12,7 @@ PROJ_ROOT_DIR="$(pwd)"
 VENV_ACTIVATE="${PROJ_ROOT_DIR}/venv/bin/activate"
 MANAGE_SCRIPT="${PROJ_ROOT_DIR}/manage.py"
 
-line="================================================"
-
-echo "$line"
+echo '================================================'
 echo "$(date) - Starting backup"
 
 source "$VENV_ACTIVATE"
