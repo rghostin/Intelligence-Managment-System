@@ -41,6 +41,6 @@ python3 "${MANAGE_SCRIPT}" mediabackup --clean --compress
 deactivate
 
 log "Starting remote syncing"
-"${RCLONE}" sync "${LOCAL_BACKUP_DIR}" "${REMOTE_BACKUP_DIR}"
+"${RCLONE}" sync --verbose --contimeout 60s --timeout 300s --retries 3 --low-level-retries 10 "${LOCAL_BACKUP_DIR}" "${REMOTE_BACKUP_DIR}"
 
 log "Backup completed"
