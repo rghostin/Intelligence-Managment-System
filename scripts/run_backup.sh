@@ -15,19 +15,12 @@ VENV_ACTIVATE="${PROJ_ROOT_DIR}/venv/bin/activate"
 MANAGE_SCRIPT="${PROJ_ROOT_DIR}/manage.py"
 RCLONE="/usr/bin/rclone"
 LOCAL_BACKUP_DIR="/tmp/testdbbackup/"
-REMOTE_BACKUP_DIR="drive:sharp_backup"
+REMOTE_DRIVE="drive"
+REMOTE_BACKUP_DIR="${REMOTE_DRIVE}:sharp_backup"
 
 
 function usage {
   echo "Usage: $0 [-r : enable remote syncing ]"
-}
-
-
-function assert_installed {
-  if ! [ -x "$(command -v "$1")" ]; then
-    echo "Error: $1 not found" >&2
-    exit 1
-  fi
 }
 
 
@@ -64,7 +57,8 @@ shift $(( OPTIND - 1 ))
 [[ "${1}" == "--" ]] && shift
 
 if ${REMOTE}; then
-  assert_installed "${RCLONE}"
+  # test config
+  "${RCLONE}" config show --quiet "${REMOTE_DRIVE}"
 fi
 
 echo '================================================'
