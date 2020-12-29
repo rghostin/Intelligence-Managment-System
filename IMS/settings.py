@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_filters',
     'widget_tweaks',
+    'dbbackup',
     'martor',
     'intelsAPI',
     'frontend'
@@ -135,6 +136,10 @@ SECURE_SSL_REDIRECT = config("SECURE_SSL_REDIRECT", cast=bool)
 SECURE_HSTS_SECONDS = config("SECURE_HSTS_SECONDS", cast=int, default=0)
 SECURE_HSTS_INCLUDE_SUBDOMAINS= config("SECURE_HSTS_INCLUDE_SUBDOMAINS", cast=bool)
 
+
+ADMINS = [('Black', 'sharpa.imsystem@gmail.com')]
+SERVER_EMAIL = config("SERVER_EMAIL")
+
 #### Authentication - Start
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'search'
@@ -149,6 +154,14 @@ REST_FRAMEWORK = {
 }
 ### DRF - End
 
+
+### Backup - Start
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': config('DBBACKUP_STORAGE_LOCATION')}
+DBBACKUP_CLEANUP_KEEP = config('DBBACKUP_CLEANUP_KEEP', cast=int)
+DBBACKUP_CLEANUP_KEEP_MEDIA = config('DBBACKUP_CLEANUP_KEEP', cast=int)
+DBBACKUP_SEND_EMAIL = config('DBBACKUP_SEND_EMAIL', cast=bool)
+### Backup - End
 
 ### Martor - Start
 # Martor Configuration
