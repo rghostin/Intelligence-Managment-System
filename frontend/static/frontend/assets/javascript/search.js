@@ -59,9 +59,9 @@ function append_search_entry(entry, detail_view_endpoint) {
 
     let tags_list = make_tags_list_html(entry.tags);
     let resource_type = capFirst(entry.resource_type);
-    let note = "";
-    if (entry.additional_note) {
-        note = entry.additional_note;
+    let description = "";
+    if (entry.description) {
+        description = truncateString(entry.description, 400);
     }
     let link = "<a href=\"#\" class='btn disabled'>Link</a>";
     if (entry.link) {
@@ -75,7 +75,7 @@ function append_search_entry(entry, detail_view_endpoint) {
                 <a href="${view_endpoint}">#${entry.id} - ${entry.title}</a>
             </h4>
             <p class="d-none d-sm-block text-muted">
-                ${note}
+                ${description}
             </p>
         </td>
         <td class="d-none d-lg-table-cell text-center">${resource_type}</td>

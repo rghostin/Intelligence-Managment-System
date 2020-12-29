@@ -56,7 +56,12 @@ class IntelCreate(CreateView):
 class IntelUpdate(UpdateView):
     model = Intel
     template_name = "frontend/intel_update.html"
-    fields = ['title', 'resource_type', 'tags', 'link', 'additional_note', 'text_content']
+    form_class = IntelCreationForm
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields.pop('files_field')
+        return form
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
@@ -93,10 +98,15 @@ class IntelDelete(DeleteView):
 class BookmarkCreate(CreateView):
     model = Intel
     template_name = "frontend/bookmark_create.html"
-    fields = ['title', 'tags', 'link', 'additional_note']
+    form_class = IntelCreationForm
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
+
+        to_exclude = ('resource_type', 'files_field', 'text_content')
+        for field_name in to_exclude:
+            form.fields.pop(field_name)
+
         form.fields['link'].required = True
         return form
 

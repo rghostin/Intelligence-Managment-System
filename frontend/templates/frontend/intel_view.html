@@ -62,6 +62,18 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        <i class="fa fa-fw fa-file mr-1"></i>
+                                        <b>Description:</b> {{ intel.description | default:"<i>null</i>" }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <i class="fa fa-fw fa-comment mr-1"></i>
+                                        <b>Note:</b> {{ intel.additional_note | default:"<i>null</i>" }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         <i class="fa fa-fw fa-tags mr-1"></i>
                                         {% for tag in intel.tags.all %}
                                             <span class="badge badge-primary">{{ tag.name }}</span>

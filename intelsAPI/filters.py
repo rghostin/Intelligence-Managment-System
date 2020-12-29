@@ -1,5 +1,4 @@
 import django_filters
-from django_filters.widgets import RangeWidget
 
 from intelsAPI.models import Intel, Tag
 
@@ -15,3 +14,5 @@ class IntelFilter(django_filters.FilterSet):
         model = Intel
         fields = ['title', 'resource_type']
 
+
+# todo search description
