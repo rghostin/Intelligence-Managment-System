@@ -137,8 +137,20 @@ SECURE_HSTS_SECONDS = config("SECURE_HSTS_SECONDS", cast=int, default=0)
 SECURE_HSTS_INCLUDE_SUBDOMAINS= config("SECURE_HSTS_INCLUDE_SUBDOMAINS", cast=bool)
 
 
-ADMINS = [('Black', 'sharpa.imsystem@gmail.com')]
+ADMINS = [('Black', 'sharp.imsystem@gmail.com')]
 SERVER_EMAIL = config("SERVER_EMAIL")
+DEFAULT_FROM_EMAIL = config("SERVER_EMAIL")
+
+### Email - Start
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_TIMEOUT = config('EMAIL_TIMEOUT', cast=int)
+### Email - End
 
 #### Authentication - Start
 LOGIN_URL = 'login'
@@ -163,6 +175,8 @@ DBBACKUP_CLEANUP_KEEP_MEDIA = config('DBBACKUP_CLEANUP_KEEP', cast=int)
 DBBACKUP_SEND_EMAIL = config('DBBACKUP_SEND_EMAIL', cast=bool)
 ### Backup - End
 
+
+
 ### Martor - Start
 # Martor Configuration
 MARTOR_THEME = 'bootstrap'  # semantic
@@ -183,6 +197,5 @@ MARTOR_TOOLBAR_BUTTONS = [
     'direct-mention', 'toggle-maximize', 'help'
 ]
 ### Martor - End
-
 
 
