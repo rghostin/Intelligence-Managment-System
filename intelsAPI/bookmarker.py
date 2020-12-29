@@ -19,7 +19,14 @@ class Bookmarker:
         return f"snapshot_{time_info}.pdf"
 
     @staticmethod
-    def create_snapshot(intel, filename=None, save=True):
+    def create_snapshot(intel, filename=None):
+        """
+        Given an intel for which a link exists, create a
+        corresponding intelfile as a pdf snapshot of the webpage
+        :param intel: the intel to snapshot
+        :param filename:
+        :return: The created IntelFile instance
+        """
         assert intel.link
 
         if filename is None:
@@ -37,8 +44,6 @@ class Bookmarker:
         intelfile = IntelFile(intel=intel)
         print(filename)
         intelfile.file.save(filename, pdf_file_content)
-
-        if save:
-            intelfile.save()
+        intelfile.save()
 
         return intelfile

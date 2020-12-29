@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 
-from frontend.bookmarker import Bookmarker
+from intelsAPI.bookmarker import Bookmarker
 from frontend.forms import IntelCreationForm
 from intelsAPI.filters import IntelFilter
 from intelsAPI.models import Intel, IntelFile
@@ -109,7 +109,7 @@ class BookmarkCreate(CreateView):
         form._save_m2m()
 
         try:
-            Bookmarker.create_snapshot(intel=intel, save=True)
+            Bookmarker.create_snapshot(intel=intel)
         except Exception as e:
             intel.delete()
             messages.error(self.request, "Unable to create snapshot")
@@ -131,7 +131,7 @@ def bookmark_add(request):
     assert_intel_author(intel=intel, user=request.user)
 
     try:
-        Bookmarker.create_snapshot(intel=intel, save=True)
+        Bookmarker.create_snapshot(intel=intel)
     except Exception as e:
         messages.error(request, "Unable to create snapshot")
     else:
