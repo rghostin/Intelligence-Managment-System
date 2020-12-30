@@ -11,7 +11,7 @@
 set -e
 
 
-# TO CONFIGURE - set absolute path to project
+# TOCONFIGURE - set absolute path to project
 PROJ_ROOT_DIR="$(pwd)"
 VENV_ACTIVATE="${PROJ_ROOT_DIR}/venv/bin/activate"
 MANAGE_SCRIPT="${PROJ_ROOT_DIR}/manage.py"
