@@ -67,7 +67,7 @@ echo '================================================'
 log "Starting local backup"
 
 source "$VENV_ACTIVATE"
-python3 "${MANAGE_SCRIPT}" dbbackup --clean --compress --encrypt
+python3 "${MANAGE_SCRIPT}" dbbackup --clean --encrypt
 python3 "${MANAGE_SCRIPT}" mediabackup --clean --compress --encrypt
 deactivate
 
