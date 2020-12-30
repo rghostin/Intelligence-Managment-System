@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_POST
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 
-from frontend.bookmarker import Bookmarker
+from intelsAPI.bookmarker import Bookmarker
 from frontend.forms import IntelCreationForm
 from intelsAPI.filters import IntelFilter
 from intelsAPI.models import Intel, IntelFile
@@ -56,7 +56,12 @@ class IntelCreate(CreateView):
 class IntelUpdate(UpdateView):
     model = Intel
     template_name = "frontend/intel_update.html"
-    fields = ['title', 'resource_type', 'tags', 'link', 'additional_note', 'text_content']
+    form_class = IntelCreationForm
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields.pop('files_field')
+        return form
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
@@ -93,10 +98,15 @@ class IntelDelete(DeleteView):
 class BookmarkCreate(CreateView):
     model = Intel
     template_name = "frontend/bookmark_create.html"
-    fields = ['title', 'tags', 'link', 'additional_note']
+    form_class = IntelCreationForm
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
+
+        to_exclude = ('resource_type', 'files_field', 'text_content')
+        for field_name in to_exclude:
+            form.fields.pop(field_name)
+
         form.fields['link'].required = True
         return form
 
@@ -109,7 +119,7 @@ class BookmarkCreate(CreateView):
         form._save_m2m()
 
         try:
-            Bookmarker.create_snapshot(intel=intel, save=True)
+            Bookmarker.create_snapshot(intel=intel)
         except Exception as e:
             intel.delete()
             messages.error(self.request, "Unable to create snapshot")
@@ -131,7 +141,7 @@ def bookmark_add(request):
     assert_intel_author(intel=intel, user=request.user)
 
     try:
-        Bookmarker.create_snapshot(intel=intel, save=True)
+        Bookmarker.create_snapshot(intel=intel)
     except Exception as e:
         messages.error(request, "Unable to create snapshot")
     else:

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_filters',
     'widget_tweaks',
+    'dbbackup',
     'martor',
     'intelsAPI',
     'frontend'
@@ -135,6 +136,23 @@ SECURE_SSL_REDIRECT = config("SECURE_SSL_REDIRECT", cast=bool)
 SECURE_HSTS_SECONDS = config("SECURE_HSTS_SECONDS", cast=int, default=0)
 SECURE_HSTS_INCLUDE_SUBDOMAINS= config("SECURE_HSTS_INCLUDE_SUBDOMAINS", cast=bool)
 
+
+ADMINS = [(config('ADMIN_NAME'), config('ADMIN_EMAIL'))]
+SERVER_EMAIL = config("SERVER_EMAIL")
+DEFAULT_FROM_EMAIL = config("SERVER_EMAIL")
+
+### Email - Start
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_TIMEOUT = config('EMAIL_TIMEOUT', cast=int)
+### Email - End
+
+
 #### Authentication - Start
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'search'
@@ -148,6 +166,27 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 25
 }
 ### DRF - End
+
+
+### Backup - Start
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': config('DBBACKUP_STORAGE_LOCATION')}
+DBBACKUP_CLEANUP_KEEP = config('DBBACKUP_CLEANUP_KEEP', cast=int)
+DBBACKUP_CLEANUP_KEEP_MEDIA = config('DBBACKUP_CLEANUP_KEEP', cast=int)
+DBBACKUP_SEND_EMAIL = config('DBBACKUP_SEND_EMAIL', cast=bool)
+DBBACKUP_FILENAME_TEMPLATE = 'db-{databasename}-{servername}-{datetime}.{extension}'
+DBBACKUP_MEDIA_FILENAME_TEMPLATE = 'media-{servername}-{datetime}.{extension}'
+DBBACKUP_GPG_ALWAYS_TRUST = config('DBBACKUP_GPG_ALWAYS_TRUST', cast=bool)
+DBBACKUP_GPG_RECIPIENT = config('ADMIN_EMAIL')
+DBBACKUP_GPG_PASSPHRASE = config('DBBACKUP_GPG_PASSPHRASE')  # custom
+
+DBBACKUP_CONNECTORS = {
+    'default': {
+        'CONNECTOR': 'dbbackup.db.sqlite.SqliteCPConnector'
+    }
+}
+### Backup - End
+
 
 
 ### Martor - Start
@@ -170,6 +209,5 @@ MARTOR_TOOLBAR_BUTTONS = [
     'direct-mention', 'toggle-maximize', 'help'
 ]
 ### Martor - End
-
 
 

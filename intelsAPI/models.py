@@ -21,6 +21,7 @@ class Intel(models.Model):
 
     author = models.ForeignKey('auth.User', on_delete=models.SET_NULL, related_name='intels', null=True)
     title = models.CharField(max_length=200)
+    description = models.TextField(max_length=1500, blank=True)
     creation_date = models.DateField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
     resource_type = models.CharField(max_length=20, choices=RESOURCE_TYPE_CHOICES)
