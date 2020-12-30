@@ -170,7 +170,11 @@ REST_FRAMEWORK = {
 
 ### Backup - Start
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
-DBBACKUP_STORAGE_OPTIONS = {'location': config('DBBACKUP_STORAGE_LOCATION')}
+DBBACKUP_STORAGE_OPTIONS = {
+    'location': config('DBBACKUP_STORAGE_LOCATION'),
+    'file_permissions_mode': 400,
+    'directory_permissions_mode': 700
+}
 DBBACKUP_CLEANUP_KEEP = config('DBBACKUP_CLEANUP_KEEP', cast=int)
 DBBACKUP_CLEANUP_KEEP_MEDIA = config('DBBACKUP_CLEANUP_KEEP', cast=int)
 DBBACKUP_SEND_EMAIL = config('DBBACKUP_SEND_EMAIL', cast=bool)
