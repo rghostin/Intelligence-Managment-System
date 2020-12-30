@@ -67,6 +67,8 @@ echo '================================================'
 log "Starting local backup"
 
 source "$VENV_ACTIVATE"
+
+# no compression of db because of some bug in the module
 python3 "${MANAGE_SCRIPT}" dbbackup --clean --encrypt
 python3 "${MANAGE_SCRIPT}" mediabackup --clean --compress --encrypt
 deactivate
