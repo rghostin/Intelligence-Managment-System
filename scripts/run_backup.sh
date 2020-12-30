@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # Usage :
-# e.g run everyday at 4AM and 6PM : crontab -e
-#   MAILTO = "sharp.imsystem@gmail.com"
-#   0 4,18 * * * <PROJ_ROOT_DIR>/scripts/run_backup.sh -r -- > /tmp/sharp_backup.log
+# * A PGP key should be set up for encryption: c.f script gen_pgp_key.py
+# * A cron job should be set up:
+#   e.g run everyday at 4AM and 6PM : crontab -e
+#     MAILTO = "sharp.imsystem@gmail.com"
+#     0 4,18 * * * <PROJ_ROOT_DIR>/scripts/run_backup.sh -r -- > /tmp/sharp_backup.log
 
 
 set -e
@@ -65,8 +67,8 @@ echo '================================================'
 log "Starting local backup"
 
 source "$VENV_ACTIVATE"
-python3 "${MANAGE_SCRIPT}" dbbackup --clean --compress
-python3 "${MANAGE_SCRIPT}" mediabackup --clean --compress
+python3 "${MANAGE_SCRIPT}" dbbackup --clean --compress --encrypt
+python3 "${MANAGE_SCRIPT}" mediabackup --clean --compress --encrypt
 deactivate
 
 
