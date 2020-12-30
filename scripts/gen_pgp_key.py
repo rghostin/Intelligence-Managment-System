@@ -37,12 +37,12 @@ input_data = gpg.gen_key_input(
 print(input_data)
 key = gpg.gen_key(input_data)
 
-# ascii_armored_public_keys = gpg.export_keys(key.fingerprint)
-# ascii_armored_private_keys = gpg.export_keys(
-#     keyids=key.fingerprint,
-#     secret=True,
-#     passphrase=PASSPHRASE,
-# )
-#
-# print(ascii_armored_public_keys)
-# print(ascii_armored_private_keys)
+ascii_armored_public_keys = gpg.export_keys(key.fingerprint)
+ascii_armored_private_keys = gpg.export_keys(
+    keyids=key.fingerprint,
+    secret=True,
+    passphrase=PASSPHRASE,
+)
+
+print(ascii_armored_public_keys)
+print(ascii_armored_private_keys)
