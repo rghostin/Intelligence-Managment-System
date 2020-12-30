@@ -1,4 +1,5 @@
 import os
+import sys
 
 import django
 import gnupg
@@ -8,6 +9,12 @@ confirm = input('Are you sure you want to generate new PGP keys ? This might ove
 if confirm.strip() != "yes":
     print('Aborting')
     exit(0)
+
+# TOCONFIGURE - set absolute path to project
+PROJ_ROOT_DIR = "."
+if PROJ_ROOT_DIR not in sys.path:
+    sys.path.append(PROJ_ROOT_DIR)
+
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'IMS.settings')
 django.setup()

@@ -19,16 +19,17 @@
       * Confirm `ADMIN_EMAIL="sharp.imsystem@gmail.com` and `SERVER_EMAIL="noreply@sharpa.live"`
 
 ### Configure backup system
-- [ ] Set up PGP keys **with new passphrase** for backup (_c.f gen_pgp_key.py_)
-- [ ] Set `PROJ_ROOT_DIR` in restore_backup.sh and run_backup.sh
+- [ ] Confirm `ADMIN_EMAIL="sharp.imsystem@gmail.com"` (same as for PGP key) and `ADMIN_NAME` set
+- [ ] Set `PROJ_ROOT_DIR` in restore_backup.sh, run_backup.sh and gen_pgp_key.py
+- [ ] Set new pgp passphrase in .env
+- [ ] Set up PGP keys for backup (_c.f gen_pgp_key.py_)
 - [ ] Configure backup directory
 - [ ] Install and configure rclone
     * On client machine, `rclone config`, select drive, keep default options to do oauth via browser
-    * Copy drive configuration file to server
+    * Copy drive configuration file to server ~/.config/rclone/rclone.conf
     * Test with `rclone about "drive:`
 - [ ] Configure .env
     * Set `DBBACKUP_STORAGE_LOCATION`
     * Set `DBBACKUP_GPG_PASSPHRASE`
-    * Confirm `ADMIN_EMAIL="sharp.imsystem@gmail.com"` (same as for PGP key)
 - [ ] Configure cron job for `run_backup.sh`
 - Test by running run_backup.sh
