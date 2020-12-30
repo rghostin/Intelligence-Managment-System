@@ -179,6 +179,12 @@ DBBACKUP_MEDIA_FILENAME_TEMPLATE = 'media-{servername}-{datetime}.{extension}'
 DBBACKUP_GPG_ALWAYS_TRUST = config('DBBACKUP_GPG_ALWAYS_TRUST', cast=bool)
 DBBACKUP_GPG_RECIPIENT = config('ADMIN_EMAIL')
 DBBACKUP_GPG_PASSPHRASE = config('DBBACKUP_GPG_PASSPHRASE')  # custom
+
+DBBACKUP_CONNECTORS = {
+    'default': {
+        'CONNECTOR': 'dbbackup.db.sqlite.SqliteCPConnector'
+    }
+}
 ### Backup - End
 
 
