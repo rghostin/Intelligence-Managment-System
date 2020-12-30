@@ -1,7 +1,9 @@
 ### Install app
 - [ ] Set up virtual env and install requirements
 - [ ] Set up media directory
-- [ ] Set up static directory and collect statics  
+- [ ] Set up static directory and collect statics
+- [ ] Makemigrations and migrate
+- [ ] `chown root:www-data db.sqlite3 `, `chmod 660 db.sqlite3`
 - [ ] Configure .env
   * Generate new `SECRET_KEY`
   * Confirm `DEBUG=False`
