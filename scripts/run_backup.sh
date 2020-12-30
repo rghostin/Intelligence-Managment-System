@@ -13,10 +13,11 @@ set -e
 
 # TOCONFIGURE - set absolute path to project
 PROJ_ROOT_DIR="$(pwd)"
+# TOCONFIGURE - set absolute path to backups
+LOCAL_BACKUP_DIR="/tmp/testdbbackup/"
 VENV_ACTIVATE="${PROJ_ROOT_DIR}/venv/bin/activate"
 MANAGE_SCRIPT="${PROJ_ROOT_DIR}/manage.py"
 RCLONE="/usr/bin/rclone"
-LOCAL_BACKUP_DIR="/tmp/testdbbackup/"
 REMOTE_DRIVE="drive"
 REMOTE_BACKUP_DIR="${REMOTE_DRIVE}:sharp_backup"
 

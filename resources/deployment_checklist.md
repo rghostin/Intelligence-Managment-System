@@ -21,7 +21,7 @@
 ### Configure backup system
 - [ ] Confirm `ADMIN_EMAIL="sharp.imsystem@gmail.com"` (same as for PGP key) and `ADMIN_NAME` set
 - [ ] Set `PROJ_ROOT_DIR` in restore_backup.sh, run_backup.sh and gen_pgp_key.py
-- [ ] Set new pgp passphrase in .env
+- [ ] Set new `DBBACKUP_GPG_PASSPHRASE` in .env
 - [ ] Set up PGP keys for backup (_c.f gen_pgp_key.py_)
 - [ ] Configure backup directory
 - [ ] Install and configure rclone
@@ -30,6 +30,5 @@
     * Test with `rclone about "drive:`
 - [ ] Configure .env
     * Set `DBBACKUP_STORAGE_LOCATION`
-    * Set `DBBACKUP_GPG_PASSPHRASE`
+- [ ]Test by running run_backup.sh
 - [ ] Configure cron job for `run_backup.sh`
-- Test by running run_backup.sh
