@@ -137,7 +137,7 @@ SECURE_HSTS_SECONDS = config("SECURE_HSTS_SECONDS", cast=int, default=0)
 SECURE_HSTS_INCLUDE_SUBDOMAINS= config("SECURE_HSTS_INCLUDE_SUBDOMAINS", cast=bool)
 
 
-ADMINS = [('Black', 'sharp.imsystem@gmail.com')]
+ADMINS = [(config('ADMIN_NAME'), config('ADMIN_EMAIL'))]
 SERVER_EMAIL = config("SERVER_EMAIL")
 DEFAULT_FROM_EMAIL = config("SERVER_EMAIL")
 
@@ -151,6 +151,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 EMAIL_TIMEOUT = config('EMAIL_TIMEOUT', cast=int)
 ### Email - End
+
 
 #### Authentication - Start
 LOGIN_URL = 'login'
@@ -173,6 +174,9 @@ DBBACKUP_STORAGE_OPTIONS = {'location': config('DBBACKUP_STORAGE_LOCATION')}
 DBBACKUP_CLEANUP_KEEP = config('DBBACKUP_CLEANUP_KEEP', cast=int)
 DBBACKUP_CLEANUP_KEEP_MEDIA = config('DBBACKUP_CLEANUP_KEEP', cast=int)
 DBBACKUP_SEND_EMAIL = config('DBBACKUP_SEND_EMAIL', cast=bool)
+DBBACKUP_GPG_ALWAYS_TRUST = config('DBBACKUP_GPG_ALWAYS_TRUST', cast=bool)
+DBBACKUP_GPG_RECIPIENT = config('ADMIN_EMAIL')
+DBBACKUP_GPG_PASSPHRASE = config('DBBACKUP_GPG_PASSPHRASE')  # custom
 ### Backup - End
 
 
