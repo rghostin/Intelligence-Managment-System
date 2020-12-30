@@ -12,7 +12,7 @@ set -e
 
 
 # TOCONFIGURE - set absolute path to project
-PROJ_ROOT_DIR="$(pwd)"
+PROJ_ROOT_DIR="/srv/sharpims/IMS"
 # TOCONFIGURE - set absolute path to backups
 LOCAL_BACKUP_DIR="/var/backups/sharp"
 VENV_ACTIVATE="${PROJ_ROOT_DIR}/venv/bin/activate"
