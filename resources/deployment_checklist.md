@@ -25,12 +25,13 @@
 - [ ] Set `PROJ_ROOT_DIR` in restore_backup.sh, run_backup.sh and gen_pgp_key.py
 - [ ] Set new `DBBACKUP_GPG_PASSPHRASE` in .env
 - [ ] Set up PGP keys for backup (_c.f gen_pgp_key.py_)
-- [ ] Configure backup directory
+- [ ] Configure backup directory /var/backups/sharp, chmod 700
 - [ ] Install and configure rclone
     * On client machine, `rclone config`, select drive, keep default options to do oauth via browser
     * Copy drive configuration file to server ~/.config/rclone/rclone.conf
     * Test with `rclone about "drive:`
 - [ ] Configure .env
     * Set `DBBACKUP_STORAGE_LOCATION`
-- [ ]Test by running run_backup.sh
+- [ ] Test by running `run_backup.sh -r`
 - [ ] Configure cron job for `run_backup.sh`
+    * `MAILTO="sharp.imsystem@gmail.com" \n 0 4,18 * * * /srv/sharpims/IMS/scripts/run_backup.sh -r`
