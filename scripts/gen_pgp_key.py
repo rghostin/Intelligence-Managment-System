@@ -11,7 +11,7 @@ if confirm.strip() != "yes":
     exit(0)
 
 # TOCONFIGURE - set absolute path to project
-PROJ_ROOT_DIR = "."
+PROJ_ROOT_DIR = "/srv/sharpims/IMS"
 if PROJ_ROOT_DIR not in sys.path:
     sys.path.append(PROJ_ROOT_DIR)
 
