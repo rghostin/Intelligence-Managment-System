@@ -15,6 +15,8 @@ set -e
 PROJ_ROOT_DIR="/srv/sharpims/IMS"
 # TOCONFIGURE - set absolute path to backups
 LOCAL_BACKUP_DIR="/var/backups/sharp"
+# TOCONFIGURE * set absolute path log file
+LOG_FILE="/var/log/sharp/backup.log"
 VENV_ACTIVATE="${PROJ_ROOT_DIR}/venv/bin/activate"
 MANAGE_SCRIPT="${PROJ_ROOT_DIR}/manage.py"
 RCLONE="/usr/bin/rclone"
@@ -28,7 +30,7 @@ function usage {
 
 
 function log {
-  echo "[*] $(date) - $1"
+  echo "[*] $(date) - $1" | tee -a "${LOG_FILE}"
 }
 
 
@@ -64,8 +66,7 @@ if ${REMOTE}; then
   "${RCLONE}" config show --quiet "${REMOTE_DRIVE}" > /dev/null
 fi
 
-echo '================================================'
-log "Starting local backup"
+log "Starting local backup ==========================="
 
 source "$VENV_ACTIVATE"
 
