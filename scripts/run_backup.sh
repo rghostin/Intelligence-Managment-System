@@ -61,7 +61,7 @@ shift $(( OPTIND - 1 ))
 
 if ${REMOTE}; then
   # test config
-  "${RCLONE}" config show --quiet "${REMOTE_DRIVE}"
+  "${RCLONE}" config show --quiet "${REMOTE_DRIVE}" > /dev/null
 fi
 
 echo '================================================'
