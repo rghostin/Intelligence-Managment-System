@@ -77,7 +77,12 @@ deactivate
 
 if ${REMOTE}; then
   log "Starting remote syncing"
-  "${RCLONE}" sync --verbose --contimeout 60s --timeout 300s --retries 3 --low-level-retries 10 "${LOCAL_BACKUP_DIR}" "${REMOTE_BACKUP_DIR}"
+  "${RCLONE}" sync --contimeout 60s --timeout 300s --retries 3 --low-level-retries 10 "${LOCAL_BACKUP_DIR}" "${REMOTE_BACKUP_DIR}"
+  if [ $? -eq 0 ]; then
+      log "Cloud syncing: OK"
+  else
+      log "Cloud syncing: FAIL"
+  fi
 else
   log "Remote syncing disabled"
 fi
