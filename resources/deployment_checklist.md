@@ -16,7 +16,7 @@
    * Set `SECURE_SSL_REDIRECT=True`, `SECURE_HSTS_SECONDS=`, `SECURE_HSTS_INCLUDE_SUBDOMAINS=True`
     
 ### Configure mailing system
-- [ ] Configure mail server TODO
+[Configure mail server](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-as-a-send-only-smtp-server-on-ubuntu-18-04#prerequisites)
 - [ ] Configure SMTP connection in .env 
       * Confirm `ADMIN_EMAIL="sharp.imsystem@gmail.com` and `SERVER_EMAIL="noreply@sharpa.live"`
 
