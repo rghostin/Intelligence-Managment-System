@@ -17,7 +17,8 @@
     
 ### Configure mailing system
 [Configure mail server](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-as-a-send-only-smtp-server-on-ubuntu-18-04#prerequisites)
-- [ ] Configure SMTP connection in .env 
+- [ ] Configure SMTP connection in .env
+      * Set config localhost:25 credentials: "":"", no TLS, timeout 60
       * Confirm `ADMIN_EMAIL="sharp.imsystem@gmail.com` and `SERVER_EMAIL="noreply@sharpa.live"`
 
 ### Configure backup system
@@ -34,4 +35,7 @@
     * Set `DBBACKUP_STORAGE_LOCATION`
 - [ ] Test by running `run_backup.sh -r`
 - [ ] Configure cron job for `run_backup.sh`
-    * `MAILTO="sharp.imsystem@gmail.com" \n 0 4,18 * * * /srv/sharpims/IMS/scripts/run_backup.sh -r >> /var/log/sharp/backup.log 2>&1`
+    * ```
+      MAILTO=sharp.imsystem@gmail.com
+      0 4,18 * * * /srv/sharpims/IMS/scripts/run_backup.sh -r 2>&1
+      ```
