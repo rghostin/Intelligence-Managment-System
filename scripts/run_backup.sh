@@ -15,8 +15,6 @@ set -e
 PROJ_ROOT_DIR="$(pwd)"
 # TOCONFIGURE - set absolute path to backups
 LOCAL_BACKUP_DIR="/tmp/testdbbackup/"
-# TOCONFIGURE - set recipient
-ADMIN_EMAIL="sharp.imsystem@gmail.com"
 # TOCONFIGURE * set absolute path log file
 LOG_FILE="/var/log/sharp/backup.log"
 VENV_ACTIVATE="${PROJ_ROOT_DIR}/venv/bin/activate"
@@ -35,9 +33,6 @@ function log {
   echo "[*] $(date) - $1" | tee -a "${LOG_FILE}"
 }
 
-function send_error_mail {
-  echo -e "An error occurred during the backup process.\n Please consult /var/log/sharp/backup.log for more details." | mail -s "Error during backup" "${ADMIN_EMAIL}"
-}
 
 REMOTE='false'
 while getopts ":r" o; do
