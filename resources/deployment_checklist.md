@@ -34,4 +34,4 @@
     * Set `DBBACKUP_STORAGE_LOCATION`
 - [ ] Test by running `run_backup.sh -r`
 - [ ] Configure cron job for `run_backup.sh`
-    * `MAILTO="sharp.imsystem@gmail.com" \n 0 4,18 * * * /srv/sharpims/IMS/scripts/run_backup.sh -r > /var/log/sharp/backup.log`
+    * `MAILTO="sharp.imsystem@gmail.com" \n 0 4,18 * * * /srv/sharpims/IMS/scripts/run_backup.sh -r >> /var/log/sharp/backup.log 2>&1`
