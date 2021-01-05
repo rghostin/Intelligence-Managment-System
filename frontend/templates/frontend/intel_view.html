@@ -66,6 +66,15 @@
                                             {% else %}
                                                 <i>null</i>
                                             {% endif %}
+                                              <div class="float-right" style="display: inline; font-size: 20px">
+                                                   <form method="post" action="{% url 'bookmark_add'  %}">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="intel_id" value="{{ intel.id }}">
+                                                        <button type="submit" class="fa fa-camera" style="background: transparent; border: none"></button>
+                                                    </form>
+                                              </div>
+
+
                                     </td>
                                 </tr>
                                 <tr>
