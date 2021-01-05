@@ -12,6 +12,14 @@
     {% endif %}
 {% endblock %}
 
+
+{% block custom_css %}
+    <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+    <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+    <link href="{% static 'martor/css/martor.bootstrap.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+{% endblock %}
+
+
 {% block page_content %}
     <div class="content">
 
@@ -118,7 +126,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         {#  control panel #}
@@ -160,15 +167,13 @@
 
 
         {#  TEXT CONTENT #}
-
-
         <div class="block block-rounded">
             <div class="block-header block-header-default">
                 <h3 class="block-title">
                     Text content
                 </h3>
             </div>
-            <div class="block-content">
+            <div class="block-content martor-preview">
                 {% if intel.text_content %}
                     <p>{{ intel.text_content | safe_markdown }}</p>
                 {% else %}
@@ -202,4 +207,12 @@
     <script src="{% static 'frontend/assets/js/plugins/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
     <script src="{% static 'frontend/assets/js/plugins/jquery-file-upload/jquery.fileupload.js' %}"></script>
     <script src="{% static 'frontend/assets/javascript/dyn_file_upload.js' %}"></script>
+
+    {# martor #}
+    <script type="text/javascript" src="{% static 'plugins/js/highlight.min.js' %}"></script>
+    <script>
+        $('.martor-preview pre').each(function(i, block){
+            hljs.highlightBlock(block);
+        });
+    </script>
 {% endblock %}
