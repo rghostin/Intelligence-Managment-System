@@ -68,4 +68,27 @@
             });
     </script>
 
+    <script>
+    function partial_update_text(new_text) {
+         $.ajax({
+                url: "{% url 'intels-detail' pk=intel.id %}",
+                dataType: 'json',
+                method: 'PATCH',
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                data: {"text_content": new_text},
+                beforeSend: function() {console.log("saving...");},
+                complete: function () {console.log("finish");},
+                success: function(data){
+                    console.log("save ok");
+                    console.log(data)
+                },
+                error: function () {
+                    console.log("error saving");
+                }
+            });
+    }
+    </script>
+
 {% endblock %}
