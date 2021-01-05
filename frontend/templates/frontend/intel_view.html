@@ -63,18 +63,20 @@
                                             <strong>Link:</strong>
                                             {% if intel.link %}
                                                 <a target="_blank" rel="noopener" href="{{ intel.link }}">{{ intel.link |truncatechars:100 }}</a>
-                                            {% else %}
-                                                <i>null</i>
-                                            {% endif %}
-                                              <div class="float-right" style="display: inline; font-size: 20px">
+                                                <div class="float-right" style="display: inline; font-size: 20px">
                                                    <form method="post" action="{% url 'bookmark_add'  %}">
                                                         {% csrf_token %}
                                                         <input type="hidden" name="intel_id" value="{{ intel.id }}">
+                                                        <input type="hidden" name="link" value="{{ intel.link }}">
                                                         <button type="submit" class="fa fa-camera" style="background: transparent; border: none"></button>
                                                     </form>
-                                              </div>
-
-
+                                                </div>
+                                            {% else %}
+                                                <i>null</i>
+                                                <div class="float-right" style="display: inline; font-size: 20px">
+                                                    <button type="button" class="fa fa-camera disabled" style="background: transparent; border: none" disabled></button>
+                                                </div>
+                                            {% endif %}
                                     </td>
                                 </tr>
                                 <tr>
@@ -211,17 +213,18 @@
                             </div>
                         </div>
                         <div class="block-content font-size-sm">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="email" class="form-control form-control-alt" id="example-group3-input2-alt" name="example-group3-input2-alt" placeholder="Email">
-                                    <div class="input-group-append">
-                                        <button type="button" class="btn btn-dark">Submit</button>
-                                    </div>
-                                </div>
+                            <div class="form-group" style="padding-bottom: 2rem;">
+                                 <form method="post" action="{% url 'bookmark_add' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="intel_id" value="{{ intel.id }}" required>
+                                     <div class="input-group">
+                                        <input type="url" class="form-control form-control-alt" name="link" placeholder="Link" required>
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-dark">Submit</button>
+                                        </div>
+                                     </div>
+                                </form>
                             </div>
-                        </div>
-                        <div class="block-content block-content-full text-right border-top">
-                            <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
