@@ -119,7 +119,7 @@ class BookmarkCreate(CreateView):
         form._save_m2m()
 
         try:
-            Bookmarker.create_snapshot(intel=intel)
+            Bookmarker.create_snapshot(intel=intel, link=intel.link)
         except Exception as e:
             intel.delete()
             messages.error(self.request, "Unable to create snapshot")
@@ -141,7 +141,7 @@ def bookmark_add(request):
     assert_intel_author(intel=intel, user=request.user)
 
     try:
-        Bookmarker.create_snapshot(intel=intel)
+        Bookmarker.create_snapshot(intel=intel, link=intel.link)
     except Exception as e:
         messages.error(request, "Unable to create snapshot")
     else:

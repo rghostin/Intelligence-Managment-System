@@ -19,15 +19,15 @@ class Bookmarker:
         return f"snapshot_{time_info}.pdf"
 
     @staticmethod
-    def create_snapshot(intel, filename=None):
+    def create_snapshot(intel, link, filename=None):
         """
-        Given an intel for which a link exists, create a
+        Given an intel and a link, create a
         corresponding intelfile as a pdf snapshot of the webpage
         :param intel: the intel to snapshot
+        :param link: like of the page to bookmark
         :param filename:
         :return: The created IntelFile instance
         """
-        assert intel.link
 
         if filename is None:
             filename = Bookmarker.get_default_filename()
@@ -37,7 +37,7 @@ class Bookmarker:
         options = {
             'quiet': ''
         }
-        pdf_data = pdfkit.from_url(intel.link, False, options=options)
+        pdf_data = pdfkit.from_url(link, False, options=options)
 
         # create intelFile
         pdf_file_content = ContentFile(pdf_data)
