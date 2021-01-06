@@ -44,7 +44,13 @@ class TagsViewSet(viewsets.ModelViewSet):
 class IntelFileViewSet(viewsets.ModelViewSet):
     queryset = IntelFile.objects.all()
     serializer_class = IntelFileSerializer
-    # permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def check_permissions(self, request):
+        intel_id = request.data.get('intel')
+        intel = get_object_or_404(Intel, pk=intel_id)
+        assert_intel_author(intel, request.user)
+        return super().check_permissions(request)
 
 
 class BookmarkAdd(APIView):

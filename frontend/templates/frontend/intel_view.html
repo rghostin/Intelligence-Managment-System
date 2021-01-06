@@ -63,16 +63,20 @@
                                             <strong>Link:</strong>
                                             {% if intel.link %}
                                                 <a target="_blank" rel="noopener" href="{{ intel.link }}">{{ intel.link |truncatechars:100 }}</a>
-                                                <div class="float-right" style="display: inline; font-size: 20px">
-                                                        <button type="button" class="fa fa-camera" style="background: transparent; border: none"
-                                                            onclick="bookmark_add('{% url 'bookmark_add' %}', '{{ csrf_token }}', {{ intel.id }}, '{{ intel.link }}')">
-                                                        </button>
-                                                </div>
+                                                {% if intel.author == request.user %}
+                                                    <div class="float-right" style="display: inline; font-size: 20px">
+                                                            <button type="button" class="fa fa-camera" style="background: transparent; border: none"
+                                                                onclick="bookmark_add('{% url 'bookmark_add' %}', '{{ csrf_token }}', {{ intel.id }}, '{{ intel.link }}')">
+                                                            </button>
+                                                    </div>
+                                                {% endif %}
                                             {% else %}
                                                 <i>null</i>
-                                                <div class="float-right" style="display: inline; font-size: 20px">
-                                                    <button type="button" class="fa fa-camera disabled" style="background: transparent; border: none" disabled></button>
-                                                </div>
+                                                {% if intel.author == request.user %}
+                                                    <div class="float-right" style="display: inline; font-size: 20px">
+                                                        <button type="button" class="fa fa-camera disabled" style="background: transparent; border: none" disabled></button>
+                                                    </div>
+                                                {% endif %}
                                             {% endif %}
                                     </td>
                                 </tr>
@@ -109,21 +113,24 @@
                         <h3 class="block-title">
                             Files (<span id="id_file_count">{{ intel.files.count }}</span>)
                         </h3>
-                        <div class="block-options">
-                            <button type="button" class="btn-block-option" data-toggle="modal" data-target="#id_snapshot_modal">
-                                <i class="si si-camera"></i>
-                            </button>
 
-                            <button type="button" class="btn-block-option js-upload-photos">
-                                <i class="si si-cloud-upload"></i>
-                            </button>
+                        {% if intel.author == request.user  %}
 
-                            <input id="fileupload" type="file" name="file" multiple
-                                   style="display: none;"
-                                   data-url="{% url 'intelfiles-list' %}"
-                                   data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}", "intel":{{ intel.id }}}'>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-toggle="modal" data-target="#id_snapshot_modal">
+                                    <i class="si si-camera"></i>
+                                </button>
 
-                        </div>
+                                <button type="button" class="btn-block-option js-upload-photos">
+                                    <i class="si si-cloud-upload"></i>
+                                </button>
+
+                                <input id="fileupload" type="file" name="file" multiple
+                                       style="display: none;"
+                                       data-url="{% url 'intelfiles-list' %}"
+                                       data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}", "intel":{{ intel.id }}}'>
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="block-content" style="max-height: 280px; overflow-y: scroll;">
                         {% if not intel.files %}
@@ -141,29 +148,31 @@
         </div>
 
         {#  control panel #}
-        <div class="block">
-            <div class="block-header">
-                <h3 class="block-title">Control</h3>
-            </div>
-
-            <div class="block-content">
-                <!-- Default -->
-                <div class="mb-4">
-                    <button type="button" class="btn btn-info mr-1 mb-3" onclick="window.location.href='{% url 'update' pk=intel.id %}'">
-                        <i class="fa fa-fw fa-pen mr-1"></i> Update
-                    </button>
-
-                    <button type="button" class="btn btn-danger mr-1 mb-3" onclick="window.location.href='{% url 'delete' pk=intel.id %}'">
-                        <i class="fa fa-fw fa-times mr-1"></i> Delete
-                    </button>
-
-{#                    <button type="button" class="btn btn-danger mr-1 mb-3" onclick="bookmark_add('{% url 'bookmark_add_api' %}', '{{ csrf_token }}', 63, 'https://nmap.org/book/port-scanning-tutorial.html')">#}
-{#                        <i class="fa fa-fw fa-times mr-1"></i> Delete#}
-{#                    </button>#}
+        {% if intel.author == request.user %}
+            <div class="block">
+                <div class="block-header">
+                    <h3 class="block-title">Control</h3>
                 </div>
-                <!-- END Default -->
+
+                <div class="block-content">
+                    <!-- Default -->
+                    <div class="mb-4">
+                        <button type="button" class="btn btn-info mr-1 mb-3" onclick="window.location.href='{% url 'update' pk=intel.id %}'">
+                            <i class="fa fa-fw fa-pen mr-1"></i> Update
+                        </button>
+
+                        <button type="button" class="btn btn-danger mr-1 mb-3" onclick="window.location.href='{% url 'delete' pk=intel.id %}'">
+                            <i class="fa fa-fw fa-times mr-1"></i> Delete
+                        </button>
+
+    {#                    <button type="button" class="btn btn-danger mr-1 mb-3" onclick="bookmark_add('{% url 'bookmark_add_api' %}', '{{ csrf_token }}', 63, 'https://nmap.org/book/port-scanning-tutorial.html')">#}
+    {#                        <i class="fa fa-fw fa-times mr-1"></i> Delete#}
+    {#                    </button>#}
+                    </div>
+                    <!-- END Default -->
+                </div>
             </div>
-        </div>
+        {% endif %}
 
 
         {#  TEXT CONTENT #}

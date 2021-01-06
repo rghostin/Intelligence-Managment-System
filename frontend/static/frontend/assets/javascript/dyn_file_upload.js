@@ -46,6 +46,9 @@ $( document ).ready(function() {
             console.log(data);
             add_to_files_list(data.result.file);
             set_drag_display(false);
+        },
+        error: function (e, data) {
+            display_notification("error", "Unable to upload file");
         }
       });
 
