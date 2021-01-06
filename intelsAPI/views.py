@@ -57,12 +57,15 @@ class BookmarkAdd(APIView):
     def post(self, request, format=None):
         intel_id = request.data.get('intel_id')
         link = request.data.get('link')
+        filename = request.data.get('filename', None)
+        if filename == '':
+            filename = None
 
         intel = get_object_or_404(Intel, pk=intel_id)
         assert_intel_author(intel=intel, user=request.user)
 
         try:
-            intelfile = Bookmarker.create_snapshot(intel=intel, link=link)
+            intelfile = Bookmarker.create_snapshot(intel=intel, link=link, filename=filename)
         except Exception as e:
             raise APIException("Unable to create snapshot")
         else:

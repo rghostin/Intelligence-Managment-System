@@ -43,6 +43,7 @@ def get_upload_path(instance, filename):
 class IntelFile(models.Model):
     intel = models.ForeignKey(Intel, on_delete=models.CASCADE, related_name='files')
     file = models.FileField(upload_to=get_upload_path)
+    link = models.URLField(blank=True)
 
     def filename(self):
         return os.path.basename(self.file.name)

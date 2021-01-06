@@ -1,4 +1,4 @@
-function bookmark_add(api_endpoint, csrftoken, intel_id, link) {
+function bookmark_add(api_endpoint, csrftoken, intel_id, link, filename) {
       $.ajax({
             url: api_endpoint,
             dataType: 'json',
@@ -6,7 +6,7 @@ function bookmark_add(api_endpoint, csrftoken, intel_id, link) {
             headers: {
                 'X-CSRFTOKEN': csrftoken
             },
-            data: {"intel_id": intel_id, "link": link},
+            data: {"intel_id": intel_id, "link": link, "filename":filename},
             beforeSend: function() { wheel_rotate_show(); },
             complete: function () { wheel_rotate_hide(); },
             success: function(data){bookmark_added_success(data)},

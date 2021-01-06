@@ -14,9 +14,9 @@
 
 
 {% block custom_css %}
-    <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
-    <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet" />
-    <link href="{% static 'martor/css/martor.bootstrap.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+    <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet"/>
+    <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet"/>
+    <link href="{% static 'martor/css/martor.bootstrap.min.css' %}" type="text/css" media="all" rel="stylesheet"/>
 {% endblock %}
 
 
@@ -33,73 +33,76 @@
                     <div class="block-content">
                         <table class="table table-striped table-borderless font-size-sm">
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <i class="fa fa-fw fa-user mr-1"></i>
-                                        <b>Author:</b> {{ intel.author.username }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="fa fa-fw fa-book mr-1"></i>
-                                        <strong>Resource Type:</strong> {{ intel.resource_type |capfirst }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="fa fa-fw fa-calendar-plus mr-1"></i>
-                                        <strong>Creation date:</strong> {{ intel.creation_date }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="fa fa-fw fa-calendar mr-1"></i>
-                                        <strong>Last update:</strong> {{ intel.last_update }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="fa fa-fw fa-link mr-1"></i>
-                                            <strong>Link:</strong>
-                                            {% if intel.link %}
-                                                <a target="_blank" rel="noopener" href="{{ intel.link }}">{{ intel.link |truncatechars:100 }}</a>
-                                                {% if intel.author == request.user %}
-                                                    <div class="float-right" style="display: inline; font-size: 20px">
-                                                            <button type="button" class="fa fa-camera" style="background: transparent; border: none"
-                                                                onclick="bookmark_add('{% url 'bookmark_add' %}', '{{ csrf_token }}', {{ intel.id }}, '{{ intel.link }}')">
-                                                            </button>
-                                                    </div>
-                                                {% endif %}
-                                            {% else %}
-                                                <i>null</i>
-                                                {% if intel.author == request.user %}
-                                                    <div class="float-right" style="display: inline; font-size: 20px">
-                                                        <button type="button" class="fa fa-camera disabled" style="background: transparent; border: none" disabled></button>
-                                                    </div>
-                                                {% endif %}
-                                            {% endif %}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="fa fa-fw fa-file mr-1"></i>
-                                        <b>Description:</b> {{ intel.description | default:"<i>null</i>" }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="fa fa-fw fa-comment mr-1"></i>
-                                        <b>Note:</b> {{ intel.additional_note | default:"<i>null</i>" }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <i class="fa fa-fw fa-tags mr-1"></i>
-                                        {% for tag in intel.tags.all %}
-                                            <span class="badge badge-primary">{{ tag.name }}</span>
-                                        {% endfor %}
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-fw fa-user mr-1"></i>
+                                    <b>Author:</b> {{ intel.author.username }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-fw fa-book mr-1"></i>
+                                    <strong>Resource Type:</strong> {{ intel.resource_type |capfirst }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-fw fa-calendar-plus mr-1"></i>
+                                    <strong>Creation date:</strong> {{ intel.creation_date }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-fw fa-calendar mr-1"></i>
+                                    <strong>Last update:</strong> {{ intel.last_update }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-fw fa-link mr-1"></i>
+                                    <strong>Link:</strong>
+                                    {% if intel.link %}
+                                        <a target="_blank" rel="noopener"
+                                           href="{{ intel.link }}">{{ intel.link |truncatechars:100 }}</a>
+                                        {% if intel.author == request.user %}
+                                            <div class="float-right" style="display: inline; font-size: 20px">
+                                                <button type="button" class="fa fa-camera"
+                                                        style="background: transparent; border: none"
+                                                        onclick="bookmark_add('{% url 'bookmark_add' %}', '{{ csrf_token }}', {{ intel.id }}, '{{ intel.link }}')">
+                                                </button>
+                                            </div>
+                                        {% endif %}
+                                    {% else %}
+                                        <i>null</i>
+                                        {% if intel.author == request.user %}
+                                            <div class="float-right" style="display: inline; font-size: 20px">
+                                                <button type="button" class="fa fa-camera disabled"
+                                                        style="background: transparent; border: none" disabled></button>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-fw fa-file mr-1"></i>
+                                    <b>Description:</b> {{ intel.description | default:"<i>null</i>" }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-fw fa-comment mr-1"></i>
+                                    <b>Note:</b> {{ intel.additional_note | default:"<i>null</i>" }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-fw fa-tags mr-1"></i>
+                                    {% for tag in intel.tags.all %}
+                                        <span class="badge badge-primary">{{ tag.name }}</span>
+                                    {% endfor %}
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -114,10 +117,11 @@
                             Files (<span id="id_file_count">{{ intel.files.count }}</span>)
                         </h3>
 
-                        {% if intel.author == request.user  %}
+                        {% if intel.author == request.user %}
 
                             <div class="block-options">
-                                <button type="button" class="btn-block-option" data-toggle="modal" data-target="#id_snapshot_modal">
+                                <button type="button" class="btn-block-option" data-toggle="modal"
+                                        data-target="#id_snapshot_modal">
                                     <i class="si si-camera"></i>
                                 </button>
 
@@ -138,7 +142,8 @@
                         {% else %}
                             <ul id="id_files_ul">
                                 {% for intelfile in intel.files.all %}
-                                    <li><a href="{{ intelfile.file.url }}" target="_blank">{{ intelfile.filename }}</a></li>
+                                    <li><a href="{{ intelfile.file.url }}" target="_blank">{{ intelfile.filename }}</a>
+                                    </li>
                                 {% endfor %}
                             </ul>
                         {% endif %}
@@ -157,17 +162,19 @@
                 <div class="block-content">
                     <!-- Default -->
                     <div class="mb-4">
-                        <button type="button" class="btn btn-info mr-1 mb-3" onclick="window.location.href='{% url 'update' pk=intel.id %}'">
+                        <button type="button" class="btn btn-info mr-1 mb-3"
+                                onclick="window.location.href='{% url 'update' pk=intel.id %}'">
                             <i class="fa fa-fw fa-pen mr-1"></i> Update
                         </button>
 
-                        <button type="button" class="btn btn-danger mr-1 mb-3" onclick="window.location.href='{% url 'delete' pk=intel.id %}'">
+                        <button type="button" class="btn btn-danger mr-1 mb-3"
+                                onclick="window.location.href='{% url 'delete' pk=intel.id %}'">
                             <i class="fa fa-fw fa-times mr-1"></i> Delete
                         </button>
 
-    {#                    <button type="button" class="btn btn-danger mr-1 mb-3" onclick="bookmark_add('{% url 'bookmark_add_api' %}', '{{ csrf_token }}', 63, 'https://nmap.org/book/port-scanning-tutorial.html')">#}
-    {#                        <i class="fa fa-fw fa-times mr-1"></i> Delete#}
-    {#                    </button>#}
+                        {#                    <button type="button" class="btn btn-danger mr-1 mb-3" onclick="bookmark_add('{% url 'bookmark_add_api' %}', '{{ csrf_token }}', 63, 'https://nmap.org/book/port-scanning-tutorial.html')">#}
+                        {#                        <i class="fa fa-fw fa-times mr-1"></i> Delete#}
+                        {#                    </button>#}
                     </div>
                     <!-- END Default -->
                 </div>
@@ -210,34 +217,44 @@
     </div>
 
     {# snapshot modal #}
-      <div class="modal" id="id_snapshot_modal" tabindex="-1" role="dialog" aria-labelledby="id_snapshot_modal" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="block block-themed block-transparent mb-0">
-                        <div class="block-header bg-primary-dark">
-                            <h3 class="block-title">Add bookmark snapshot</h3>
-                            <div class="block-options">
-                                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
-                                    <i class="fa fa-fw fa-times"></i>
-                                </button>
-                            </div>
+    <div class="modal" id="id_snapshot_modal" tabindex="-1" role="dialog" aria-labelledby="id_snapshot_modal"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent mb-0">
+                    <div class="block-header bg-primary-dark">
+                        <h3 class="block-title">Add bookmark snapshot</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-fw fa-times"></i>
+                            </button>
                         </div>
-                        <div class="block-content font-size-sm">
-                            <div class="form-group" style="padding-bottom: 2rem;">
-
-                                     <div class="input-group">
-                                        <input id="id_link_bookmark" type="url" class="form-control form-control-alt" name="link" placeholder="Link" value="" autocomplete="off" required>
-                                        <div class="input-group-append">
-                                            <button id="id_btn_bookmark" type="submit" class="btn btn-dark" >Submit</button>
-                                        </div>
-                                     </div>
-
+                    </div>
+                    <div class="block-content font-size-sm">
+                        <div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <input id="id_link_bookmark" type="url" class="form-control form-control-alt"
+                                           name="link" placeholder="Link" value="" autocomplete="off" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <input id="id_filename_bookmark" type="text" class="form-control form-control-alt"
+                                           name="filename" placeholder="Filename (Optional)" value="" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="form-group row text-right">
+                                <div class="col-sm-12 ml-auto">
+                                    <button id="id_btn_bookmark" type="button" class="btn btn-dark" >Add</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 {% endblock %}
 
@@ -254,14 +271,18 @@
     {# martor #}
     <script type="text/javascript" src="{% static 'plugins/js/highlight.min.js' %}"></script>
     <script>
-        $('.martor-preview pre').each(function(i, block){
+        $('.martor-preview pre').each(function (i, block) {
             hljs.highlightBlock(block);
         });
 
-        $( document ).ready(function() {
-            $("#id_btn_bookmark").click(function() {
+        $(document).ready(function () {
+            $("#id_btn_bookmark").click(function () {
                 let link = $("#id_link_bookmark").val();
-                bookmark_add('{% url 'bookmark_add' %}', '{{ csrf_token }}', {{ intel.id }}, link);
+                let filename = $("#id_filename_bookmark").val();
+                if (filename === '') {
+                    filename = null;
+                }
+                bookmark_add('{% url 'bookmark_add' %}', '{{ csrf_token }}', {{ intel.id }}, link, filename);
                 $("#id_snapshot_modal").modal('hide');
             });
         });
