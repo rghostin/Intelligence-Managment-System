@@ -29,7 +29,7 @@
                             {% csrf_token %}
                             {% include 'frontend/includes/include_rendered_form.html' with form=form %}
                             <div class="form-group text-right">
-                                <button type="button" class="btn btn-primary" onclick="partial_update_text('{% url 'intels-detail' pk=intel.id %}', get_current_text_content())">Quick save text</button>
+                                <button type="button" class="btn btn-primary" onclick="do_partial_update()">Quick save text</button>
                                 <button type="submit" class="btn btn-dark ">Save</button>
                             </div>
                         </form>
@@ -65,8 +65,9 @@
 
 
     <script>
-        function get_current_text_content() {
-            return $('.ace_content').text();
+
+        function get_ace_editor() {
+            return ace.edit("martor-text_content")
         }
 
         function partial_update_text(api_endpoint, new_text) {
@@ -80,16 +81,27 @@
                     data: {"text_content": new_text},
                     beforeSend: function() { $("#id_loading").css('display','block'); },
                     complete: function () { $("#id_loading").css('display','none'); },
-                    success: function(data){
-                        console.log(data)},
+                    success: function(data){},
                     error: function () {
                         display_notification("error", "Unable to save text");
                     }
                 });
         }
 
+        function do_partial_update() {
+            partial_update_text('{% url 'intels-detail' pk=intel.id %}', get_ace_editor().getValue());
+        }
+
         $(document).ready(function () {
                 load_tags();
+
+                get_ace_editor().commands.addCommand({
+                    name: 'save',
+                    bindKey: {win: "Ctrl-S", "mac": "Cmd-S"},
+                    exec: function(editor) {
+                        do_partial_update();
+                    }
+                })
         });
     </script>
 
