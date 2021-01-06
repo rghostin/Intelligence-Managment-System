@@ -56,8 +56,9 @@ class BookmarkAdd(APIView):
         assert_intel_author(intel=intel, user=request.user)
 
         try:
-            Bookmarker.create_snapshot(intel=intel, link=link)
+            intelfile = Bookmarker.create_snapshot(intel=intel, link=link)
         except Exception as e:
             raise APIException("Unable to create snapshot")
         else:
-            return Response({'status': True, "message": "Snapshot created successfully"})
+            intelfileSerializer = IntelFileSerializer(intelfile)
+            return Response(intelfileSerializer.data)

@@ -12,9 +12,7 @@ from intelsAPI.bookmarker import Bookmarker
 from frontend.forms import IntelCreationForm
 from intelsAPI.filters import IntelFilter
 from intelsAPI.models import Intel, IntelFile
-
-
-
+from intelsAPI.views import assert_intel_author
 
 
 @login_required
