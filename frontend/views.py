@@ -14,9 +14,7 @@ from intelsAPI.filters import IntelFilter
 from intelsAPI.models import Intel, IntelFile
 
 
-def assert_intel_author(intel, user):
-    if intel.author != user:
-        raise PermissionDenied
+
 
 
 @login_required

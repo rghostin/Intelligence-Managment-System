@@ -159,6 +159,10 @@
                     <button type="button" class="btn btn-danger mr-1 mb-3" onclick="window.location.href='{% url 'delete' pk=intel.id %}'">
                         <i class="fa fa-fw fa-times mr-1"></i> Delete
                     </button>
+
+                    <button type="button" class="btn btn-danger mr-1 mb-3" onclick="bookmark_add('{% url 'bookmark_add_api' %}', '{{ csrf_token }}', 63, 'https://nmap.org/book/port-scanning-tutorial.html')">
+                        <i class="fa fa-fw fa-times mr-1"></i> Delete
+                    </button>
                 </div>
                 <!-- END Default -->
             </div>
@@ -239,6 +243,9 @@
     <script src="{% static 'frontend/assets/js/plugins/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
     <script src="{% static 'frontend/assets/js/plugins/jquery-file-upload/jquery.fileupload.js' %}"></script>
     <script src="{% static 'frontend/assets/javascript/dyn_file_upload.js' %}"></script>
+
+    <script src="{% static "frontend/assets/javascript/bookmarks.js" %}"></script>
+
 
     {# martor #}
     <script type="text/javascript" src="{% static 'plugins/js/highlight.min.js' %}"></script>

@@ -10,4 +10,5 @@ router.register(r'intelfiles', intelsAPI_views.IntelFileViewSet, basename='intel
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('bookmark-add-api', intelsAPI_views.BookmarkAdd.as_view(), name='bookmark_add_api'),
 ]
