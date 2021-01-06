@@ -24,7 +24,6 @@ function spinner_rotate_hide() {
 
 
 function add_wheel_rotate() {
-    console.log("adding w");
     var wheel_html = `
         <div style="display: none; position: fixed; top: 12%; right: 40px; z-index: 99999;" id="id_wheel_rotate">
             <i class="fa fa-2x fa-cog fa-spin"></i>
