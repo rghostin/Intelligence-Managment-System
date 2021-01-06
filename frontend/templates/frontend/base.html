@@ -9,10 +9,9 @@
         <title>Sharp IMS</title>
 
         <!-- Icons -->
-        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-        <link rel="shortcut icon" href="{% static 'frontend/assets/media/favicons/favicon.png' %}">
-        <link rel="icon" type="image/png" sizes="192x192" href="{% static 'frontend/assets/media/favicons/favicon-192x192.png' %}">
-        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'frontend/assets/media/favicons/apple-touch-icon-180x180.png' %}">
+{#        <link rel="shortcut icon" href="{% static 'frontend/assets/media/favicons/favicon.png' %}">#}
+{#        <link rel="icon" type="image/png" sizes="192x192" href="{% static 'frontend/assets/media/favicons/favicon-192x192.png' %}">#}
+{#        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'frontend/assets/media/favicons/apple-touch-icon-180x180.png' %}">#}
         <!-- END Icons -->
 
         <!-- Stylesheets -->
@@ -25,6 +24,14 @@
         <!-- END Stylesheets -->
     </head>
     <body>
+        {% block loading %}
+            <div style="display: none; position: fixed; top: 12%; right: 40px; z-index: 99999;" id="id_loading">
+                <div class="spinner-border text-success" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        {% endblock %}
+
         <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed page-header-dark">
             <!-- Side Overlay-->
             <aside id="side-overlay" class="font-size-sm">
@@ -279,7 +286,7 @@
         <!-- Custom JS -->
         <script src="{% static 'frontend/assets/js/oneui.app.min.js' %}"></script>
         <script src="{% static "frontend/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js" %}"></script>
-        {% include "frontend/includes/include_msg_noitifications.html" %}
+        {% include "frontend/includes/include_msg_notifications.html" %}
         {% block custom_js %}{%  endblock %}
     </body>
 </html>

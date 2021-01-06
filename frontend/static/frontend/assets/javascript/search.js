@@ -32,7 +32,7 @@ function ajax_load_filtered_intels(api_endpoint, detail_view_endpoint, filterArr
             }
         },
         error: function () {
-          display_notification("error", "UNable to load search results");
+          display_notification("error", "Unable to load search results");
         }
     });
 }

@@ -12,6 +12,14 @@
     {% endif %}
 {% endblock %}
 
+
+{% block custom_css %}
+    <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+    <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+    <link href="{% static 'martor/css/martor.bootstrap.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+{% endblock %}
+
+
 {% block page_content %}
     <div class="content">
 
@@ -55,8 +63,19 @@
                                             <strong>Link:</strong>
                                             {% if intel.link %}
                                                 <a target="_blank" rel="noopener" href="{{ intel.link }}">{{ intel.link |truncatechars:100 }}</a>
+                                                <div class="float-right" style="display: inline; font-size: 20px">
+                                                   <form method="post" action="{% url 'bookmark_add'  %}">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="intel_id" value="{{ intel.id }}">
+                                                        <input type="hidden" name="link" value="{{ intel.link }}">
+                                                        <button type="submit" class="fa fa-camera" style="background: transparent; border: none"></button>
+                                                    </form>
+                                                </div>
                                             {% else %}
                                                 <i>null</i>
+                                                <div class="float-right" style="display: inline; font-size: 20px">
+                                                    <button type="button" class="fa fa-camera disabled" style="background: transparent; border: none" disabled></button>
+                                                </div>
                                             {% endif %}
                                     </td>
                                 </tr>
@@ -94,6 +113,10 @@
                             Files (<span id="id_file_count">{{ intel.files.count }}</span>)
                         </h3>
                         <div class="block-options">
+                            <button type="button" class="btn-block-option" data-toggle="modal" data-target="#modal-block-normal">
+                                <i class="si si-camera"></i>
+                            </button>
+
                             <button type="button" class="btn-block-option js-upload-photos">
                                 <i class="si si-cloud-upload"></i>
                             </button>
@@ -118,7 +141,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         {#  control panel #}
@@ -134,22 +156,6 @@
                         <i class="fa fa-fw fa-pen mr-1"></i> Update
                     </button>
 
-                    <div style="display: inline-block">
-                        {% if intel.link %}
-                            <form method="post" action="{% url 'bookmark_add'  %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="intel_id" value="{{ intel.id }}">
-                                <button type="submit" class="btn btn-secondary mr-1 mb-3">
-                                    <i class="fa fa-fw fa-camera mr-1"></i> Snapshot
-                                </button>
-                            </form>
-                        {% else %}
-                            <button type="button" class="btn btn-secondary mr-1 mb-3 disabled" data-toggle="tooltip" data-placement="top" title="No link provided">
-                                <i class="fa fa-fw fa-camera mr-1"></i> Snapshot
-                            </button>
-                        {% endif %}
-                    </div>
-
                     <button type="button" class="btn btn-danger mr-1 mb-3" onclick="window.location.href='{% url 'delete' pk=intel.id %}'">
                         <i class="fa fa-fw fa-times mr-1"></i> Delete
                     </button>
@@ -160,15 +166,13 @@
 
 
         {#  TEXT CONTENT #}
-
-
         <div class="block block-rounded">
             <div class="block-header block-header-default">
                 <h3 class="block-title">
                     Text content
                 </h3>
             </div>
-            <div class="block-content">
+            <div class="block-content martor-preview">
                 {% if intel.text_content %}
                     <p>{{ intel.text_content | safe_markdown }}</p>
                 {% else %}
@@ -194,6 +198,39 @@
             </div>
         </div>
     </div>
+
+    {# snapshot modal #}
+      <div class="modal" id="modal-block-normal" tabindex="-1" role="dialog" aria-labelledby="modal-block-normal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="block block-themed block-transparent mb-0">
+                        <div class="block-header bg-primary-dark">
+                            <h3 class="block-title">Add bookmark snapshot</h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                    <i class="fa fa-fw fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="block-content font-size-sm">
+                            <div class="form-group" style="padding-bottom: 2rem;">
+                                 <form method="post" action="{% url 'bookmark_add' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="intel_id" value="{{ intel.id }}" required>
+                                     <div class="input-group">
+                                        <input type="url" class="form-control form-control-alt" name="link" placeholder="Link" required>
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-dark">Submit</button>
+                                        </div>
+                                     </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 {% endblock %}
 
 {% block custom_js %}
@@ -202,4 +239,12 @@
     <script src="{% static 'frontend/assets/js/plugins/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
     <script src="{% static 'frontend/assets/js/plugins/jquery-file-upload/jquery.fileupload.js' %}"></script>
     <script src="{% static 'frontend/assets/javascript/dyn_file_upload.js' %}"></script>
+
+    {# martor #}
+    <script type="text/javascript" src="{% static 'plugins/js/highlight.min.js' %}"></script>
+    <script>
+        $('.martor-preview pre').each(function(i, block){
+            hljs.highlightBlock(block);
+        });
+    </script>
 {% endblock %}

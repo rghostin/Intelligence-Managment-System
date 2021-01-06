@@ -29,9 +29,9 @@
                             {% csrf_token %}
                             {% include 'frontend/includes/include_rendered_form.html' with form=form %}
                             <div class="form-group text-right">
+                                <button type="button" class="btn btn-primary" onclick="do_partial_update()">Quick save text</button>
                                 <button type="submit" class="btn btn-dark ">Save</button>
                             </div>
-
                         </form>
 
                     </div>
@@ -63,10 +63,46 @@
 
     <script src="{% static "frontend/assets/javascript/utils.js" %}"></script>
 
+
     <script>
+
+        function get_ace_editor() {
+            return ace.edit("martor-text_content")
+        }
+
+        function partial_update_text(api_endpoint, new_text) {
+             $.ajax({
+                    url: api_endpoint,
+                    dataType: 'json',
+                    method: 'PATCH',
+                    headers: {
+                        'X-CSRFTOKEN': '{{ csrf_token }}'
+                    },
+                    data: {"text_content": new_text},
+                    beforeSend: function() { $("#id_loading").css('display','block'); },
+                    complete: function () { $("#id_loading").css('display','none'); },
+                    success: function(data){},
+                    error: function () {
+                        display_notification("error", "Unable to save text");
+                    }
+                });
+        }
+
+        function do_partial_update() {
+            partial_update_text('{% url 'intels-detail' pk=intel.id %}', get_ace_editor().getValue());
+        }
+
         $(document).ready(function () {
                 load_tags();
-            });
+
+                get_ace_editor().commands.addCommand({
+                    name: 'save',
+                    bindKey: {win: "Ctrl-S", "mac": "Cmd-S"},
+                    exec: function(editor) {
+                        do_partial_update();
+                    }
+                })
+        });
     </script>
 
 {% endblock %}
