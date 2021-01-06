@@ -79,8 +79,8 @@
                         'X-CSRFTOKEN': '{{ csrf_token }}'
                     },
                     data: {"text_content": new_text},
-                    beforeSend: function() { $("#id_loading").css('display','block'); },
-                    complete: function () { $("#id_loading").css('display','none'); },
+                    beforeSend: function() { spinner_rotate_show(); },
+                    complete: function () { spinner_rotate_hide(); },
                     success: function(data){},
                     error: function () {
                         display_notification("error", "Unable to save text");
@@ -93,15 +93,15 @@
         }
 
         $(document).ready(function () {
-                load_tags();
+            load_tags();
 
-                get_ace_editor().commands.addCommand({
-                    name: 'save',
-                    bindKey: {win: "Ctrl-S", "mac": "Cmd-S"},
-                    exec: function(editor) {
-                        do_partial_update();
-                    }
-                })
+            get_ace_editor().commands.addCommand({
+                name: 'save',
+                bindKey: {win: "Ctrl-S", "mac": "Cmd-S"},
+                exec: function(editor) {
+                    do_partial_update();
+                }
+            })
         });
     </script>
 
