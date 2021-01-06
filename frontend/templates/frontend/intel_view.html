@@ -65,7 +65,7 @@
                                                 <a target="_blank" rel="noopener" href="{{ intel.link }}">{{ intel.link |truncatechars:100 }}</a>
                                                 <div class="float-right" style="display: inline; font-size: 20px">
                                                         <button type="button" class="fa fa-camera" style="background: transparent; border: none"
-                                                            onclick="bookmark_add('{% url 'bookmark_add_api' %}', '{{ csrf_token }}', {{ intel.id }}, '{{ intel.link }}')">
+                                                            onclick="bookmark_add('{% url 'bookmark_add' %}', '{{ csrf_token }}', {{ intel.id }}, '{{ intel.link }}')">
                                                         </button>
                                                 </div>
                                             {% else %}
@@ -252,7 +252,7 @@
         $( document ).ready(function() {
             $("#id_btn_bookmark").click(function() {
                 let link = $("#id_link_bookmark").val();
-                bookmark_add('{% url 'bookmark_add_api' %}', '{{ csrf_token }}', {{ intel.id }}, link);
+                bookmark_add('{% url 'bookmark_add' %}', '{{ csrf_token }}', {{ intel.id }}, link);
                 $("#id_snapshot_modal").modal('hide');
             });
         });

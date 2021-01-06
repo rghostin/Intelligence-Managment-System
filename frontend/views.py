@@ -123,24 +123,3 @@ class BookmarkCreate(CreateView):
 
         messages.success(self.request, "Bookmark intel created successfully")
         return redirect('view', pk=intel.id)
-
-
-@login_required
-@require_POST
-def bookmark_add(request):
-    try:
-        intel_id = request.POST['intel_id']
-        link = request.POST['link']
-    except KeyError:
-        return HttpResponseBadRequest()
-
-    intel = get_object_or_404(Intel, pk=intel_id)
-    assert_intel_author(intel=intel, user=request.user)
-
-    try:
-        Bookmarker.create_snapshot(intel=intel, link=link)
-    except Exception as e:
-        messages.error(request, "Unable to create snapshot")
-    else:
-        messages.success(request, "Snapshot created successfully")
-    return redirect('view', pk=intel_id)
