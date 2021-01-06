@@ -9,7 +9,6 @@ function add_spinner_rotate() {
     $("body").append(spinner_html);
 }
 
-
 function spinner_rotate_show() {
     if ($("#id_spinner_rotate").length === 0) {
         add_spinner_rotate();
@@ -20,5 +19,27 @@ function spinner_rotate_show() {
 function spinner_rotate_hide() {
     if ($("#id_spinner_rotate").length !== 0) {
         $("#id_spinner_rotate").css('display','none');
+    }
+}
+
+
+function add_wheel_rotate() {
+    var wheel_html = `
+        <div style="display: none; position: fixed; top: 14%; right: 35px; z-index: 99999;" id="id_wheel_rotate">
+            <i class="fa fa-2x fa-cog fa-spin"></i>
+        </div>`
+    $("body").append(wheel_html);
+}
+
+function wheel_rotate_show() {
+    if ($("#id_wheel_rotate").length === 0) {
+        add_wheel_rotate();
+    }
+    $("#id_wheel_rotate").css('display','block');
+}
+
+function wheel_rotate_hide() {
+    if ($("#id_wheel_rotate").length !== 0) {
+        $("#id_wheel_rotate").css('display','none');
     }
 }

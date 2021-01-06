@@ -1,6 +1,11 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, filters
 from rest_framework import permissions
+from rest_framework.exceptions import PermissionDenied, APIException
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
+from intelsAPI.bookmarker import Bookmarker
 from intelsAPI.filters import IntelFilter
 from intelsAPI.models import Intel, Tag, IntelFile
 from intelsAPI.serializers import IntelSerializer, TagSerializer, IntelFileSerializer
@@ -8,6 +13,11 @@ from intelsAPI.permissions import IsOwnerOrReadOnly
 from rest_framework import generics
 
 from django_filters import rest_framework as dj_filters
+
+
+def assert_intel_author(intel, user):
+    if intel.author != user:
+        raise PermissionDenied
 
 
 class IntelViewSet(viewsets.ModelViewSet):
@@ -37,3 +47,18 @@ class IntelFileViewSet(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
 
 
+class BookmarkAdd(APIView):
+    def post(self, request, format=None):
+        intel_id = request.data.get('intel_id')
+        link = request.data.get('link')
+
+        intel = get_object_or_404(Intel, pk=intel_id)
+        assert_intel_author(intel=intel, user=request.user)
+
+        try:
+            intelfile = Bookmarker.create_snapshot(intel=intel, link=link)
+        except Exception as e:
+            raise APIException("Unable to create snapshot")
+        else:
+            intelfileSerializer = IntelFileSerializer(intelfile)
+            return Response(intelfileSerializer.data)

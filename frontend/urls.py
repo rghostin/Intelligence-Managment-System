@@ -10,6 +10,4 @@ urlpatterns = [
    path('update/<int:pk>', views.IntelUpdate.as_view(), name='update'),
    path('delete/<int:pk>', views.IntelDelete.as_view(), name='delete'),
    path('bookmark-create', views.BookmarkCreate.as_view(), name='bookmark_create'),
-   path('bookmark-add', views.bookmark_add, name='bookmark_add'),
-
 ]
