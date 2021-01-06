@@ -29,6 +29,8 @@
                             {% csrf_token %}
                             {% include 'frontend/includes/include_rendered_form.html' with form=form %}
                             <div class="form-group text-right">
+                                <button type="button" class="btn btn-primary" onclick="partial_update_text('test')">Quick save text</button>
+
                                 <button type="submit" class="btn btn-dark ">Save</button>
                             </div>
                         </form>
@@ -62,33 +64,31 @@
 
     <script src="{% static "frontend/assets/javascript/utils.js" %}"></script>
 
-    <script>
-        $(document).ready(function () {
-                load_tags();
-            });
-    </script>
 
     <script>
-    function partial_update_text(new_text) {
-         $.ajax({
-                url: "{% url 'intels-detail' pk=intel.id %}",
-                dataType: 'json',
-                method: 'PATCH',
-                headers: {
-                    'X-CSRFTOKEN': '{{ csrf_token }}'
-                },
-                data: {"text_content": new_text},
-                beforeSend: function() {console.log("saving...");},
-                complete: function () {console.log("finish");},
-                success: function(data){
-                    console.log("save ok");
-                    console.log(data)
-                },
-                error: function () {
-                    console.log("error saving");
-                }
-            });
-    }
+        function partial_update_text(new_text) {
+
+             $.ajax({
+                    url: "{% url 'intels-detail' pk=intel.id %}",
+                    dataType: 'json',
+                    method: 'PATCH',
+                    headers: {
+                        'X-CSRFTOKEN': '{{ csrf_token }}'
+                    },
+                    data: {"text_content": new_text},
+                    beforeSend: function() { $("#id_loading").css('display','block'); },
+                    complete: function () { $("#id_loading").css('display','none'); },
+                    success: function(data){
+                        console.log(data)},
+                    error: function () {
+                        display_notification("error", "Unable to save text");
+                    }
+                });
+        }
+
+        $(document).ready(function () {
+                load_tags();
+        });
     </script>
 
 {% endblock %}
