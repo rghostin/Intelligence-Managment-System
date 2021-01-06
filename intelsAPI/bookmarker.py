@@ -31,6 +31,9 @@ class Bookmarker:
 
         if filename is None:
             filename = Bookmarker.get_default_filename()
+        else:
+            if filename[-4:0] != ".pdf":
+                filename += ".pdf"
         Bookmarker.assert_valid_filename(filename)
 
         # download snapshot
