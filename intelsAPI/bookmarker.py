@@ -41,7 +41,7 @@ class Bookmarker:
 
         # create intelFile
         pdf_file_content = ContentFile(pdf_data)
-        intelfile = IntelFile(intel=intel)
+        intelfile = IntelFile(intel=intel, link=link)
         intelfile.file.save(filename, pdf_file_content)
         intelfile.save()
 
