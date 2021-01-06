@@ -29,8 +29,7 @@
                             {% csrf_token %}
                             {% include 'frontend/includes/include_rendered_form.html' with form=form %}
                             <div class="form-group text-right">
-                                <button type="button" class="btn btn-primary" onclick="partial_update_text('test')">Quick save text</button>
-
+                                <button type="button" class="btn btn-primary" onclick="partial_update_text('{% url 'intels-detail' pk=intel.id %}', get_current_text_content())">Quick save text</button>
                                 <button type="submit" class="btn btn-dark ">Save</button>
                             </div>
                         </form>
@@ -66,10 +65,13 @@
 
 
     <script>
-        function partial_update_text(new_text) {
+        function get_current_text_content() {
+            return $('.ace_content').text();
+        }
 
+        function partial_update_text(api_endpoint, new_text) {
              $.ajax({
-                    url: "{% url 'intels-detail' pk=intel.id %}",
+                    url: api_endpoint,
                     dataType: 'json',
                     method: 'PATCH',
                     headers: {
