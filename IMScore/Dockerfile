@@ -11,6 +11,7 @@ RUN useradd --user-group --create-home --no-log-init --shell /bin/bash app
 # setup application dir
 ENV APP_HOME=/home/app/web
 RUN mkdir -p $APP_HOME/static_root
+RUN mkdir -p $APP_HOME/media_root
 WORKDIR $APP_HOME
 
 # install dependencies
@@ -20,7 +21,7 @@ RUN pip install -r requirements.txt
 
 # copy project
 COPY . $APP_HOME
-# RUN chown -R app:app $APP_HOME
+RUN chown -R app:app $APP_HOME
 
 
 # run entrypoint

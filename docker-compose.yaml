@@ -19,7 +19,8 @@ services:
     env_file:
       - ./db/db_conn.env
     volumes:
-    - staticroot:/home/app/web/static_root # entrypoint collects static into shared volume that is also accessible by nginx
+      - staticroot:/home/app/web/static_root # entrypoint collects static into shared volume that is also accessible by nginx
+      - mediaroot:/home/app/web/media_root
     expose:
       - 8000
     depends_on:
@@ -41,3 +42,4 @@ services:
 volumes:
   postgresdata:
   staticroot:
+  mediaroot:
