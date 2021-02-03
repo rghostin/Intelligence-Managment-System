@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: postgresdb
+    image: postgres:latest
+    restart: always
+    env_file:
+      - ./db/db_conn.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+
+  web:
+    container_name: django-ims
+    build: ./IMScore
+    command: gunicorn IMS.wsgi:application --bind 0.0.0.0:8000 --workers=4
+    env_file:
+      - ./db/db_conn.env
+    volumes:
+    - staticroot:/home/app/web/static_root # entrypoint collects static into shared volume that is also accessible by nginx
+    expose:
+      - 8000
+    depends_on:
+      - db
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - staticroot:/home/app/web/static_root
+      - ./nginx/certs:/etc/nginx/certs
+    depends_on:
+      - web
+
+volumes:
+  postgresdata:
+  staticroot:
