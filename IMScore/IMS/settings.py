@@ -134,8 +134,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', cast=bool)
+CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', cast=bool)
 SECURE_SSL_REDIRECT = config("SECURE_SSL_REDIRECT", cast=bool)
 SECURE_HSTS_SECONDS = config("SECURE_HSTS_SECONDS", cast=int, default=0)
 SECURE_HSTS_INCLUDE_SUBDOMAINS= config("SECURE_HSTS_INCLUDE_SUBDOMAINS", cast=bool)
