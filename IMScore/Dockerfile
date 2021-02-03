@@ -21,10 +21,10 @@ RUN pip install -r requirements.txt
 
 # copy project
 COPY . $APP_HOME
-RUN chown -R app:app $APP_HOME
+# RUN chown -R app:app $APP_HOME
 
 
 # run entrypoint
 RUN apt-get update && apt-get install -y netcat
-USER app:app
+# USER app:app
 ENTRYPOINT ["/home/app/web/docker_entrypoint.sh"]
