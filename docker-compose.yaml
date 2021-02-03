@@ -35,7 +35,7 @@ services:
       - "443:443"
     volumes:
       - staticroot:/home/app/web/static_root
-      - ./nginx/letsencrypt:/etc/letsenrypt
+      - ./nginx/letsencrypt:/etc/letsencrypt
     depends_on:
       - web
 
