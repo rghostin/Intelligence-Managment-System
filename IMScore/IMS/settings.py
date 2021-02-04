@@ -80,14 +80,20 @@ WSGI_APPLICATION = 'IMS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+DB_NAME = os.getenv('POSTGRES_NAME')
+DB_USERNAME = os.getenv('POSTGRES_USER')
+DB_PASSWORD = os.getenv('POSTGRES_PASSWORD')
+DB_HOST = os.getenv('DATABASE_HOST')
+DB_PORT = os.getenv('DATABASE_PORT')
+
 DATABASES = {
     'default': {    
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('POSTGRES_NAME'),
-        'USER': os.getenv('POSTGRES_USER'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST'),
-        'PORT': os.getenv('DATABASE_PORT'),
+        'NAME': DB_NAME,
+        'USER': DB_USERNAME,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }
 
@@ -189,11 +195,16 @@ DBBACKUP_GPG_ALWAYS_TRUST = config('DBBACKUP_GPG_ALWAYS_TRUST', cast=bool)
 DBBACKUP_GPG_RECIPIENT = config('ADMIN_EMAIL')
 DBBACKUP_GPG_PASSPHRASE = config('DBBACKUP_GPG_PASSPHRASE')  # custom
 
-DBBACKUP_CONNECTORS = {
-    'default': {
-        'CONNECTOR': 'dbbackup.db.sqlite.SqliteCPConnector'
-    }
-}
+# DBBACKUP_CONNECTORS = {
+#     'default': {
+#         'CONNECTOR': 'dbbackup.db.postgresql.PgDumpBinaryConnector',
+#         'NAME': DB_NAME,
+#         'USER': DB_USERNAME,
+#         'PASSWORD': DB_PASSWORD,
+#         'HOST': DB_HOST,
+#         'PORT': DB_PORT,
+#     }
+# }
 ### Backup - End
 
 
