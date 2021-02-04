@@ -19,10 +19,10 @@ services:
     env_file:
       - ./db/db_conn.env
     volumes:
-      - staticroot:/home/app/web/static_root # entrypoint collects static into shared volume that is also accessible by nginx
-      - mediaroot:/home/app/web/media_root
+      - staticroot:/app/web/static_root # entrypoint collects static into shared volume that is also accessible by nginx
+      - mediaroot:/app/web/media_root
       - backups:/var/backups/web
-      - gpginfrastructure:/home/app/.gnupg
+      - gpginfrastructure:/root/.gnupg
     expose:
       - 8000
     depends_on:
@@ -36,7 +36,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - staticroot:/home/app/web/static_root
+      - staticroot:/app/web/static_root
       - letsencrypt:/etc/letsencrypt
     depends_on:
       - web
