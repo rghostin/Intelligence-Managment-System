@@ -5,6 +5,7 @@
 - [ ] Verify correct domain in `nginx/nginx.conf`
 - [ ] Verify no volumes from older versions `docker volume ls`
 - [ ] Verify TZ is correct in all Dockerfiles (nginx/web)
+- [ ] Set domain name in `postfix/postfix.env`
 - [ ] Database credentials: Set new credentials in `db/db_conn.env`
 - [ ] Configure .env taken from `prod.env`:
   * Generate new `SECRET_KEY`
