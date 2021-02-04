@@ -23,6 +23,7 @@ services:
       - mediaroot:/app/web/media_root
       - backups:/var/backups/web
       - gpginfrastructure:/root/.gnupg
+      - rcloneconfig:/root/.config/rclone
     expose:
       - 8000
     depends_on:
@@ -37,6 +38,7 @@ services:
       - "443:443"
     volumes:
       - staticroot:/app/web/static_root
+      - mediaroot:/app/web/media_root
       - letsencrypt:/etc/letsencrypt
     depends_on:
       - web
@@ -47,9 +49,6 @@ services:
     restart: always
     env_file:
       - ./postfix/postfix.env
-    ports:
-      - "25:25"
-
 
 volumes:
   postgresdata:
@@ -57,4 +56,5 @@ volumes:
   mediaroot:
   backups:
   gpginfrastructure:
+  rcloneconfig:
   letsencrypt:
