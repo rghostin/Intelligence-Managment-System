@@ -29,4 +29,8 @@ If OK, add the following cronjob: `0 6 * * * certbot renew --post-hook "nginx -s
 ### Updating the application
 - Make the update in code
 - `docker-compose up --build -d`, unchanged containers are left unchanged.
+
+### Reloading nginx
 - Reload nginx: `docker exec nginx "nginx -s reload"`
+- If the container restarted, need to reconfigure the TLS. Just run again `certbot --nginx -d sharpa.live -d www.sharpa.live --agree-tos -m sharp.imsystem@gmail.com` and choose to reuse the existing certificates (persisted in the letsencrypt volume).
+
