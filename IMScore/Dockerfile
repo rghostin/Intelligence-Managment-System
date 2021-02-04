@@ -1,9 +1,9 @@
 FROM python:3
 
-# python config
+# env config
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
-
+ENV TZ=Europe/Brussels
 
 # create app user and group
 RUN useradd --user-group --create-home --no-log-init --shell /bin/bash app
