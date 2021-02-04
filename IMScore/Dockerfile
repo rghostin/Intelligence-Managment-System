@@ -12,6 +12,7 @@ RUN useradd --user-group --create-home --no-log-init --shell /bin/bash app
 ENV APP_HOME=/home/app/web
 RUN mkdir -p $APP_HOME/static_root
 RUN mkdir -p $APP_HOME/media_root
+RUN mkdir -p /var/log/web
 WORKDIR $APP_HOME
 
 # install python dependencies

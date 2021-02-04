@@ -10,17 +10,32 @@
 - [ ] Configure .env taken from `prod.env`:
   * Generate new `SECRET_KEY`
   * Restrict Allowed Hosts
-  * Set admin details
+  * Set admin details `ADMIN_NAME`, `ADMIN_EMAIL`, `SERVER_EMAIL`
+  * Set new GPG passphrase `DBBACKUP_GPG_PASSPHRASE`
   
 ### Base Installation
 - [ ] Run containers : `docker-compose up --build -d`
 - [ ] Verify status: `docker ps -a`, `docker-compose logs -f`
 
 ### TLS letsencrypt
-In the nginx container, `docker exec -it nginx sh`, run: `certbot --nginx -d sharpa.live -d www.sharpa.live --agree-tos -m sharp.imsystem@gmail.com`
+In the nginx container, `docker exec -it nginx sh`, run: `certbot --nginx -d sharpa.live -d www.sharpa.live --agree-tos -m sharp.imsystem@gmail.com` (persisted in letsencrypt volume)
 A new configuration is written in `/etc/nginx/nginx`.
 Test renewal with `certbot renew --dry-run`.
 If OK, add the following cronjob: `0 6 * * * certbot renew --post-hook "nginx -s reload"`
+
+
+### Backup system
+- [ ] In the web container, generate new GPG keys with `scripts/gen_pgp_key.py` (persisted in gpginfrastructure volume).
+- [ ] Install and configure rclone
+    * On client machine, `rclone config`, select drive, keep default options to do oauth via browser
+    * Copy drive configuration file to server ~/.config/rclone/rclone.conf
+    * Test with `rclone about "drive:`
+- [ ] Test by running `run_backup.sh -r`, `restore_backup.sh`
+- [ ] Configure cron job for `run_backup.sh`
+    * ```
+      MAILTO=sharp.imsystem@gmail.com
+      0 4,18 * * * /srv/sharpims/IMS/scripts/run_backup.sh -r 2>&1
+      ```
 
 ### Post Installation
 - [ ] Add superuser : `docker exec -it django-ims bash', then inside the container `python manage.py createsuperuser`

@@ -12,16 +12,15 @@ set -e
 
 
 # TOCONFIGURE - set absolute path to project
-PROJ_ROOT_DIR="$(pwd)"
+PROJ_ROOT_DIR="/home/app/web"
 # TOCONFIGURE - set absolute path to backups
-LOCAL_BACKUP_DIR="/tmp/testdbbackup/"
+LOCAL_BACKUP_DIR="/var/backups/web"
 # TOCONFIGURE * set absolute path log file
-LOG_FILE="/var/log/sharp/backup.log"
-VENV_ACTIVATE="${PROJ_ROOT_DIR}/venv/bin/activate"
+LOG_FILE="/var/log/web/backup.log"
 MANAGE_SCRIPT="${PROJ_ROOT_DIR}/manage.py"
 RCLONE="/usr/bin/rclone"
 REMOTE_DRIVE="drive"
-REMOTE_BACKUP_DIR="${REMOTE_DRIVE}:sharp_backup"
+REMOTE_BACKUP_DIR="${REMOTE_DRIVE}:web_backup"
 
 
 function usage {
@@ -68,11 +67,9 @@ fi
 
 log "Starting local backup ==========================="
 
-source "$VENV_ACTIVATE"
 # no compression of db because of some bug in the module
 python3 "${MANAGE_SCRIPT}" dbbackup --clean --encrypt
 python3 "${MANAGE_SCRIPT}" mediabackup --clean --compress --encrypt
-deactivate
 
 if ${REMOTE}; then
   log "Starting remote syncing"

@@ -21,6 +21,8 @@ services:
     volumes:
       - staticroot:/home/app/web/static_root # entrypoint collects static into shared volume that is also accessible by nginx
       - mediaroot:/home/app/web/media_root
+      - backups:/var/backups/web
+      - gpginfrastructure:/home/app/.gnupg
     expose:
       - 8000
     depends_on:
@@ -51,4 +53,6 @@ volumes:
   postgresdata:
   staticroot:
   mediaroot:
+  backups:
+  gpginfrastructure:
   letsencrypt:
