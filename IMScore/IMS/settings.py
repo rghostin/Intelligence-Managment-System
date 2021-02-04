@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'IMS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DB_NAME = os.getenv('POSTGRES_NAME')
+DB_NAME = os.getenv('POSTGRES_DB')
 DB_USERNAME = os.getenv('POSTGRES_USER')
 DB_PASSWORD = os.getenv('POSTGRES_PASSWORD')
 DB_HOST = os.getenv('DATABASE_HOST')
@@ -194,19 +194,7 @@ DBBACKUP_MEDIA_FILENAME_TEMPLATE = 'media-{servername}-{datetime}.{extension}'
 DBBACKUP_GPG_ALWAYS_TRUST = config('DBBACKUP_GPG_ALWAYS_TRUST', cast=bool)
 DBBACKUP_GPG_RECIPIENT = config('ADMIN_EMAIL')
 DBBACKUP_GPG_PASSPHRASE = config('DBBACKUP_GPG_PASSPHRASE')  # custom
-
-# DBBACKUP_CONNECTORS = {
-#     'default': {
-#         'CONNECTOR': 'dbbackup.db.postgresql.PgDumpBinaryConnector',
-#         'NAME': DB_NAME,
-#         'USER': DB_USERNAME,
-#         'PASSWORD': DB_PASSWORD,
-#         'HOST': DB_HOST,
-#         'PORT': DB_PORT,
-#     }
-# }
 ### Backup - End
-
 
 
 ### Martor - Start
