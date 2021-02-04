@@ -39,6 +39,14 @@ services:
     depends_on:
       - web
 
+  postfix:
+    container_name: postfix
+    image: tozd/postfix:alpine-38
+    restart: always
+    env_file:
+      - ./postfix/postfix.env
+
+
 volumes:
   postgresdata:
   staticroot:
