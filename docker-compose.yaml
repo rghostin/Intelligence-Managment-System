@@ -47,6 +47,8 @@ services:
     restart: always
     env_file:
       - ./postfix/postfix.env
+    ports:
+      - "25:25"
 
 
 volumes:
