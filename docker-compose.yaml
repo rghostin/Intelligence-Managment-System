@@ -40,6 +40,7 @@ services:
       - staticroot:/app/web/static_root
       - mediaroot:/app/web/media_root
       - letsencrypt:/etc/letsencrypt
+      - nginxconf:/etc/nginx/conf.d
     depends_on:
       - web
 
@@ -58,3 +59,4 @@ volumes:
   gpginfrastructure:
   rcloneconfig:
   letsencrypt:
+  nginxconf:
