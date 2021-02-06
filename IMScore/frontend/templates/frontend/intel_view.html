@@ -146,9 +146,9 @@
                         {% else %}
                             <ul id="id_files_ul">
                                 {% for intelfile in intel.files.all %}
-                                    <li>
-                                        <input class="form-check-input filecheckbox" type="checkbox" value="{{ intelfile.id }}" >
+                                    <li id="id_il_file_{{ intelfile.id }}">
                                         <a href="{{ intelfile.file.url }}" target="_blank">{{ intelfile.filename }}</a>
+                                        <button onclick="delete_file('{% url "intelfiles-detail" pk=intelfile.id %}', {{ intelfile.id }}, '{{ csrf_token }}')">X</button>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -294,17 +294,16 @@
                 $("#id_snapshot_modal").modal('hide');
             });
 
-            $('#id_btn_delete_files').click(function () {
-                console.log("hi");
-                var checkedVals = $('.filecheckbox:checkbox:checked').map(function() {
-                    return this.value;
-                }).get();
-
-                for (let i=0; i<checkedVals.length; ++i) {
-                    let file_id = checkedVals[i];
-                    delete_file(INTELFILES_DETAIL_ENDPOINT, file_id, "{{ csrf_token }}");
-                }
-            });
+            {#$('#id_btn_delete_files').click(function () {#}
+            {#    console.log("hi");#}
+            {#    var checkedVals = $('.filecheckbox:checkbox:checked').map(function() {#}
+            {#        return this.value;#}
+            {#    }).get();#}
+            {##}
+            {#    for (let i=0; i<checkedVals.length; ++i) {#}
+            {#        let file_id = checkedVals[i];#}
+            {#        delete_file(INTELFILES_DETAIL_ENDPOINT, file_id, "{{ csrf_token }}");#}
+            {#    }#}
         });
 
     </script>

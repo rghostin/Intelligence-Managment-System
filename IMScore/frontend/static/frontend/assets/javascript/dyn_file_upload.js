@@ -1,12 +1,20 @@
 function add_to_files_list(file_url) {
     let filename = file_url.substring(file_url.lastIndexOf('/')+1);
-    let files_count = parseInt($("#id_file_count").text());
+    let files_count = get_files_count();
     if (files_count === 0) {
         $("#id_files_ul").html('<ul id="id_files_ul"></ul>')
     }
     let entry = `<li><a href="${file_url}" target="_blank">${filename}</a></li>`;
     $("#id_files_ul").append(entry);
-    $("#id_file_count").html(files_count+1);
+    set_files_count(files_count+1)
+}
+
+function get_files_count() {
+    return parseInt($("#id_file_count").text());
+}
+
+function set_files_count(n) {
+    $("#id_file_count").html(n);
 }
 
 function set_drag_display(setOn) {
@@ -63,11 +71,9 @@ set_drag_display(false);
 });
 
 
-function delete_file(intelfiles_detail_endpoint, file_id, csrftoken) {
-    let url = intelfiles_detail_endpoint + file_id;
-    console.log(url);
+function delete_file(file_endpoint, file_id, csrftoken) {
     $.ajax({
-        url: url,
+        url: file_endpoint,
         type: "DELETE",
         // contentType: "application/json",
         // dataType: 'json',
@@ -75,9 +81,15 @@ function delete_file(intelfiles_detail_endpoint, file_id, csrftoken) {
             'X-CSRFTOKEN': csrftoken
         },
         beforeSend: function(jqXHR, settings) {console.log("before");},
-        success: function(data){ console.log("success") },
+        success: function(data){ console.log("success"); rm_file_from_list(file_id) },
         error: function () {
           display_notification("error", "Unable to load search results");
         }
     });
+}
+
+function rm_file_from_list(file_id) {
+    let li_id = "#id_il_file_"+file_id;
+    $(li_id).remove();
+    set_files_count(get_files_count()-1);
 }
