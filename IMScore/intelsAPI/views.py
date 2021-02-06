@@ -10,7 +10,6 @@ from intelsAPI.filters import IntelFilter
 from intelsAPI.models import Intel, Tag, IntelFile
 from intelsAPI.serializers import IntelSerializer, TagSerializer, IntelFileSerializer
 from intelsAPI.permissions import IsOwnerOrReadOnly
-from rest_framework import generics
 
 from django_filters import rest_framework as dj_filters
 
@@ -46,11 +45,11 @@ class IntelFileViewSet(viewsets.ModelViewSet):
     serializer_class = IntelFileSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
-    def check_permissions(self, request):
-        intel_id = request.data.get('intel')
-        intel = get_object_or_404(Intel, pk=intel_id)
-        assert_intel_author(intel, request.user)
-        return super().check_permissions(request)
+    # def check_permissions(self, request):
+    #     intel_id = request.data.get('intel')
+    #     intel = get_object_or_404(Intel, pk=intel_id)
+    #     assert_intel_author(intel, request.user)
+    #     return super().check_permissions(request)
 
 
 class BookmarkAdd(APIView):

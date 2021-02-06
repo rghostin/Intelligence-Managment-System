@@ -61,3 +61,23 @@ set_drag_display(true);
 $(".dzone").bind('dragleave', function (e) {
 set_drag_display(false);
 });
+
+
+function delete_file(intelfiles_detail_endpoint, file_id, csrftoken) {
+    let url = intelfiles_detail_endpoint + file_id;
+    console.log(url);
+    $.ajax({
+        url: url,
+        type: "DELETE",
+        // contentType: "application/json",
+        // dataType: 'json',
+        headers: {
+            'X-CSRFTOKEN': csrftoken
+        },
+        beforeSend: function(jqXHR, settings) {console.log("before");},
+        success: function(data){ console.log("success") },
+        error: function () {
+          display_notification("error", "Unable to load search results");
+        }
+    });
+}

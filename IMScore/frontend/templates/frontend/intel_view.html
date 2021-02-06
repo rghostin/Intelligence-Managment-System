@@ -125,6 +125,10 @@
                                     <i class="si si-camera"></i>
                                 </button>
 
+                                <button type="button" class="btn-block-option" id="id_btn_delete_files">
+                                    <i class="si si-trash"></i>
+                                </button>
+
                                 <button type="button" class="btn-block-option js-upload-photos">
                                     <i class="si si-cloud-upload"></i>
                                 </button>
@@ -142,7 +146,9 @@
                         {% else %}
                             <ul id="id_files_ul">
                                 {% for intelfile in intel.files.all %}
-                                    <li><a href="{{ intelfile.file.url }}" target="_blank">{{ intelfile.filename }}</a>
+                                    <li>
+                                        <input class="form-check-input filecheckbox" type="checkbox" value="{{ intelfile.id }}" >
+                                        <a href="{{ intelfile.file.url }}" target="_blank">{{ intelfile.filename }}</a>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -271,6 +277,8 @@
     {# martor #}
     <script type="text/javascript" src="{% static 'plugins/js/highlight.min.js' %}"></script>
     <script>
+        const INTELFILES_DETAIL_ENDPOINT = "/api/intelfiles/";
+
         $('.martor-preview pre').each(function (i, block) {
             hljs.highlightBlock(block);
         });
@@ -284,6 +292,18 @@
                 }
                 bookmark_add('{% url 'bookmark_add' %}', '{{ csrf_token }}', {{ intel.id }}, link, filename);
                 $("#id_snapshot_modal").modal('hide');
+            });
+
+            $('#id_btn_delete_files').click(function () {
+                console.log("hi");
+                var checkedVals = $('.filecheckbox:checkbox:checked').map(function() {
+                    return this.value;
+                }).get();
+
+                for (let i=0; i<checkedVals.length; ++i) {
+                    let file_id = checkedVals[i];
+                    delete_file(INTELFILES_DETAIL_ENDPOINT, file_id, "{{ csrf_token }}");
+                }
             });
         });
 
