@@ -148,7 +148,7 @@
                                 {% for intelfile in intel.files.all %}
                                     <li id="id_il_file_{{ intelfile.id }}">
                                         <a href="{{ intelfile.file.url }}" target="_blank">{{ intelfile.filename }}</a>
-                                        <button onclick="delete_file('{% url "intelfiles-detail" pk=intelfile.id %}', {{ intelfile.id }}, '{{ csrf_token }}')">X</button>
+                                        <button onclick="if(confirm('Are you sure you want to delete {{ intelfile.filename }}')){delete_file('{% url "intelfiles-detail" pk=intelfile.id %}', {{ intelfile.id }}, '{{ csrf_token }}')};">X</button>
                                     </li>
                                 {% endfor %}
                             </ul>
