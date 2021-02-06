@@ -274,3 +274,6 @@ pip-selfcheck.json
 **/migrations/**
 !**/migrations
 !**/migrations/__init__.py
+
+static_root/
+media_root/
