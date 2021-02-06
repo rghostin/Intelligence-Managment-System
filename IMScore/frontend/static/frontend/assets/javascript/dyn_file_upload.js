@@ -4,7 +4,7 @@ function add_to_files_list(file_url) {
     if (files_count === 0) {
         $("#id_files_ul").html('<ul id="id_files_ul"></ul>')
     }
-    let del_btn = `<button onclick="return false;">X</button>`; // todo
+    let del_btn = `<button onclick="return false;">X</button>`;
     let entry = `<li><a href="${file_url}" target="_blank">${filename}</a>${del_btn}</li>`;
     $("#id_files_ul").append(entry);
     set_files_count(files_count+1)
@@ -52,8 +52,6 @@ $( document ).ready(function() {
           $(".progress-bar").text(strProgress);
         },
         done: function (e, data) {
-            console.log(data);
-            console.log(this);
             add_to_files_list(data.result.file);
             set_drag_display(false);
         },
