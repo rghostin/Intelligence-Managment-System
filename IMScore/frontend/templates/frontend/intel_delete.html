@@ -11,12 +11,9 @@
                 <div class="block">
                     <div class="block-header">
                         <h3 class="block-title">
-                            Basic information
+                            Deletion
                         </h3>
                         <div class="block-options">
-                            <button type="button" class="btn-block-option">
-                                <i class="si si-settings"></i>
-                            </button>
                         </div>
                     </div>
 
@@ -26,7 +23,7 @@
                         <form method="post">
                             {% csrf_token %}
                             <div class="mb-4 text-right">
-                                <button type="button" class="btn btn-dark mr-1 mb-3" onclick="window.location.href='{% url 'view' pk=intel.id %}'">
+                                <button type="button" class="btn btn-outline-dark mr-1 mb-3" onclick="window.location.href='{% url 'view' pk=intel.id %}'">
                                    Cancel
                                 </button>
 
