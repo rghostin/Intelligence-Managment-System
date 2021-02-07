@@ -45,11 +45,12 @@ class IntelFileViewSet(viewsets.ModelViewSet):
     serializer_class = IntelFileSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
-    # def check_permissions(self, request):
-    #     intel_id = request.data.get('intel')
-    #     intel = get_object_or_404(Intel, pk=intel_id)
-    #     assert_intel_author(intel, request.user)
-    #     return super().check_permissions(request)
+    def check_permissions(self, request):
+        intel_id = request.data.get('intel')
+        if intel_id:
+            intel = get_object_or_404(Intel, pk=intel_id)
+            assert_intel_author(intel, request.user)
+        return super().check_permissions(request)
 
 
 class BookmarkAdd(APIView):
