@@ -79,7 +79,7 @@ function append_search_entry(entry, detail_view_endpoint) {
             </p>
         </td>
         <td class="d-none d-lg-table-cell text-center">${resource_type}</td>
-        <td>${tags_list}</td>
+        <td class="text-center">${tags_list}</td>
         <td class="d-none d-lg-table-cell font-size-xl text-center font-w600">
             ${link}
         </td>
