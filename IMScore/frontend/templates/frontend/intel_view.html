@@ -136,10 +136,8 @@
                             </div>
                         {% endif %}
                     </div>
-                    <div class="block-content" style="max-height: 280px; overflow-y: scroll;">
-
-
-                               <table class="table table-vcenter">
+                    <div class="block-content" style="max-height: 375px; overflow-y: scroll;">
+                           <table class="table table-vcenter">
                                     <tbody id="id_tbody_files">
                                         {% for intelfile in intel.files.all %}
                                             <tr id="id_il_file_{{ intelfile.id }}">
@@ -168,7 +166,7 @@
                                             </tr>
                                         {% endfor %}
                                     </tbody>
-                                </table>
+                        </table>
                     </div>
                 </div>
             </div>
