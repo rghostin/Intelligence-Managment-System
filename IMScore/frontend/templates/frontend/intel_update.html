@@ -29,6 +29,7 @@
                             {% csrf_token %}
                             {% include 'frontend/includes/include_rendered_form.html' with form=form %}
                             <div class="form-group text-right">
+                                <button type="button" class="btn btn-outline-dark" onclick="window.history.back()">Cancel</button>
                                 <button type="button" class="btn btn-primary" onclick="do_partial_update()">Quick save text</button>
                                 <button type="submit" class="btn btn-dark ">Save</button>
                             </div>
