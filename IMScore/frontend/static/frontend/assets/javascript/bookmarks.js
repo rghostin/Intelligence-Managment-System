@@ -17,6 +17,6 @@ function bookmark_add(api_endpoint, csrftoken, intel_id, link, filename) {
 }
 
 function bookmark_added_success(data) {
-    add_to_files_list(data.id, data.file, data.link);
+    add_to_files_list(data);
     display_notification("success", "Bookmark created successfully");
 }

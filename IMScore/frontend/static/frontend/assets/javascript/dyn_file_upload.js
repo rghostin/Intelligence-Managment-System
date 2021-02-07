@@ -1,4 +1,9 @@
-function add_to_files_list(file_id, file_media_url, link) {
+function add_to_files_list(file_result) {
+    let file_id = file_result.id;
+    let file_media_url = file_result.file;
+    let creation_date = file_result.creation_date;
+    let link = file_result.link;
+
     let filename = file_media_url.substring(file_media_url.lastIndexOf('/')+1);
     let files_count = get_files_count();
 
@@ -17,7 +22,7 @@ function add_to_files_list(file_id, file_media_url, link) {
                 </td>
                 <td>${entry_link}</td>
                 <td class="d-none d-sm-table-cell">
-                    <span class="badge badge-warning">Trial</span>
+                    ${creation_date}
                 </td>
                 <td class="text-center">
                     <div class="btn-group">
@@ -76,7 +81,7 @@ $( document ).ready(function() {
           $(".progress-bar").text(strProgress);
         },
         done: function (e, data) {
-            add_to_files_list(data.result.id, data.result.file, data.result.link);
+            add_to_files_list(data.result);
             set_drag_display(false);
         },
         error: function (e, data) {
