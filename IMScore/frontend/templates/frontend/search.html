@@ -17,19 +17,8 @@
     <div class="content">
         <div class="row">
             <div class="col-md-5 col-xl-3">
-                <!-- Toggle Inbox Side Navigation -->
-                <div class="d-md-none push">
-                    <!-- Class Toggle, functionality initialized in Helpers.coreToggleClass() -->
-                    <button type="button" class="btn btn-block btn-primary" data-toggle="class-toggle"
-                            data-target="#one-inbox-side-nav" data-class="d-none">
-                        Inbox Menu
-                    </button>
-                </div>
-                <!-- END Toggle Inbox Side Navigation -->
-
-                <!-- Inbox Side Navigation -->
+                <!-- Search form Side  -->
                 <div id="one-inbox-side-nav" class="d-none d-md-block push">
-                    <!-- Inbox Menu -->
                     <div class="block block-rounded">
                         <div class="block-header block-header-default">
                             <h3 class="block-title">Search</h3>
@@ -85,363 +74,61 @@
                             </form>
                         </div>
                     </div>
-                    <!-- END Inbox Menu -->
                 </div>
-                <!-- END Inbox Side Navigation -->
+                <!-- END search form side -->
             </div>
+
             <div class="col-md-7 col-xl-9">
                 <!-- Message List -->
                 <div class="block">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">
-                            15-30 <span class="font-w400 text-lowercase">from</span> 700
+                            Results 15-30 <span class="font-w400 text-lowercase">from</span> 700
                         </h3>
                         <div class="block-options">
-                            <button type="button" class="btn-block-option" data-toggle="tooltip" data-placement="left"
-                                    title="Previous 15 Messages">
+                            <button type="button" class="btn-block-option" id="id_prev">
                                 <i class="si si-arrow-left"></i>
                             </button>
-                            <button type="button" class="btn-block-option" data-toggle="tooltip" data-placement="left"
-                                    title="Next 15 Messages">
+                            <span class="page-link btn-block-option" id="id_page_num">1</span>
+{#                                                            <li class="page-item active">#}
+{#                                    <span class="page-link" id="id_page_num">1</span>#}
+{#                                </li>#}
+                            <button type="button" class="btn-block-option" id="id_next">
                                 <i class="si si-arrow-right"></i>
-                            </button>
-                            <button type="button" class="btn-block-option" data-toggle="block-option"
-                                    data-action="state_toggle" data-action-mode="demo">
-                                <i class="si si-refresh"></i>
                             </button>
                             <button type="button" class="btn-block-option" data-toggle="block-option"
                                     data-action="fullscreen_toggle"></button>
                         </div>
                     </div>
                     <div class="block-content">
-                        <!-- Messages Options -->
-                        <div class="d-flex justify-content-between push">
-                            <div class="btn-group">
-                                <button class="btn btn-sm btn-light" type="button">
-                                    <i class="fa fa-archive text-primary"></i>
-                                    <span class="d-none d-sm-inline ml-1">Archive</span>
-                                </button>
-                                <button class="btn btn-sm btn-light" type="button">
-                                    <i class="fa fa-star text-warning"></i>
-                                    <span class="d-none d-sm-inline ml-1">Star</span>
-                                </button>
-                            </div>
-                            <button class="btn btn-sm btn-light" type="button">
-                                <i class="fa fa-times text-danger"></i>
-                                <span class="d-none d-sm-inline ml-1">Delete</span>
-                            </button>
-                        </div>
-                        <!-- END Messages Options -->
-
                         <!-- Messages and Checkable Table (.js-table-checkable class is initialized in Helpers.tableToolsCheckable()) -->
                         <div class="pull-x">
                             <table class="js-table-checkable table table-hover table-vcenter font-size-sm">
-                                <tbody>
-                                <tr>
-                                    <td class="text-center" style="width: 60px;">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg15"
-                                                   name="inbox-msg15">
-                                            <label class="custom-control-label font-w400" for="inbox-msg15"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600" style="width: 140px;">Brian Cruz</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">Welcome to our service</a>
-                                        <div class="text-muted mt-1">It's a pleasure to have you on our service..</div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted" style="width: 80px;">
-                                        <i class="fa fa-paperclip mr-1"></i> (3)
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted" style="width: 120px;">
-                                        <em>2 min ago</em>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg14"
-                                                   name="inbox-msg14">
-                                            <label class="custom-control-label font-w400" for="inbox-msg14"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600">Ryan Flores</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">Your subscription was updated</a>
-                                        <div class="text-muted mt-1">We are glad you decided to go with a vip..</div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <i class="fa fa-paperclip mr-1"></i> (2)
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <em>10 min ago</em>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg13"
-                                                   name="inbox-msg13">
-                                            <label class="custom-control-label font-w400" for="inbox-msg13"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600">Andrea Gardner</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">Update is available</a>
-                                        <div class="text-muted mt-1">An update is under way for your app..</div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted"></td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <em>25 min ago</em>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg12"
-                                                   name="inbox-msg12">
-                                            <label class="custom-control-label font-w400" for="inbox-msg12"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600">Jack Greene</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">New Sale!</a>
-                                        <div class="text-muted mt-1">You had a new sale and earned..</div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <i class="fa fa-paperclip mr-1"></i> (1)
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <em>30 min ago</em>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg11"
-                                                   name="inbox-msg11">
-                                            <label class="custom-control-label font-w400" for="inbox-msg11"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600">Brian Cruz</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">Action Required for your account!</a>
-                                        <div class="text-muted mt-1">Your account is inactive for a long time and..
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted"></td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <em>1 hour ago</em>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg10"
-                                                   name="inbox-msg10">
-                                            <label class="custom-control-label font-w400" for="inbox-msg10"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600">Thomas Riley</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">New Photo Pack!</a>
-                                        <div class="text-muted mt-1">Our new photo pack is available now! You..</div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted"></td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <em>2 hrs ago</em>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg9"
-                                                   name="inbox-msg9">
-                                            <label class="custom-control-label font-w400" for="inbox-msg9"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600">Alice Moore</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">Product is released!</a>
-                                        <div class="text-muted mt-1">This is a notification about our new product..
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <i class="fa fa-paperclip mr-1"></i> (1)
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <em>1 day ago</em>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg8"
-                                                   name="inbox-msg8">
-                                            <label class="custom-control-label font-w400" for="inbox-msg8"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600">Ralph Murray</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">Now on Sale!</a>
-                                        <div class="text-muted mt-1">Our Book is out! You can buy a copy and..</div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <i class="fa fa-paperclip mr-1"></i> (9)
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <em>1 day ago</em>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg7"
-                                                   name="inbox-msg7">
-                                            <label class="custom-control-label font-w400" for="inbox-msg7"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600">David Fuller</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">Monthly Report</a>
-                                        <div class="text-muted mt-1">The monthly report you requested for..</div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <i class="fa fa-paperclip mr-1"></i> (6)
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <em>3 days ago</em>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg6"
-                                                   name="inbox-msg6">
-                                            <label class="custom-control-label font-w400" for="inbox-msg6"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600">Scott Young</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">Trial Started!</a>
-                                        <div class="text-muted mt-1">You 30-day trial has now started and..</div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted"></td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <em>3 days ago</em>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg5"
-                                                   name="inbox-msg5">
-                                            <label class="custom-control-label font-w400" for="inbox-msg5"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600">Jose Wagner</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">Invoice #INV001645</a>
-                                        <div class="text-muted mt-1">This is the invoice for the project we..</div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted"></td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <em>5 days ago</em>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg4"
-                                                   name="inbox-msg4">
-                                            <label class="custom-control-label font-w400" for="inbox-msg4"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600">Adam McCoy</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">Friend Request!</a>
-                                        <div class="text-muted mt-1">You have a new friend request. Click the..</div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <i class="fa fa-paperclip mr-1"></i> (5)
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <em>1 week ago</em>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg3"
-                                                   name="inbox-msg3">
-                                            <label class="custom-control-label font-w400" for="inbox-msg3"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600">Thomas Riley</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">Enjoy life!</a>
-                                        <div class="text-muted mt-1">Thank you for helping us with our cause...</div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <i class="fa fa-paperclip mr-1"></i> (3)
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <em>1 week ago</em>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg2"
-                                                   name="inbox-msg2">
-                                            <label class="custom-control-label font-w400" for="inbox-msg2"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600">Carl Wells</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">New Twitter follower!</a>
-                                        <div class="text-muted mt-1">You have a new follower, congratulations..</div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <i class="fa fa-paperclip mr-1"></i> (1)
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <em>2 weeks ago</em>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="inbox-msg1"
-                                                   name="inbox-msg1">
-                                            <label class="custom-control-label font-w400" for="inbox-msg1"></label>
-                                        </div>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell font-w600">Melissa Rice</td>
-                                    <td>
-                                        <a class="font-w600" data-toggle="modal" data-target="#one-inbox-message"
-                                           href="#">Huge Discount available!</a>
-                                        <div class="text-muted mt-1">Due to the fact that you are a great..</div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell text-muted"></td>
-                                    <td class="d-none d-xl-table-cell text-muted">
-                                        <em>3 weeks ago</em>
-                                    </td>
-                                </tr>
+                                <tbody id="id_search_results_body">
+                                    <tr>
+                                        <td class="text-center" style="width: 60px;"><b>#12540</b></td>
+
+                                        <td>
+                                            <a class="font-w400" href="#" style="font-size: 18px">Welcome to our service</a>
+                                            <div class="text-muted mt-1">It's a pleasure to have you on our service..</div>
+                                        </td>
+
+                                        <td class="d-none d-sm-table-cell font-w600" style="width: 140px;">
+                                            <p><span class="badge badge-danger">a</span>  <span class="badge badge-danger">b</span>  <span class="badge badge-danger">c</span>  <span class="badge badge-danger">d</span>  </p>
+                                        </td>
+
+                                        <td class="d-none d-xl-table-cell text-muted" style="width: 80px;"><i class="fa fa-paperclip mr-1"></i> (3)</td>
+
+                                        <td class="d-none d-xl-table-cell text-muted" style="width: 250px;">
+                                            <span class="font-size-sm">
+                                                by <a href="#">black</a>
+                                                <br>
+                                                Created on <em>May 18, 2019</em>
+                                                <br>
+                                                Updated on <em>May 19, 2019</em>
+                                            </span>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

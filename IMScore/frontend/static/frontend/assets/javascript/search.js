@@ -55,20 +55,21 @@ function make_tags_list_html(tags) {
 }
 
 function append_search_entry(entry, detail_view_endpoint) {
+    console.log(entry);
     let view_endpoint = detail_view_endpoint + entry.id;
 
     let tags_list = make_tags_list_html(entry.tags);
     let resource_type = capFirst(entry.resource_type);
     let description = "";
     if (entry.description) {
-        description = truncateString(entry.description, 400);
+        description = truncateString(entry.description, 200);
     }
     let link = "<a href=\"#\" class='btn disabled'>Link</a>";
     if (entry.link) {
         link = "<a target='_blank' rel='noopener' href=\"" + entry.link + "\">Link</a>";
     }
 
-    let html_entry = `
+    let htmSl_entry = `
     <tr>
         <td>
             <h4 class="h5 mt-3 mb-2">
@@ -84,6 +85,32 @@ function append_search_entry(entry, detail_view_endpoint) {
             ${link}
         </td>
     </tr>
+    `;
+
+    let html_entry = `
+        <tr>
+            <td class="text-center" style="width: 60px; font-size: 18px;"><b>#${entry.id}</b></td>
+
+            <td style="width:350px;">
+                <a class="font-w400" href="${view_endpoint}" style="font-size: 18px">${entry.title}</a>
+                <div class="text-muted mt-1">${description}</div>
+            </td>
+
+            <td class="d-none d-sm-table-cell font-w600" style="width: 140px;">${tags_list}</td>
+
+            <td class="d-none d-xl-table-cell text-muted" style="width: 70px;"><i class="fa fa-paperclip mr-1"></i> (${entry.files.length})</td>
+
+            <td class="d-none d-xl-table-cell text-muted" style="width: 10px;">
+                <span class="font-size-sm">
+                    by <a href="#">${entry.author}</a>
+                    <br>
+                    C <em>${entry.creation_date}</em>
+                    <br>
+                    U <em>${entry.last_update}</em>
+                </span>
+            </td>
+        </tr>
+
     `;
 
     $('#id_search_results_body').append(html_entry);
