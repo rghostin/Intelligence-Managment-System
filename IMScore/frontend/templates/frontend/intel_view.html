@@ -24,7 +24,7 @@
     <div class="content">
 
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-4">
                 {# BASIC INFO #}
                 <div class="block block-rounded">
                     <div class="block-header block-header-default text-center">
@@ -110,7 +110,7 @@
             </div>
 
             {# FILES #}
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <div class="block block-rounded dzone" style="height: 355px">
                     <div class="block-header block-header-default text-center">
                         <h3 class="block-title">
@@ -125,10 +125,6 @@
                                     <i class="si si-camera"></i>
                                 </button>
 
-                                <button type="button" class="btn-block-option" id="id_btn_delete_files">
-                                    <i class="si si-trash"></i>
-                                </button>
-
                                 <button type="button" class="btn-block-option js-upload-photos">
                                     <i class="si si-cloud-upload"></i>
                                 </button>
@@ -141,18 +137,48 @@
                         {% endif %}
                     </div>
                     <div class="block-content" style="max-height: 280px; overflow-y: scroll;">
-                        {% if not intel.files %}
-                            <p><i>No files</i></p>
-                        {% else %}
-                            <ul id="id_files_ul">
-                                {% for intelfile in intel.files.all %}
-                                    <li id="id_il_file_{{ intelfile.id }}">
-                                        <a href="{{ intelfile.file.url }}" target="_blank">{{ intelfile.filename }}</a>
-                                        <button onclick="if(confirm('Are you sure you want to delete {{ intelfile.filename }}')){delete_file('{% url "intelfiles-detail" pk=intelfile.id %}', {{ intelfile.id }}, '{{ csrf_token }}')};">X</button>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
+
+
+                               <table class="table table-vcenter">
+                                    <tbody id="id_tbody_files">
+                                        {% for intelfile in intel.files.all %}
+                                            <tr id="id_il_file_{{ intelfile.id }}">
+                                                <th class="text-center" scope="row">{{ forloop.counter }}</th>
+                                                <td class="font-w600 font-size-sm">
+                                                    <a href="{{ intelfile.file.url }}" target="_blank">{{ intelfile.filename }}</a>
+                                                </td>
+                                                <td>
+                                                    {%  if intelfile.link %}
+                                                        <a target="_blank" rel="noopener" href="{{ intelfile.link }}" data-toggle="tooltip" title="{{ intelfile.link }}">Link</a>
+                                                    {% else %}
+                                                        <a href="#" class="disabled">Link</a>
+                                                    {% endif %}
+                                                </td>
+                                                <td class="d-none d-sm-table-cell">
+                                                    <span class="badge badge-warning">Trial</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Delete file"
+                                                        onclick="if(confirm('Are you sure you want to delete {{ intelfile.filename }}')){delete_file('{% url "intelfiles-detail" pk=intelfile.id %}', {{ intelfile.id }}, '{{ csrf_token }}')};">
+                                                            <i class="fa fa-fw fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+{#                            <ul id="id_files_ul">#}
+{#                                {% for intelfile in intel.files.all %}#}
+{#                                    <li id="id_il_file_{{ intelfile.id }}">#}
+{#                                        <a href="{{ intelfile.file.url }}" target="_blank">{{ intelfile.filename }}</a>#}
+{#                                        <button onclick="if(confirm('Are you sure you want to delete {{ intelfile.filename }}')){delete_file('{% url "intelfiles-detail" pk=intelfile.id %}', {{ intelfile.id }}, '{{ csrf_token }}')};">#}
+{#                                            <i class="si si-close text-danger"></i>#}
+{#                                        </button>#}
+{#                                    </li>#}
+{#                                {% endfor %}#}
+{#                            </ul>#}
                     </div>
                 </div>
             </div>
@@ -293,17 +319,6 @@
                 bookmark_add('{% url 'bookmark_add' %}', '{{ csrf_token }}', {{ intel.id }}, link, filename);
                 $("#id_snapshot_modal").modal('hide');
             });
-
-            {#$('#id_btn_delete_files').click(function () {#}
-            {#    console.log("hi");#}
-            {#    var checkedVals = $('.filecheckbox:checkbox:checked').map(function() {#}
-            {#        return this.value;#}
-            {#    }).get();#}
-            {##}
-            {#    for (let i=0; i<checkedVals.length; ++i) {#}
-            {#        let file_id = checkedVals[i];#}
-            {#        delete_file(INTELFILES_DETAIL_ENDPOINT, file_id, "{{ csrf_token }}");#}
-            {#    }#}
         });
 
     </script>

@@ -1,12 +1,36 @@
-function add_to_files_list(file_url) {
-    let filename = file_url.substring(file_url.lastIndexOf('/')+1);
+function add_to_files_list(file_id, file_media_url, link) {
+    let filename = file_media_url.substring(file_media_url.lastIndexOf('/')+1);
     let files_count = get_files_count();
-    if (files_count === 0) {
-        $("#id_files_ul").html('<ul id="id_files_ul"></ul>')
+
+    var entry_link;
+    if (link === "") {
+        entry_link = `<a href="#" class="disabled">Link</a>`;
+    } else {
+        entry_link=`<a target="_blank" rel="noopener" href="${link}" data-toggle="tooltip" title="${link}">Link</a>`
     }
-    let del_btn = `<button onclick="return false;">X</button>`;
-    let entry = `<li><a href="${file_url}" target="_blank">${filename}</a>${del_btn}</li>`;
-    $("#id_files_ul").append(entry);
+
+    let entry = `
+            <tr id="id_il_file_${file_id}">
+                <th class="text-center" scope="row">${files_count+1}</th>
+                <td class="font-w600 font-size-sm">
+                    <a href="${file_media_url}" target="_blank">${filename}</a>
+                </td>
+                <td>${entry_link}</td>
+                <td class="d-none d-sm-table-cell">
+                    <span class="badge badge-warning">Trial</span>
+                </td>
+                <td class="text-center">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Delete file"
+                        onclick="return false">
+                            <i class="fa fa-fw fa-times"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>`;
+
+    $("#id_tbody_files").append(entry);
+
     set_files_count(files_count+1)
 }
 
@@ -52,7 +76,7 @@ $( document ).ready(function() {
           $(".progress-bar").text(strProgress);
         },
         done: function (e, data) {
-            add_to_files_list(data.result.file);
+            add_to_files_list(data.result.id, data.result.file, data.result.link);
             set_drag_display(false);
         },
         error: function (e, data) {
@@ -78,8 +102,7 @@ function delete_file(file_endpoint, file_id, csrftoken) {
         headers: {
             'X-CSRFTOKEN': csrftoken
         },
-        beforeSend: function(jqXHR, settings) {console.log("before");},
-        success: function(data){ console.log("success"); rm_file_from_list(file_id) },
+        success: function(data){ rm_file_from_list(file_id) },
         error: function () {
           display_notification("error", "Unable to load search results");
         }
