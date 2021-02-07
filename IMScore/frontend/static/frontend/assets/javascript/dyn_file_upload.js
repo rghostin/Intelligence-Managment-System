@@ -107,7 +107,10 @@ function delete_file(file_endpoint, file_id, csrftoken) {
         headers: {
             'X-CSRFTOKEN': csrftoken
         },
-        success: function(data){ rm_file_from_list(file_id) },
+        success: function(data){
+            rm_file_from_list(file_id);
+            display_notification("warning", "File deleted");
+        },
         error: function () {
           display_notification("error", "Unable to load search results");
         }
