@@ -1,7 +1,9 @@
 import os
+import string
 
 from django.db import models
 from django.dispatch import receiver
+from django.utils.crypto import get_random_string
 from martor.models import MartorField
 
 
@@ -38,7 +40,11 @@ class Intel(models.Model):
 
 
 def get_upload_path(instance, filename):
-    return os.path.join("intel_files", "intel_%d" % instance.intel.id, filename)
+    base_filename, ext = os.path.splitext(filename)
+    # len(charset) ** n = 62**6=5e10
+    rdm = get_random_string(length=6, allowed_chars=string.ascii_letters+string.digits)
+    new_filename = f'{base_filename}_{rdm}{ext}'
+    return os.path.join("intel_files", "intel_%d" % instance.intel.id, new_filename)
 
 
 class IntelFile(models.Model):
