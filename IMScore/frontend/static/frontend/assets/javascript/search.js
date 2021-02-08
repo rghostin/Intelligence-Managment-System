@@ -69,7 +69,7 @@ function append_search_entry(entry, detail_view_endpoint) {
 
     let html_entry = `
         <tr>
-            <td class="text-center" style="width: 60px; font-size: 18px;"><b>#${entry.id}</b></td>
+            <td class="text-center" style="width: 60px; font-size: 18px; padding-left: 30px"><b>#${entry.id}</b></td>
 
             <td style="max-width:450px; word-wrap: break-word;">
                 <a class="font-w400" href="${view_endpoint}" style="font-size: 18px;max-width:350px; word-wrap: break-word;">${entry.title}</a>
@@ -92,7 +92,6 @@ function append_search_entry(entry, detail_view_endpoint) {
                 </span>
             </td>
         </tr>
-
     `;
 
     $('#id_search_results_body').append(html_entry);
