@@ -68,7 +68,7 @@ function append_search_entry(entry, detail_view_endpoint) {
     let last_update = formatISO806(entry.last_update);
 
     let html_entry = `
-        <tr>
+        <tr onclick="window.location='${view_endpoint}'">
             <td class="text-center" style="width: 60px; font-size: 18px; padding-left: 30px"><b>#${entry.id}</b></td>
 
             <td style="max-width:450px; word-wrap: break-word;">
