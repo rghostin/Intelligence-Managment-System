@@ -19,3 +19,7 @@ function truncateString(str, num) {
   }
   return str.slice(0, num) + '...'
 }
+
+function formatISO806(date_str) {
+    return moment(date_str).utc().format("YYYY-MM-DD, HH:MMUTC")
+}
