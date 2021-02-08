@@ -21,12 +21,6 @@ def search(request):
     print(intelFilter.form.fields['creation_date_range'])
     return render(request, 'frontend/search.html', locals())
 
-# todo rm
-@login_required
-def search_old(request):
-    intelFilter = IntelFilter(request.GET, Intel.objects.all())
-    print(intelFilter.form.fields['creation_date_range'])
-    return render(request, 'frontend/search.old.html', locals())
 
 @method_decorator(login_required, name='dispatch')
 class IntelView(DetailView):
