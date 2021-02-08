@@ -58,9 +58,15 @@
                 <!-- Side Header -->
                 <div class="content-header bg-white-5">
                     <!-- Logo -->
-                    <a class="font-w600 text-dual" href="{% url 'search' %}">
-                        Sharp IMS
-                    </a>
+                    <div class="font-w600 text-dual" href="{% url 'search' %}" style="margin-left: -8px;">
+                        <span style="color:red; font-size: 40px; display: inline-block">&#9812;</span>
+                        <span style="display: inline-block;  line-height: 88%; margin-left: 7px">
+                            <span style="display: inline-block;">Sharp</span>
+                            <br/>
+                            <span style="font-size: 12px; font-weight: lighter">Intelligence MS</span>
+                        </span>
+
+                    </div>
                     <!-- END Logo -->
                     
                 </div>
@@ -114,9 +120,9 @@
 
                         <!-- Toggle Mini Sidebar -->
                         <!-- Layout API, functionality initialized in Template._uiApiLayout()-->
-{#                        <button type="button" class="btn btn-sm btn-dual mr-2 d-none d-lg-inline-block" data-toggle="layout" data-action="sidebar_mini_toggle">#}
-{#                            <i class="fa fa-fw fa-ellipsis-v"></i>#}
-{#                        </button>#}
+                        <button type="button" class="btn btn-sm btn-dual mr-2 d-none d-lg-inline-block" data-toggle="layout" data-action="sidebar_mini_toggle">
+                            <i class="fa fa-fw fa-ellipsis-v"></i>
+                        </button>
                         <!-- END Toggle Mini Sidebar -->
 
                     </div>
@@ -189,8 +195,8 @@
             <footer id="page-footer" class="bg-body-light">
                 <div class="content py-3">
                     <div class="row font-size-sm">
-                        <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left">
-                            Sharp Intelligence Management System &copy; <span data-toggle="year-copy"></span>
+                        <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left" >
+                            <span style="font-size: 18px;">&#9812;</span> Sharp Intelligence Management System &copy; <span data-toggle="year-copy"></span>
                         </div>
                     </div>
                 </div>
