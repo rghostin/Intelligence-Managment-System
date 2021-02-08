@@ -58,7 +58,7 @@ function append_search_entry(entry, detail_view_endpoint) {
     let resource_type = capFirst(entry.resource_type);
     let description = "";
     if (entry.description) {
-        description = truncateString(entry.description, 200);
+        description = truncateString(entry.description, 250);
     }
     let link = "<i class=\"fa fa-unlink mr-1\"></i>";
     if (entry.link) {
@@ -71,20 +71,18 @@ function append_search_entry(entry, detail_view_endpoint) {
         <tr>
             <td class="text-center" style="width: 60px; font-size: 18px;"><b>#${entry.id}</b></td>
 
-            <td style="width:350px;">
-                <a class="font-w400" href="${view_endpoint}" style="font-size: 18px">${entry.title}</a>
-                <div class="text-muted mt-1">${description}</div>
+            <td style="max-width:450px; word-wrap: break-word;">
+                <a class="font-w400" href="${view_endpoint}" style="font-size: 18px;max-width:350px; word-wrap: break-word;">${entry.title}</a>
+                <div class="text-muted mt-1" style="max-width:450px;word-wrap: break-word;">${description}</div>
             </td>
             
-            <td class="d-none d-xl-table-cell text-muted" style="width: 70px;"><i class="fa fa-paperclip mr-1"></i> (${entry.files.length})</td>
+            <td class="d-none d-xl-table-cell text-muted text-center" style="width: 70px;"><i class="fa fa-paperclip mr-1"></i> (${entry.files.length})</td>
 
-            <td class="d-none d-xl-table-cell text-muted" style="width: 70px;">${link}</td>
+            <td class="d-none d-xl-table-cell text-muted text-center" style="width: 70px;">${link}</td>
 
+            <td class="d-none d-sm-table-cell font-w600 " style="width: 220px;">${tags_list}</td>
 
-            <td class="d-none d-sm-table-cell font-w600" style="width: 140px;">${tags_list}</td>
-
-
-            <td class="d-none d-xl-table-cell text-muted" style="width: 130px;">
+            <td class="d-none d-xl-table-cell text-muted" style="width: 200px;">
                 <span class="font-size-sm">
                     by <a href="#">${entry.author}</a>
                     <br>
