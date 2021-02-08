@@ -14,6 +14,8 @@ function ajax_load_filtered_intels(api_endpoint, detail_view_endpoint, filterArr
         contentType: "application/json",
         dataType: 'json',
         data: $.param(data),
+        beforeSend: function () { spinner_rotate_show(); },
+        complete: function () { spinner_rotate_hide(); },
         success: function(data){
             if (show_results_banner) {
                 display_results_banner(data.count, data.results.length, page);
