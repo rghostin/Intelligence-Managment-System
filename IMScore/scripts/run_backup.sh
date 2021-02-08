@@ -12,7 +12,7 @@ set -e
 
 
 # TOCONFIGURE - set absolute path to project
-PROJ_ROOT_DIR="/home/black/WS/IMS/IMScore"
+PROJ_ROOT_DIR="/app/web"
 # TOCONFIGURE - set absolute path to backups
 LOCAL_BACKUP_DIR="/var/backups/web"
 # TOCONFIGURE * set absolute path log file

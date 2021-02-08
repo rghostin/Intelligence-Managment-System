@@ -7,7 +7,7 @@ set -e
 
 
 # TOCONFIGURE - set absolute path to project
-PROJ_ROOT_DIR="/home/black/WS/IMS/IMScore"
+PROJ_ROOT_DIR="/app/web"
 MANAGE_SCRIPT="${PROJ_ROOT_DIR}/manage.py"
 
 
