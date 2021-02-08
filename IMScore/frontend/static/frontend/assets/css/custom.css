@@ -7,3 +7,28 @@ a.disabled {
   cursor: default;
   color: gray;
 }
+
+
+/* Pagination start */
+.btn-pagx {
+    color: #5e5e5e;
+}
+
+.btn-pagx.disabled {
+    cursor: default;
+    color: #adb5bd;
+}
+
+.btn-pagx.disabled:hover {
+    cursor: default;
+    color: #adb5bd;
+}
+
+.btn-pagx.pagenum {
+  z-index: 1;
+  cursor: default;
+  color: #5c80d1;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #5c80d1;
+}
+/* Pagination end */
