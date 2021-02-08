@@ -101,11 +101,11 @@ function append_search_entry(entry, detail_view_endpoint) {
 }
 
 function display_results_banner(total_entries, curr_entries_per_page, curr_page) {
-    var max_entries_per_page = 25;
+    const MAX_ENTRIES_PER_PAGE = 10;
     if (curr_page==null){
         curr_page = get_page_num();
     }
-    var low = (max_entries_per_page*(curr_page-1))+1;
+    var low = (MAX_ENTRIES_PER_PAGE*(curr_page-1))+1;
     var high = low+curr_entries_per_page-1;
 
     $("#id_results_banner_low").text(low.toString());
