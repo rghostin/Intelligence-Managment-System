@@ -229,6 +229,19 @@ MARTOR_TOOLBAR_BUTTONS = [
     'link', 'image-link', 'image-upload',
     'direct-mention', 'toggle-maximize', 'help'
 ]
+
+MARTOR_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',
+    'markdown.extensions.nl2br',
+    'markdown.extensions.smarty',
+    'markdown.extensions.fenced_code',
+    'markdown.extensions.toc',
+
+    # Custom markdown extensions.
+    'martor.extensions.urlize',
+    'martor.extensions.del_ins',      # ~~strikethrough~~ and ++underscores++
+    'martor.extensions.escape_html',  # to handle the XSS vulnerabilities
+]
 ### Martor - End
 
 
