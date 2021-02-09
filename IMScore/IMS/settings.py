@@ -236,6 +236,7 @@ MARTOR_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.smarty',
     'markdown.extensions.fenced_code',
     'markdown.extensions.toc',
+    'markdown.extensions.codehilite',
 
     # Custom markdown extensions.
     'martor.extensions.urlize',
