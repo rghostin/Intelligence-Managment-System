@@ -15,7 +15,6 @@
 
 {% block custom_css %}
     <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet"/>
-    <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet"/>
     <link href="{% static 'martor/css/martor.bootstrap.min.css' %}" type="text/css" media="all" rel="stylesheet"/>
 {% endblock %}
 
@@ -191,10 +190,6 @@
                                 onclick="window.location.href='{% url 'delete' pk=intel.id %}'">
                             <i class="fa fa-fw fa-times mr-1"></i> Delete
                         </button>
-
-                        {#                    <button type="button" class="btn btn-danger mr-1 mb-3" onclick="bookmark_add('{% url 'bookmark_add_api' %}', '{{ csrf_token }}', 63, 'https://nmap.org/book/port-scanning-tutorial.html')">#}
-                        {#                        <i class="fa fa-fw fa-times mr-1"></i> Delete#}
-                        {#                    </button>#}
                     </div>
                     <!-- END Default -->
                 </div>
@@ -291,15 +286,8 @@
 
     <script src="{% static "frontend/assets/javascript/bookmarks.js" %}"></script>
 
-
-    {# martor #}
-    <script type="text/javascript" src="{% static 'plugins/js/highlight.min.js' %}"></script>
     <script>
         const INTELFILES_DETAIL_ENDPOINT = "/api/intelfiles/";
-
-        $('.martor-preview pre').each(function (i, block) {
-            hljs.highlightBlock(block);
-        });
 
         $(document).ready(function () {
             $("#id_btn_bookmark").click(function () {
