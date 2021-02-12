@@ -221,13 +221,27 @@ MARTOR_ENABLE_CONFIGS = {
     'jquery': 'false',       # to include/revoke jquery (require for admin default django)
     'living': 'false',      # to enable/disable live updates in preview
     'spellcheck': 'true',  # to enable/disable spellcheck in form textareas
-    'hljs': 'true',         # to enable/disable hljs highlighting in preview
+    'hljs': 'false',         # to enable/disable hljs highlighting in preview
 }
 MARTOR_TOOLBAR_BUTTONS = [
     'bold', 'italic', 'horizontal', 'heading', 'pre-code',
     'blockquote', 'unordered-list', 'ordered-list',
     'link', 'image-link', 'image-upload',
     'direct-mention', 'toggle-maximize', 'help'
+]
+
+MARTOR_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',
+    'markdown.extensions.nl2br',
+    'markdown.extensions.smarty',
+    'markdown.extensions.fenced_code',
+    'markdown.extensions.toc',
+    'markdown.extensions.codehilite',
+
+    # Custom markdown extensions.
+    'martor.extensions.urlize',
+    'martor.extensions.del_ins',      # ~~strikethrough~~ and ++underscores++
+    'martor.extensions.escape_html',  # to handle the XSS vulnerabilities
 ]
 ### Martor - End
 
