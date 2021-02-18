@@ -1,4 +1,6 @@
-function add_to_files_list(file_result) {
+function add_to_files_list(file_result, file_size) {
+    // todo fix - add_files_to_list: current is not consistent with template
+
     let file_id = file_result.id;
     let file_media_url = file_result.file;
     let creation_date = file_result.creation_date;
@@ -21,6 +23,9 @@ function add_to_files_list(file_result) {
                     <a href="${file_media_url}" target="_blank">${filename}</a>
                 </td>
                 <td>${entry_link}</td>
+                <td>
+                    ${file_size}
+                </td>
                 <td class="d-none d-sm-table-cell">
                     ${creation_date}
                 </td>
@@ -81,7 +86,8 @@ $( document ).ready(function() {
           $(".progress-bar").text(strProgress);
         },
         done: function (e, data) {
-            add_to_files_list(data.result);
+            console.log(data);
+            add_to_files_list(data.result, data.total);
             set_drag_display(false);
         },
         error: function (e, data) {

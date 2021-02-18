@@ -146,13 +146,16 @@
                                                 </td>
                                                 <td>
                                                     {%  if intelfile.link %}
-                                                        <a target="_blank" rel="noopener" href="{{ intelfile.link }}" data-toggle="tooltip" title="{{ intelfile.link }}">Link</a>
+                                                        <a target='_blank' rel='noopener' href="${entry.link}" data-toggle="tooltip" title="${entry.link}" data-placement="top"><i class="fa fa-link mr-1"></i></a>
                                                     {% else %}
-                                                        <a href="#" class="disabled">Link</a>
+                                                        <i class="fa fa-unlink mr-1"></i>
                                                     {% endif %}
                                                 </td>
+                                                <td>
+                                                    {{ intelfile.file.size|filesizeformat }}
+                                                </td>
                                                 <td class="d-none d-sm-table-cell">
-                                                    {{ intelfile.creation_date|date:"c"}}
+                                                    {{ intelfile.creation_date|date:"c"}} UTC
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
