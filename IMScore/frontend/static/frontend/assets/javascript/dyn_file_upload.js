@@ -117,7 +117,7 @@ function delete_file(file_endpoint, file_id, csrftoken) {
             display_notification("warning", "File deleted");
         },
         error: function () {
-          display_notification("error", "Unable to load search results");
+          display_notification("error", "Unable to delete file");
         }
     });
 }
