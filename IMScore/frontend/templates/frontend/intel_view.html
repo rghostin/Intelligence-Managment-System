@@ -142,7 +142,7 @@
                                             <tr id="id_il_file_{{ intelfile.id }}">
                                                 <th class="text-center" scope="row">{{ forloop.counter }}</th>
                                                 <td class="font-w600 font-size-sm">
-                                                    <a href="{{ intelfile.file.url }}" target="_blank">{{ intelfile.filename }}</a>
+                                                    {{ intelfile.filename }}
                                                 </td>
                                                 <td>
                                                     {%  if intelfile.link %}
@@ -159,7 +159,13 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Delete file"
+                                                        <a class="btn btn-sm btn-light js-tooltip-enabled" href="{{ intelfile.file.url }}" target="_blank" rel="noopener" data-toggle="tooltip" title="View">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                        <a class="btn btn-sm btn-light js-tooltip-enabled" href="{{ intelfile.file.url }}" data-toggle="tooltip" title="Download" download>
+                                                            <i class="fa fa-download"></i>
+                                                        </a>
+                                                        <button type="button" class="btn btn-sm btn-light js-tooltip-enabled" data-toggle="tooltip" title="Delete"
                                                         onclick="if(confirm('Are you sure you want to delete {{ intelfile.filename }}')){delete_file('{% url "intelfiles-detail" pk=intelfile.id %}', {{ intelfile.id }}, '{{ csrf_token }}')};">
                                                             <i class="fa fa-fw fa-times"></i>
                                                         </button>
