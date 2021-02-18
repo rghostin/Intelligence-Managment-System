@@ -299,6 +299,14 @@
                 bookmark_add('{% url 'bookmark_add' %}', '{{ csrf_token }}', {{ intel.id }}, link, filename);
                 $("#id_snapshot_modal").modal('hide');
             });
+
+            // update event
+            document.addEventListener('keydown', function(event) {
+              if (event.ctrlKey && event.key === 'e') {
+                window.location = "{% url 'update' pk=intel.pk %}";
+              }
+            });
+
         });
 
     </script>
