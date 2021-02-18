@@ -86,7 +86,6 @@ $( document ).ready(function() {
           $(".progress-bar").text(strProgress);
         },
         done: function (e, data) {
-            console.log(data);
             add_to_files_list(data.result, data.total);
             set_drag_display(false);
         },
